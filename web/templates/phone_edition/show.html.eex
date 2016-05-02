@@ -1,0 +1,38 @@
+<h2>Show phone edition</h2>
+
+<ul>
+
+  <li>
+    <strong>Phone:</strong>
+    <%= @phone_edition.phone_id %>
+  </li>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @phone_edition.name %>
+  </li>
+
+  <li>
+    <strong>Limited:</strong>
+    <%= @phone_edition.limited %>
+  </li>
+
+  <li>
+    <strong>Prototype:</strong>
+    <%= @phone_edition.prototype %>
+  </li>
+
+  <li>
+    <strong>Photo url:</strong>
+    <%= @phone_edition.photo_url %>
+  </li>
+
+  <li>
+    <strong>Notes:</strong>
+    <%= @phone_edition.notes %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: phone_edition_path(@conn, :edit, @phone_edition) %>
+<%= link "Back", to: phone_edition_path(@conn, :index) %>

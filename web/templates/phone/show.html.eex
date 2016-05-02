@@ -1,0 +1,83 @@
+<h2>Show phone</h2>
+
+<ul>
+
+  <li>
+    <strong>Brand:</strong>
+    <%= @phone.brand_id %>
+  </li>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @phone.name %>
+  </li>
+
+  <li>
+    <strong>Network:</strong>
+    <%= @phone.network %>
+  </li>
+
+  <li>
+    <strong>Features:</strong>
+    <%= @phone.features %>
+  </li>
+
+  <li>
+    <strong>Weight:</strong>
+    <%= @phone.weight %>
+  </li>
+
+  <li>
+    <strong>Size:</strong>
+    <%= @phone.size %>
+  </li>
+
+  <li>
+    <strong>Battery:</strong>
+    <%= @phone.battery %>
+  </li>
+
+  <li>
+    <strong>Notes:</strong>
+    <%= @phone.notes %>
+  </li>
+
+  <li>
+    <strong>Release:</strong>
+    <%= @phone.release %>
+  </li>
+
+</ul>
+
+<h2>Editions:</h2>
+<%= for edition <- @editions do %>
+  <ul>
+    <li>
+      <strong>Name:</strong>
+      <%= edition.name %>
+    </li>
+
+    <li>
+      <strong>Limited:</strong>
+      <%= edition.limited %>
+    </li>
+
+    <li>
+      <strong>Prototype:</strong>
+      <%= edition.prototype %>
+    </li>
+
+    <li>
+      <strong>Photo:</strong>
+      <img src="<%= edition.photo_url %>"/>
+    </li>
+
+    <li>
+      <strong>Notes:</strong>
+      <%= edition.notes %>
+    </li>
+  </ul>
+<% end %>
+
+<%= link "Edit", to: short_phone_path(@conn, :edit, @brand.id, @phone) %>
+<%= link "Back", to: short_phone_path(@conn, :index, @brand.id) %>

@@ -1,0 +1,7 @@
+<h2>Edit phone</h2>
+
+<%= render "form.html", changeset: @changeset,
+                        brand: @brand,
+                        action: short_phone_path(@conn, :update, @brand.id, @phone) %>
+
+<%= link "Back", to: short_phone_path(@conn, :index, @brand.id) %>
