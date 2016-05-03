@@ -19,7 +19,7 @@ defmodule SiemensCollection.Mixfile do
   def application do
     [mod: {SiemensCollection, []},
      applications: [:phoenix, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex]]
+                    :phoenix_ecto, :postgrex, :addict, :ex_admin]]
   end
 
   # Specifies which paths to compile per environment.
@@ -38,7 +38,8 @@ defmodule SiemensCollection.Mixfile do
      {:gettext, "~> 0.9"},
      {:cowboy, "~> 1.0"},
      {:addict, "~> 0.2"},
-     {:ex_admin, "~> 0.7.2"}]
+     {:ex_admin, "~> 0.7.2"},
+     {:exrm, "~> 1.0.3"}]
   end
 
   # Aliases are shortcut or tasks specific to the current project.
