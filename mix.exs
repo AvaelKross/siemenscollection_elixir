@@ -37,8 +37,8 @@ defmodule SiemensCollection.Mixfile do
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:gettext, "~> 0.9"},
      {:cowboy, "~> 1.0"},
-     {:addict, "~> 0.2"},
-     {:ex_admin, "~> 0.7.2"},
+     {:addict, github: "AvaelKross/addict"},
+     {:ex_admin, github: "AvaelKross/ex_admin", branch: 'v0.7.3'},
      {:exrm, "~> 1.0.3"}]
   end
 

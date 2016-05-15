@@ -1,15 +1,10 @@
-<h2>Show phone</h2>
+<h2><%= @phone.brand.name %> <%= @phone.name %></h2>
 
 <ul>
 
   <li>
-    <strong>Brand:</strong>
-    <%= @phone.brand_id %>
-  </li>
-
-  <li>
-    <strong>Name:</strong>
-    <%= @phone.name %>
+    <strong>Release:</strong>
+    <%= @phone.release %>
   </li>
 
   <li>
@@ -42,20 +37,12 @@
     <%= @phone.notes %>
   </li>
 
-  <li>
-    <strong>Release:</strong>
-    <%= @phone.release %>
-  </li>
-
 </ul>
 
 <h2>Editions:</h2>
 <%= for edition <- @editions do %>
+  <h3><%= edition.name %></h3>
   <ul>
-    <li>
-      <strong>Name:</strong>
-      <%= edition.name %>
-    </li>
 
     <li>
       <strong>Limited:</strong>
@@ -79,5 +66,7 @@
   </ul>
 <% end %>
 
-<%= link "Edit", to: short_phone_path(@conn, :edit, @brand.id, @phone) %>
+<%= if can_edit(@conn) do %>
+  <%= link "Edit", to: short_phone_path(@conn, :edit, @brand.id, @phone) %>
+<% end %>
 <%= link "Back", to: short_phone_path(@conn, :index, @brand.id) %>

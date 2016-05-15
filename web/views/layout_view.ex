@@ -8,4 +8,8 @@ defmodule SiemensCollection.LayoutView do
   def is_logged_in(conn) do
     current_user(conn) != nil
   end
+
+  def can_edit(conn) do
+    is_logged_in(conn) && current_user(conn).email == "avaelkross@gmail.com"
+  end
 end

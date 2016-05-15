@@ -4,6 +4,7 @@ defmodule SiemensCollection.PhoneEditionController do
   alias SiemensCollection.PhoneEdition
 
   plug :scrub_params, "phone_edition" when action in [:create, :update]
+  plug Addict.Plugs.Authenticated when action in [:new, :create, :edit, :update, :delete]
 
   def index(conn, _params) do
     phone_editions = Repo.all(PhoneEdition)

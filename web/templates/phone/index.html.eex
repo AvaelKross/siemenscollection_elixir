@@ -29,12 +29,16 @@
 
       <td class="text-right">
         <%= link "Show", to: short_phone_path(@conn, :show, @brand.id, phone), class: "btn btn-default btn-xs" %>
-        <%= link "Edit", to: short_phone_path(@conn, :edit, @brand.id, phone), class: "btn btn-default btn-xs" %>
-        <%= link "Delete", to: short_phone_path(@conn, :delete, @brand.id, phone), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+        <%= if can_edit(@conn) do %>
+          <%= link "Edit", to: short_phone_path(@conn, :edit, @brand.id, phone), class: "btn btn-default btn-xs" %>
+          <%= link "Delete", to: short_phone_path(@conn, :delete, @brand.id, phone), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+        <% end %>
       </td>
     </tr>
 <% end %>
   </tbody>
 </table>
 
-<%= link "New phone", to: short_phone_path(@conn, :new, @brand.id) %>
+<%= if can_edit(@conn) do %>
+  <%= link "New phone", to: short_phone_path(@conn, :new, @brand.id) %>
+<% end %>

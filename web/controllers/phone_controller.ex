@@ -7,9 +7,12 @@ defmodule SiemensCollection.PhoneController do
   alias SiemensCollection.PhoneEdition
   alias SiemensCollection.Brand
 
+  plug Addict.Plugs.Authenticated when action in [:new, :create, :edit, :update, :delete]
+  plug :check_rights when action in [:new, :create, :edit, :update, :delete]
+
   plug :scrub_params, "phone" when action in [:create, :update]
   plug :set_brand
-
+  
   def index(conn, _params) do
     query = from p in Phone, where: p.brand_id == ^conn.assigns.brand.id
     phones = Repo.all(query)
@@ -35,7 +38,7 @@ defmodule SiemensCollection.PhoneController do
   end
 
   def show(conn, %{"id" => id}) do
-    phone = Repo.get!(Phone, id)
+    phone = Repo.get!(Phone, id) |> Repo.preload([:brand])
     query = from pe in PhoneEdition, where: pe.phone_id == ^phone.id
     editions = Repo.all(query)
     render(conn, "show.html", phone: phone, editions: editions)
@@ -77,6 +80,16 @@ defmodule SiemensCollection.PhoneController do
     if conn.params["brand_id"] do
       brand = Repo.get(Brand, conn.params["brand_id"])
       assign(conn, :brand, brand)
+    else
+      conn
+    end
+  end
+
+  defp check_rights(conn, _) do
+    if Addict.Helper.current_user(conn) && Addict.Helper.current_user(conn).email != "avaelkross@gmail.com" do
+      conn
+      |> put_flash(:info, "You have no rights to do it")
+      |> redirect(to: brand_path(conn, :index))
     else
       conn
     end
