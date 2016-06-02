@@ -14,8 +14,10 @@ defmodule SiemensCollection.PhoneController do
   plug :set_brand
   
   def index(conn, _params) do
-    query = from p in Phone, where: p.brand_id == ^conn.assigns.brand.id
+    brand_id = conn.assigns.brand.id
+    query = Phone |> Phone.for_brand(brand_id) |> Phone.editions_count
     phones = Repo.all(query)
+
     render(conn, "index.html", phones: phones)
   end
 

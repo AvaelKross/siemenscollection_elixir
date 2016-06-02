@@ -1,31 +1,21 @@
-<h2>Listing phones</h2>
+<h2 class="siemens-text">Phones</h2>
 
 <table class="table">
   <thead>
     <tr>
       <th>Name</th>
-      <th>Network</th>
-      <th>Features</th>
-      <th>Weight</th>
-      <th>Size</th>
-      <th>Battery</th>
-      <th>Notes</th>
       <th>Release</th>
+      <th>Editions</th>
 
       <th></th>
     </tr>
   </thead>
   <tbody>
-<%= for phone <- @phones do %>
+<%= for {phone, count} <- @phones do %>
     <tr>
       <td><%= phone.name %></td>
-      <td><%= phone.network %></td>
-      <td><%= phone.features %></td>
-      <td><%= phone.weight %></td>
-      <td><%= phone.size %></td>
-      <td><%= phone.battery %></td>
-      <td><%= phone.notes %></td>
       <td><%= phone.release %></td>
+      <td><%= count %> editions</td>
 
       <td class="text-right">
         <%= link "Show", to: short_phone_path(@conn, :show, @brand.id, phone), class: "btn btn-default btn-xs" %>

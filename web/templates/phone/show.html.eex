@@ -1,4 +1,4 @@
-<h2><%= @phone.brand.name %> <%= @phone.name %></h2>
+<h2 class="siemens-text"><%= @phone.brand.name %> <%= @phone.name %></h2>
 
 <ul>
 
@@ -39,34 +39,37 @@
 
 </ul>
 
-<h2>Editions:</h2>
+<h2 class="siemens-text editions">Editions:</h2>
 <%= for edition <- @editions do %>
-  <h3><%= edition.name %></h3>
-  <ul>
-
-    <li>
-      <strong>Limited:</strong>
-      <%= edition.limited %>
-    </li>
-
-    <li>
-      <strong>Prototype:</strong>
-      <%= edition.prototype %>
-    </li>
-
-    <li>
-      <strong>Photo:</strong>
+  <div class="edition">
+    <h3 class="siemens-text"><%= edition.name %></h3>
+    <%= if edition.photo_url do %>
       <img src="<%= edition.photo_url %>"/>
-    </li>
+    <% end %>
+    <div class="info">
+      <ul>
+        <li>
+          <strong>Limited:</strong>
+          <%= edition.limited %>
+        </li>
 
-    <li>
-      <strong>Notes:</strong>
-      <%= edition.notes %>
-    </li>
-  </ul>
+        <li>
+          <strong>Prototype:</strong>
+          <%= edition.prototype %>
+        </li>
+
+        <li>
+          <strong>Notes:</strong>
+          <%= edition.notes %>
+        </li>
+      </ul>
+    </div>
+  </div>
 <% end %>
 
-<%= if can_edit(@conn) do %>
-  <%= link "Edit", to: short_phone_path(@conn, :edit, @brand.id, @phone) %>
-<% end %>
-<%= link "Back", to: short_phone_path(@conn, :index, @brand.id) %>
+<div class="footer_buttons">
+  <%= if can_edit(@conn) do %>
+    <%= link "Edit", to: short_phone_path(@conn, :edit, @brand.id, @phone), class: "siemens-text" %>
+  <% end %>
+  <%= link "Back", to: short_phone_path(@conn, :index, @brand.id), class: "siemens-text" %>
+</div>

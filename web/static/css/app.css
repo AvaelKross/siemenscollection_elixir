@@ -30,6 +30,32 @@ form.link, form.button {
   background-size: 519px 71px;
 }
 
+.logo a {
+  background-color: rgb(86,152,150);
+  display: block;
+  width: 300px;
+  color: white;
+}
+
+.logo a:hover {
+  text-decoration: none;
+  background-color: rgb(64,120,120) !important;
+}
+
+.login-line a {
+  cursor: pointer;
+  color: white;
+  background-color: rgb(86,152,150);
+  margin-top: 0px;
+  margin-bottom: 10px;
+  padding: 10px 5px 3px 55px !important;
+  border-radius: 0px !important;
+}
+
+.login-line a:hover {
+  background-color: rgb(64,120,120) !important;
+}
+
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,
 .marketing {
@@ -56,6 +82,47 @@ form.link, form.button {
 /* Supporting marketing content */
 .marketing {
   margin: 35px 0;
+}
+
+.siemens-text {
+  background-color: rgb(86,152,150);
+  color: white;
+}
+
+.edition .siemens-text {
+  padding-left: 20px;
+}
+
+a.siemens-text {
+  padding: 5px 25px 5px 5px;
+}
+
+a.siemens-text:hover {
+  color: white;
+  background-color: rgb(64,120,120) !important;
+  text-decoration: none;
+}
+
+.edition img {
+  float: left;
+  width: 100px;
+}
+
+.edition .info {
+  position: relative;
+  left: 0px;
+  padding-left: 100px;
+}
+
+.edition {
+  clear: both;
+  padding-bottom: 100px;
+}
+
+.footer_buttons {
+  margin-top: 20px;
+  float:left;
+  clear: both;
 }
 
 /* Responsive: Portrait tablets and up */

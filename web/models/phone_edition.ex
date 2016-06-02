@@ -7,7 +7,7 @@ defmodule SiemensCollection.PhoneEdition do
     field :prototype, :boolean, default: false
     field :notes, :string
     field :photo_url, :string
-    belongs_to :phone, SiemensCollection.Phone
+    belongs_to :phone, SiemensCollection.Phone, foreign_key: :phone_id
 
     timestamps
   end

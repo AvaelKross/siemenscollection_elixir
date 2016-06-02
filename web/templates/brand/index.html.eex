@@ -1,4 +1,4 @@
-<h2>Brands</h2>
+<h2 class="siemens-text">Brands</h2>
 
 <table class="table">
 <%= for brand <- @brands do %>

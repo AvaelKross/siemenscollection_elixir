@@ -19,6 +19,7 @@
         <div class="addict modal__footer">
           <button id="btn-register" class="addict btn">Register</button>
         </div>
+        <a class="addict link" href="/login">Log in</a>
       </div>
      </div>
   </div>

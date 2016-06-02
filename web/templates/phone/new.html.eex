@@ -4,4 +4,6 @@
                         brand: @brand,
                         action: short_phone_path(@conn, :create, @brand.id) %>
 
-<%= link "Back", to: short_phone_path(@conn, :index, @brand.id) %>
+<div class="footer_buttons">
+  <%= link "Back", to: short_phone_path(@conn, :index, @brand.id), class: "siemens-text" %>
+</div>

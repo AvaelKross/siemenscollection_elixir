@@ -12,6 +12,8 @@ defmodule SiemensCollection.Phone do
     field :release, :string
     belongs_to :brand, SiemensCollection.Brand
 
+    has_many :phone_editions, SiemensCollection.PhoneEdition
+
     timestamps
   end
 
@@ -27,5 +29,16 @@ defmodule SiemensCollection.Phone do
   def changeset(model, params \\ :empty) do
     model
     |> cast(params, @required_fields, @optional_fields)
+  end
+
+  def editions_count(query) do
+    from p in query,
+      group_by: p.id,
+      left_join: c in assoc(p, :phone_editions),
+      select: {p, count(c.id)}
+  end
+
+  def for_brand(query, brand_id) do
+    from p in query, where: p.brand_id == ^brand_id, order_by: p.name
   end
 end
