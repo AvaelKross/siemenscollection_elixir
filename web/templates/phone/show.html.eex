@@ -39,12 +39,23 @@
 
 </ul>
 
-<h2 class="siemens-text editions">Editions:</h2>
+<h2 class="siemens-text editions">
+  Editions:
+  <%= if can_edit(@conn) do %>
+    <%= link "New", to: short_phone_edition_path(@conn, :new, @brand.id, @phone.id), class: "btn btn-default btn-xs" %>
+  <% end %>
+</h2>
 <%= for edition <- @editions do %>
   <div class="edition">
-    <h3 class="siemens-text"><%= edition.name %></h3>
-    <%= if edition.photo_url do %>
-      <img src="<%= edition.photo_url %>"/>
+    <h3 class="siemens-text">
+      <%= edition.name %>
+      <%= if can_edit(@conn) do %>
+        <%= link "Edit", to: short_phone_edition_path(@conn, :edit, @brand.id, @phone.id, edition), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: short_phone_edition_path(@conn, :delete, @brand.id, @phone.id, edition), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+      <% end %>
+      </h3>
+    <%= for picture <- edition.pictures do %>
+      <img src="<%= picture.url %>"/>
     <% end %>
     <div class="info">
       <ul>

@@ -41,7 +41,7 @@ defmodule SiemensCollection.PhoneController do
 
   def show(conn, %{"id" => id}) do
     phone = Repo.get!(Phone, id) |> Repo.preload([:brand])
-    query = from pe in PhoneEdition, where: pe.phone_id == ^phone.id
+    query = from pe in PhoneEdition, where: pe.phone_id == ^phone.id, preload: [:pictures]
     editions = Repo.all(query)
     render(conn, "show.html", phone: phone, editions: editions)
   end
@@ -91,7 +91,7 @@ defmodule SiemensCollection.PhoneController do
     if Addict.Helper.current_user(conn) && Addict.Helper.current_user(conn).email != "avaelkross@gmail.com" do
       conn
       |> put_flash(:info, "You have no rights to do it")
-      |> redirect(to: brand_path(conn, :index))
+      |> redirect(to: short_brand_path(conn, :index))
     else
       conn
     end

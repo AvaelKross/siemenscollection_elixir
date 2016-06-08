@@ -1,6 +1,7 @@
 <h2>New phone edition</h2>
 
 <%= render "form.html", changeset: @changeset,
-                        action: phone_edition_path(@conn, :create) %>
+                        phone: @phone,
+                        action: short_phone_edition_path(@conn, :create, @brand.id, @phone.id) %>
 
-<%= link "Back", to: phone_edition_path(@conn, :index) %>
+<%= link "Back", to: short_phone_path(@conn, :show, @brand.id, @phone.id) %>

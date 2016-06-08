@@ -24,21 +24,21 @@ defmodule SiemensCollection.Router do
     addict :routes
   end
 
-  scope "/", SiemensCollection do
-    pipe_through :browser # Use the default browser stack
+  # scope "/", SiemensCollection do
+  #   pipe_through :browser # Use the default browser stack
 
-    get "/", BrandController, :index
-    resources "/phones", PhoneController
-    resources "/phone_editions", PhoneEditionController
-  end
+  #   get "/", BrandController, :index
+  #   resources "/phones", PhoneController
+  #   resources "/phone_editions", PhoneEditionController
+  # end
 
   scope "/", SiemensCollection, as: :short do
     pipe_through :browser
+    get "/", BrandController, :index
     scope "/:brand_id" do
-      resources "/", PhoneController do
-        scope "/:model_id" do
-          resources "/", PhoneEditionController
-        end
+      resources "/", PhoneController
+      scope "/:phone_id" do
+        resources "/", PhoneEditionController, except: [:index, :show]
       end
     end
   end

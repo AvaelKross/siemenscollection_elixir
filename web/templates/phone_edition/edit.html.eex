@@ -1,6 +1,9 @@
-<h2>Edit phone edition</h2>
+<h2>Edit</h2>
 
 <%= render "form.html", changeset: @changeset,
-                        action: phone_edition_path(@conn, :update, @phone_edition) %>
+                        phone: @phone,
+                        action: short_phone_edition_path(@conn, :update, @brand.id, @phone.id, @phone_edition) %>
 
-<%= link "Back", to: phone_edition_path(@conn, :index) %>
+<div class="footer_buttons">
+  <%= link "Back", to: short_phone_path(@conn, :show, @brand.id, @phone.id), class: "siemens-text" %>
+</div>

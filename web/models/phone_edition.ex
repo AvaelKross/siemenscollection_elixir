@@ -8,6 +8,7 @@ defmodule SiemensCollection.PhoneEdition do
     field :notes, :string
     field :photo_url, :string
     belongs_to :phone, SiemensCollection.Phone, foreign_key: :phone_id
+    has_many :pictures, SiemensCollection.Picture
 
     timestamps
   end

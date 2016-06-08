@@ -93,6 +93,18 @@ form.link, form.button {
   padding-left: 20px;
 }
 
+.edition .siemens-text .btn {
+  margin-top: 2px;
+  float: right;
+  margin-right: 2px;
+}
+
+.siemens-text.editions .btn {
+  margin-top: 6px;
+  float: right;
+  margin-right: 2px;
+}
+
 a.siemens-text {
   padding: 5px 25px 5px 5px;
 }
@@ -106,12 +118,17 @@ a.siemens-text:hover {
 .edition img {
   float: left;
   width: 100px;
+  margin-right: 10px;
 }
 
 .edition .info {
   position: relative;
   left: 0px;
   padding-left: 100px;
+}
+
+.edition .info ul {
+  list-style: none;
 }
 
 .edition {

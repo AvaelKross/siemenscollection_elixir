@@ -4,6 +4,7 @@
       <p>Oops, something went wrong! Please check the errors below.</p>
     </div>
   <% end %>
+  <%= hidden_input f, :phone_id, value: @phone.id %>
 
   <div class="form-group">
     <%= label f, :name, class: "control-label" %>
@@ -21,12 +22,6 @@
     <%= label f, :prototype, class: "control-label" %>
     <%= checkbox f, :prototype, class: "form-control" %>
     <%= error_tag f, :prototype %>
-  </div>
-  
-  <div class="form-group">
-    <%= label f, :photo_url, class: "control-label" %>
-    <%= text_input f, :photo_url, class: "form-control" %>
-    <%= error_tag f, :photo_url %>
   </div>
 
   <div class="form-group">
