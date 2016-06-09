@@ -3,11 +3,6 @@
 <ul>
 
   <li>
-    <strong>Release:</strong>
-    <%= @phone.release %>
-  </li>
-
-  <li>
     <strong>Network:</strong>
     <%= @phone.network %>
   </li>
@@ -54,11 +49,22 @@
         <%= link "Delete", to: short_phone_edition_path(@conn, :delete, @brand.id, @phone.id, edition), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
       <% end %>
       </h3>
-    <%= for picture <- edition.pictures do %>
-      <img src="<%= picture.url %>"/>
+    <%= if length(edition.pictures) > 0 do %>
+      <div class="images">
+        <%= for picture <- edition.pictures do %>
+          <a href="<%= picture.url %>" target="_blank">
+            <img src="<%= picture.url %>"/>
+          </a>
+        <% end %>
+      </div>
     <% end %>
     <div class="info">
       <ul>
+        <li>
+          <strong>Release:</strong>
+          <%= edition.release %>
+        </li>
+
         <li>
           <strong>Limited:</strong>
           <%= edition.limited %>

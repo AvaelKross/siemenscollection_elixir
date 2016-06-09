@@ -116,24 +116,28 @@ a.siemens-text:hover {
 }
 
 .edition img {
-  float: left;
+  /*float: left;*/
   width: 100px;
   margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.edition .images {
+  width: 230px;
+  float: left;
 }
 
 .edition .info {
-  position: relative;
-  left: 0px;
-  padding-left: 100px;
+  margin-left: 230px;
 }
 
 .edition .info ul {
   list-style: none;
+  padding-left: 0px;
 }
 
 .edition {
   clear: both;
-  padding-bottom: 100px;
 }
 
 .footer_buttons {

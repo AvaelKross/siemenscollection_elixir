@@ -7,6 +7,7 @@ defmodule SiemensCollection.PhoneEdition do
     field :prototype, :boolean, default: false
     field :notes, :string
     field :photo_url, :string
+    field :release, :string
     belongs_to :phone, SiemensCollection.Phone, foreign_key: :phone_id
     has_many :pictures, SiemensCollection.Picture
 
@@ -14,7 +15,7 @@ defmodule SiemensCollection.PhoneEdition do
   end
 
   @required_fields ~w(name)
-  @optional_fields ~w(limited prototype notes photo_url phone_id)
+  @optional_fields ~w(limited prototype notes photo_url phone_id release)
 
   @doc """
   Creates a changeset based on the `model` and `params`.

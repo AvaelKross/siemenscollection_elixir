@@ -4,7 +4,6 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th>Release</th>
       <th>Editions</th>
 
       <th></th>
@@ -14,7 +13,6 @@
 <%= for {phone, count} <- @phones do %>
     <tr>
       <td><%= phone.name %></td>
-      <td><%= phone.release %></td>
       <td><%= count %> editions</td>
 
       <td class="text-right">
