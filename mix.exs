@@ -19,7 +19,7 @@ defmodule SiemensCollection.Mixfile do
   def application do
     [mod: {SiemensCollection, []},
      applications: [:phoenix, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex, :addict, :ex_admin]]
+                    :phoenix_ecto, :postgrex, :addict, :ex_admin, :ex_aws, :httpoison]]
   end
 
   # Specifies which paths to compile per environment.
@@ -39,7 +39,13 @@ defmodule SiemensCollection.Mixfile do
      {:cowboy, "~> 1.0"},
      {:addict, github: "AvaelKross/addict"},
      {:ex_admin, github: "AvaelKross/ex_admin", branch: 'v0.7.3'},
-     {:exrm, "~> 1.0.3"}]
+     {:exrm, "~> 1.0.3"},
+     {:arc, "~> 0.5.2", github: "AvaelKross/arc", override: true},
+     {:arc_ecto, "~> 0.3.2"}, # update after updating ECTO to 2.*
+     {:ex_aws, "~> 0.4.10"}, # Required for Amazon S3
+     {:httpoison, "~> 0.7"}, # Required for Amazon S3
+     {:poison, "~> 1.2"}     # Required for Amazon S3
+    ]
   end
 
   # Aliases are shortcut or tasks specific to the current project.

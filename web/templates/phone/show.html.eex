@@ -52,8 +52,9 @@
     <%= if length(edition.pictures) > 0 do %>
       <div class="images">
         <%= for picture <- edition.pictures do %>
-          <a href="<%= picture.url %>" target="_blank">
-            <img src="<%= picture.url %>"/>
+          <% image_url = SiemensCollection.Picture.get_url(picture) %>
+          <a href="<%= image_url %>" target="_blank">
+            <img src="<%= image_url %>"/>
           </a>
         <% end %>
       </div>
