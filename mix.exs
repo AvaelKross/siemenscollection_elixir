@@ -19,7 +19,7 @@ defmodule SiemensCollection.Mixfile do
   def application do
     [mod: {SiemensCollection, []},
      applications: [:phoenix, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex, :addict, :ex_admin, :ex_aws, :httpoison, :arc]]
+                    :phoenix_ecto, :postgrex, :addict, :ex_admin, :ex_aws, :httpoison, :arc, :arc_ecto]]
   end
 
   # Specifies which paths to compile per environment.
