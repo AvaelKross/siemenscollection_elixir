@@ -15,21 +15,24 @@ defmodule SiemensCollection.PictureController do
   end
 
   def create(conn, %{"images" => images_params}) do
-    Enum.each images_params["images_from_pc"], fn n ->
-      if n != nil && n != "" do
-        changeset = Picture.changeset(%Picture{}, %{phone_edition_id: conn.params["edition_id"]})
-        {:ok, picture} = Repo.insert(changeset)
-        changeset = Picture.changeset(picture, %{image: n})
-        {:ok, _} = Repo.update(changeset)
+    if images_params["images_from_pc"] != nil do
+      Enum.each images_params["images_from_pc"], fn n ->
+        if n != nil && n != "" do
+          changeset = Picture.changeset(%Picture{}, %{phone_edition_id: conn.params["edition_id"]})
+          {:ok, picture} = Repo.insert(changeset)
+          changeset = Picture.changeset(picture, %{image: n})
+          {:ok, _} = Repo.update(changeset)
+        end
       end
     end
-
-    Enum.each images_params["images_from_link"], fn n ->
-      if n != nil && n != "" do
-        changeset = Picture.changeset(%Picture{}, %{phone_edition_id: conn.params["edition_id"]})
-        {:ok, picture} = Repo.insert(changeset)
-        changeset = Picture.changeset(picture, %{image: n})
-        {:ok, _} = Repo.update(changeset)
+    if images_params["images_from_link"] != nil do
+      Enum.each images_params["images_from_link"], fn n ->
+        if n != nil && n != "" do
+          changeset = Picture.changeset(%Picture{}, %{phone_edition_id: conn.params["edition_id"]})
+          {:ok, picture} = Repo.insert(changeset)
+          changeset = Picture.changeset(picture, %{image: n})
+          {:ok, _} = Repo.update(changeset)
+        end
       end
     end
 
