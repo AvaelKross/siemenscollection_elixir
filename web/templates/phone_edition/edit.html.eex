@@ -4,6 +4,17 @@
                         phone: @phone,
                         action: short_phone_edition_path(@conn, :update, @brand.id, @phone.id, @phone_edition) %>
 
+<%= link "Upload images", to: short_picture_path(@conn, :new, @brand.id, @phone.id, @phone_edition.id) %>
+<%= if length(@phone_edition.pictures) > 0 do %>
+  <div class="images">
+    <%= for picture <- @phone_edition.pictures do %>
+      <% image_url = SiemensCollection.Picture.get_url(picture) %>
+      <img src="<%= image_url %>"/>
+      <%= link "Destroy", to: short_picture_path(@conn, :delete, @brand.id, @phone.id, @phone_edition.id, picture.id), method: :delete %>
+    <% end %>
+  </div>
+<% end %>
+
 <div class="footer_buttons">
   <%= link "Back", to: short_phone_path(@conn, :show, @brand.id, @phone.id), class: "siemens-text" %>
 </div>

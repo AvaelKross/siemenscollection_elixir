@@ -12,11 +12,6 @@ defmodule SiemensCollection.PhoneEditionController do
   plug :set_brand
   plug :set_phone
 
-  # def index(conn, _params) do
-  #   phone_editions = Repo.all(PhoneEdition)
-  #   render(conn, "index.html", phone_editions: phone_editions)
-  # end
-
   def new(conn, _params) do
     changeset = PhoneEdition.changeset(%PhoneEdition{})
     render(conn, "new.html", changeset: changeset)
@@ -35,13 +30,8 @@ defmodule SiemensCollection.PhoneEditionController do
     end
   end
 
-  # def show(conn, %{"id" => id}) do
-  #   phone_edition = Repo.get!(PhoneEdition, id)
-  #   render(conn, "show.html", phone_edition: phone_edition)
-  # end
-
   def edit(conn, %{"id" => id}) do
-    phone_edition = Repo.get!(PhoneEdition, id)
+    phone_edition = Repo.get!(PhoneEdition, id) |> Repo.preload([:pictures])
     changeset = PhoneEdition.changeset(phone_edition)
     render(conn, "edit.html", phone_edition: phone_edition, changeset: changeset)
   end
@@ -63,8 +53,6 @@ defmodule SiemensCollection.PhoneEditionController do
   def delete(conn, %{"id" => id}) do
     phone_edition = Repo.get!(PhoneEdition, id)
 
-    # Here we use delete! (with a bang) because we expect
-    # it to always work (and if it does not, it will raise).
     Repo.delete!(phone_edition)
 
     conn
