@@ -1,25 +1,26 @@
-<h2>New images</h2>
+<h2>Upload images</h2>
 
 <%= form_for @conn, short_picture_path(@conn, :create, @conn.params["brand_id"], @conn.params["phone_id"], @conn.params["edition_id"]), [multipart: true, as: :images], fn f -> %>
+  <div class="images_upload_form">
+    <h4>From PC:</h4>
+    <input type="file" name="images[]">
+    <input type="file" name="images[]">
+    <input type="file" name="images[]">
+    <input type="file" name="images[]">
 
-<h4>From PC:</h4>
-<input type="file" name="images[images_from_pc][]">
-<input type="file" name="images[images_from_pc][]">
-<input type="file" name="images[images_from_pc][]">
-<input type="file" name="images[images_from_pc][]">
+    <h4>From links:</h4>
+    <input type="url" name="images[]" placeholder="Paste URL here.."><br>
+    <input type="url" name="images[]" placeholder="Paste URL here.."><br>
+    <input type="url" name="images[]" placeholder="Paste URL here.."><br>
+    <input type="url" name="images[]" placeholder="Paste URL here.."><br>
 
-<h4>From links:</h4>
-<input type="url" name="images[images_from_link][]">
-<input type="url" name="images[images_from_link][]">
-<input type="url" name="images[images_from_link][]">
-<input type="url" name="images[images_from_link][]">
-
-<div class="form-group">
-  <%= submit "Submit", class: "btn btn-primary" %>
-</div>
+    <div class="form-group">
+      <%= submit "Upload", class: "btn btn-primary" %>
+    </div>
+  </div>
 
 <% end %>
 
 <div class="footer_buttons">
-  <%= link "Back", to: short_phone_path(@conn, :show, @conn.params["brand_id"], @conn.params["phone_id"]), class: "siemens-text" %>
+  <%= link "Back", to: short_phone_edition_path(@conn, :edit, @conn.params["brand_id"], @conn.params["phone_id"], @conn.params["edition_id"]), class: "siemens-text" %>
 </div>

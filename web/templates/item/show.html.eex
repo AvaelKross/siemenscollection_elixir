@@ -1,0 +1,55 @@
+<h2><%= full_phone_name(@item.phone_edition) %></h2>
+
+<ul>
+
+  <li>
+    <strong>Notes:</strong>
+    <%= @item.notes %>
+  </li>
+
+  <li>
+    <strong>Condition:</strong>
+    <%= @item.condition %>
+  </li>
+
+  <li>
+    <strong>Released:</strong>
+    <%= @item.released %>
+  </li>
+
+  <li>
+    <strong>Imei:</strong>
+    <%= @item.imei %>
+  </li>
+
+  <li>
+    <strong>Sw:</strong>
+    <%= @item.sw %>
+  </li>
+
+  <li>
+    <strong>Made in:</strong>
+    <%= @item.made_in %>
+  </li>
+
+  <li>
+    <strong>Calls time:</strong>
+    <%= @item.calls_time %>
+  </li>
+
+  <li>
+    <strong>Set:</strong>
+    <%= @item.set %>
+  </li>
+
+  <li>
+    <strong>Selling:</strong>
+    <%= @item.selling %>
+  </li>
+
+</ul>
+
+<div class="footer_buttons">
+  <%= link "Edit", to: short_item_path(@conn, :edit, @user, @item), class: "siemens-text" %>
+  <%= link "Back", to: short_item_path(@conn, :index, @user), class: "siemens-text" %>
+</div>

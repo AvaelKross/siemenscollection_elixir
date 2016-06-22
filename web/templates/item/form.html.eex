@@ -1,0 +1,72 @@
+<%= form_for @changeset, @action, fn f -> %>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Oops, something went wrong! Please check the errors below.</p>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= label f, :phone_edition_id, class: "control-label" %>
+    <%= select f, :phone_edition_id, 
+      Enum.map(@phone_editions, fn p -> {full_phone_name(p), p.id} end) %>
+    <%= error_tag f, :phone_edition_id %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :notes, class: "control-label" %>
+    <%= textarea f, :notes, class: "form-control" %>
+    <%= error_tag f, :notes %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :condition, class: "control-label" %>
+    <%= number_input f, :condition, class: "form-control" %>
+    <%= error_tag f, :condition %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :released, class: "control-label" %>
+    <%= text_input f, :released, class: "form-control" %>
+    <%= error_tag f, :released %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :imei, class: "control-label" %>
+    <%= text_input f, :imei, class: "form-control" %>
+    <%= error_tag f, :imei %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :sw, class: "control-label" %>
+    <%= text_input f, :sw, class: "form-control" %>
+    <%= error_tag f, :sw %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :made_in, class: "control-label" %>
+    <%= text_input f, :made_in, class: "form-control" %>
+    <%= error_tag f, :made_in %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :calls_time, class: "control-label" %>
+    <%= text_input f, :calls_time, class: "form-control" %>
+    <%= error_tag f, :calls_time %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :set, class: "control-label" %>
+    <%= textarea f, :set, class: "form-control" %>
+    <%= error_tag f, :set %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :selling, class: "control-label" %>
+    <%= checkbox f, :selling, class: "form-control" %>
+    <%= error_tag f, :selling %>
+  </div>
+
+  <div class="form-group">
+    <%= submit "Submit", class: "btn btn-primary" %>
+  </div>
+<% end %>

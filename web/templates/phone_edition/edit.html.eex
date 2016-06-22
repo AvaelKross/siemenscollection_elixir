@@ -4,13 +4,18 @@
                         phone: @phone,
                         action: short_phone_edition_path(@conn, :update, @brand.id, @phone.id, @phone_edition) %>
 
-<%= link "Upload images", to: short_picture_path(@conn, :new, @brand.id, @phone.id, @phone_edition.id) %>
+<h2>Images</h2>
+
+<%= link "Upload new images", to: short_picture_path(@conn, :new, @brand.id, @phone.id, @phone_edition.id) %>
+<br><br>
 <%= if length(@phone_edition.pictures) > 0 do %>
-  <div class="images">
+  <div class="edit_images">
     <%= for picture <- @phone_edition.pictures do %>
       <% image_url = SiemensCollection.Picture.get_url(picture) %>
-      <img src="<%= image_url %>"/>
-      <%= link "Destroy", to: short_picture_path(@conn, :delete, @brand.id, @phone.id, @phone_edition.id, picture.id), method: :delete %>
+      <div class="image">
+        <img src="<%= image_url %>"/>
+        <%= link "Destroy", to: short_picture_path(@conn, :delete, @brand.id, @phone.id, @phone_edition.id, picture.id), method: :delete %>
+      </div>
     <% end %>
   </div>
 <% end %>

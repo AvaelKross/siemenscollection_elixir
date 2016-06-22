@@ -17,6 +17,7 @@
         <nav role="navigation">
           <ul class="nav nav-pills pull-right login-line">
             <%= if is_logged_in(@conn) do %>
+              <li><%= link "/ My", to: short_item_path(@conn, :index, current_user(@conn).id) %></li>
               <li><a id="btn-logout"><%= current_user(@conn).name %> / Logout</a></li>
             <% else %>
               <li><a href="/login">/ Login</a></li>
@@ -24,6 +25,12 @@
           </ul>
         </nav>
         <span class="logo"><a href="/"><h2>Phones Collection</h2></a></span>
+        <nav role="navigation">
+          <ul class="nav menu-line">
+              <li><%= link "Database /", to: short_brand_path(@conn, :index) %></li>
+              <li><%= link "Collections /", to: short_collection_path(@conn, :index) %></li>
+          </ul>
+        </nav>
       </header>
 
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>

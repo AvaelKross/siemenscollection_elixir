@@ -10,6 +10,6 @@ defmodule SiemensCollection.LayoutView do
   end
 
   def can_edit(conn) do
-    is_logged_in(conn) && current_user(conn).email == "avaelkross@gmail.com"
+    SiemensCollection.Plugs.CheckAdminRights.can_edit(conn)
   end
 end

@@ -35,6 +35,12 @@ defmodule SiemensCollection.Router do
   scope "/", SiemensCollection, as: :short do
     pipe_through :browser
     get "/", BrandController, :index
+    scope "/collections" do
+      get "/", CollectionController, :index
+      scope "/:user_id" do
+        resources "/", ItemController
+      end
+    end
     scope "/:brand_id" do
       resources "/", PhoneController
       scope "/:phone_id" do

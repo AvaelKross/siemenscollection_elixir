@@ -6,9 +6,8 @@ defmodule SiemensCollection.PictureController do
   alias SiemensCollection.Image
 
   plug :scrub_params, "images" when action in [:create]
-  plug Addict.Plugs.Authenticated when action in [:new, :create, :delete]
 
-  plug :check_rights when action in [:new, :create, :delete]
+  plug SiemensCollection.Plugs.CheckAdminRights when action in [:new, :create, :delete]
 
   def new(conn, _params) do
     render(conn, "new.html")
@@ -57,15 +56,5 @@ defmodule SiemensCollection.PictureController do
     |> redirect(to: short_phone_edition_path(conn, :edit, conn.params["brand_id"],
                                                           conn.params["phone_id"],
                                                           conn.params["edition_id"]))
-  end
-
-  defp check_rights(conn, _) do
-    if Addict.Helper.current_user(conn) && Addict.Helper.current_user(conn).email != "avaelkross@gmail.com" do
-      conn
-      |> put_flash(:info, "You have no rights to do it")
-      |> redirect(to: short_brand_path(conn, :index))
-    else
-      conn
-    end
   end
 end

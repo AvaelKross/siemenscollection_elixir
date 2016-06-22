@@ -7,11 +7,10 @@ defmodule SiemensCollection.PhoneController do
   alias SiemensCollection.PhoneEdition
   alias SiemensCollection.Brand
 
-  plug Addict.Plugs.Authenticated when action in [:new, :create, :edit, :update, :delete]
-  plug :check_rights when action in [:new, :create, :edit, :update, :delete]
+  plug SiemensCollection.Plugs.CheckAdminRights when action in [:new, :create, :edit, :update, :delete]
 
   plug :scrub_params, "phone" when action in [:create, :update]
-  plug :set_brand
+  plug SiemensCollection.Plugs.SetBrand
   
   def index(conn, _params) do
     brand_id = conn.assigns.brand.id
@@ -78,22 +77,4 @@ defmodule SiemensCollection.PhoneController do
     |> redirect(to: short_phone_path(conn, :index, conn.assigns.brand.id))
   end
 
-  defp set_brand(conn, _) do
-    if conn.params["brand_id"] do
-      brand = Repo.get(Brand, conn.params["brand_id"])
-      assign(conn, :brand, brand)
-    else
-      conn
-    end
-  end
-
-  defp check_rights(conn, _) do
-    if Addict.Helper.current_user(conn) && Addict.Helper.current_user(conn).email != "avaelkross@gmail.com" do
-      conn
-      |> put_flash(:info, "You have no rights to do it")
-      |> redirect(to: short_brand_path(conn, :index))
-    else
-      conn
-    end
-  end
 end
