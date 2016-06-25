@@ -37,7 +37,7 @@
 <h2 class="siemens-text editions">
   Editions:
   <%= if can_edit(@conn) do %>
-    <%= link "New", to: short_phone_edition_path(@conn, :new, @brand.id, @phone.id), class: "btn btn-default btn-xs" %>
+    <%= link "New", to: catalog_phone_edition_path(@conn, :new, @brand.id, @phone.id), class: "btn btn-default btn-xs" %>
   <% end %>
 </h2>
 <%= for edition <- @editions do %>
@@ -45,8 +45,8 @@
     <h3 class="siemens-text">
       <%= edition.name %>
       <%= if can_edit(@conn) do %>
-        <%= link "Edit", to: short_phone_edition_path(@conn, :edit, @brand.id, @phone.id, edition), class: "btn btn-default btn-xs" %>
-        <%= link "Delete", to: short_phone_edition_path(@conn, :delete, @brand.id, @phone.id, edition), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+        <%= link "Edit", to: catalog_phone_edition_path(@conn, :edit, @brand.id, @phone.id, edition), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: catalog_phone_edition_path(@conn, :delete, @brand.id, @phone.id, edition), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
       <% end %>
       </h3>
     <%= if length(edition.pictures) > 0 do %>
@@ -87,7 +87,7 @@
 
 <div class="footer_buttons">
   <%= if can_edit(@conn) do %>
-    <%= link "Edit", to: short_phone_path(@conn, :edit, @brand.id, @phone), class: "siemens-text" %>
+    <%= link "Edit", to: catalog_phone_path(@conn, :edit, @brand.id, @phone), class: "siemens-text" %>
   <% end %>
-  <%= link "Back", to: short_phone_path(@conn, :index, @brand.id), class: "siemens-text" %>
+  <%= link "Back", to: catalog_phone_path(@conn, :index, @brand.id), class: "siemens-text" %>
 </div>

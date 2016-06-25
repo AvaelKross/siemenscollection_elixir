@@ -1,6 +1,12 @@
 <h2>Upload images</h2>
 
-<%= form_for @conn, short_picture_path(@conn, :create, @conn.params["brand_id"], @conn.params["phone_id"], @conn.params["edition_id"]), [multipart: true, as: :images], fn f -> %>
+<% path = if @conn.params["edition_id"] != nil do
+            SiemensCollection.Router.Helpers.catalog_picture_path(@conn, :create, @conn.params["brand_id"], @conn.params["phone_id"], @conn.params["edition_id"])
+          else
+            SiemensCollection.Router.Helpers.collections_picture_path(@conn, :create, @conn.params["user_id"], @conn.params["item_id"])
+          end %>
+
+<%= form_for @conn, path, [multipart: true, as: :images], fn f -> %>
   <div class="images_upload_form">
     <h4>From PC:</h4>
     <input type="file" name="images[]">
@@ -18,9 +24,14 @@
       <%= submit "Upload", class: "btn btn-primary" %>
     </div>
   </div>
-
 <% end %>
 
+<% back_path = if @conn.params["edition_id"] do
+                 SiemensCollection.Router.Helpers.catalog_phone_edition_path(@conn, :edit, @conn.params["brand_id"], @conn.params["phone_id"], @conn.params["edition_id"])
+               else
+                  SiemensCollection.Router.Helpers.collections_item_path(@conn, :edit, @conn.params["user_id"], @conn.params["item_id"])
+               end %>
+
 <div class="footer_buttons">
-  <%= link "Back", to: short_phone_edition_path(@conn, :edit, @conn.params["brand_id"], @conn.params["phone_id"], @conn.params["edition_id"]), class: "siemens-text" %>
+  <%= link "Back", to: back_path, class: "siemens-text" %>
 </div>

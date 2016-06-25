@@ -24,7 +24,7 @@ defmodule SiemensCollection.PhoneEditionController do
       {:ok, _phone_edition} ->
         conn
         |> put_flash(:info, "Phone edition created successfully.")
-        |> redirect(to: short_phone_path(conn, :show, conn.assigns.brand.id, conn.assigns.phone.id))
+        |> redirect(to: catalog_phone_path(conn, :show, conn.assigns.brand.id, conn.assigns.phone.id))
       {:error, changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
@@ -44,7 +44,7 @@ defmodule SiemensCollection.PhoneEditionController do
       {:ok, phone_edition} ->
         conn
         |> put_flash(:info, "Phone edition updated successfully.")
-        |> redirect(to: short_phone_path(conn, :show, conn.assigns.brand.id, conn.assigns.phone.id))
+        |> redirect(to: catalog_phone_path(conn, :show, conn.assigns.brand.id, conn.assigns.phone.id))
       {:error, changeset} ->
         render(conn, "edit.html", phone_edition: phone_edition, changeset: changeset)
     end
@@ -57,7 +57,7 @@ defmodule SiemensCollection.PhoneEditionController do
 
     conn
     |> put_flash(:info, "Phone edition deleted successfully.")
-    |> redirect(to: short_phone_path(conn, :show, conn.assigns.brand.id, conn.assigns.phone.id))
+    |> redirect(to: catalog_phone_path(conn, :show, conn.assigns.brand.id, conn.assigns.phone.id))
   end
 
   defp set_phone(conn, _) do

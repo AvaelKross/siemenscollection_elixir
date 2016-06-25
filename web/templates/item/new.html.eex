@@ -2,8 +2,8 @@
 
 <%= render "form.html", changeset: @changeset,
                         phone_editions: @phone_editions,
-                        action: short_item_path(@conn, :create, @user) %>
+                        action: collections_item_path(@conn, :create, @user) %>
 
 <div class="footer_buttons">
-  <%= link "Back", to: short_item_path(@conn, :index, @user), class: "siemens-text" %>
+  <%= link "Back", to: collections_item_path(@conn, :index, @user), class: "siemens-text" %>
 </div>

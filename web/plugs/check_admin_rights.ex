@@ -12,7 +12,7 @@ defmodule SiemensCollection.Plugs.CheckAdminRights do
     else
       conn
       |> put_flash(:info, "You have no rights to do it")
-      |> redirect(to: SiemensCollection.Router.Helpers.short_brand_path(conn, :index))
+      |> redirect(to: SiemensCollection.Router.Helpers.catalog_brand_path(conn, :index))
     end
   end
 

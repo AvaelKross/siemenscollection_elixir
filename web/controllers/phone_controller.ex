@@ -32,7 +32,7 @@ defmodule SiemensCollection.PhoneController do
       {:ok, _phone} ->
         conn
         |> put_flash(:info, "Phone created successfully.")
-        |> redirect(to: short_phone_path(conn, :index, conn.assigns.brand.id))
+        |> redirect(to: catalog_phone_path(conn, :index, conn.assigns.brand.id))
       {:error, changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
@@ -59,7 +59,7 @@ defmodule SiemensCollection.PhoneController do
       {:ok, phone} ->
         conn
         |> put_flash(:info, "Phone updated successfully.")
-        |> redirect(to: short_phone_path(conn, :show, conn.assigns.brand.id, phone))
+        |> redirect(to: catalog_phone_path(conn, :show, conn.assigns.brand.id, phone))
       {:error, changeset} ->
         render(conn, "edit.html", phone: phone, changeset: changeset)
     end
@@ -74,7 +74,7 @@ defmodule SiemensCollection.PhoneController do
 
     conn
     |> put_flash(:info, "Phone deleted successfully.")
-    |> redirect(to: short_phone_path(conn, :index, conn.assigns.brand.id))
+    |> redirect(to: catalog_phone_path(conn, :index, conn.assigns.brand.id))
   end
 
 end

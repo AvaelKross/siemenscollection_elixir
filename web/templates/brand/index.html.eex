@@ -4,7 +4,7 @@
 <%= for brand <- @brands do %>
     <tr>
       <td>
-        <%= link brand.name, to: short_phone_path(@conn, :index, brand.id) %>
+        <%= link brand.name, to: catalog_phone_path(@conn, :index, brand.id) %>
       </td>
     </tr>
 <% end %>

@@ -34,5 +34,5 @@
 
 </ul>
 
-<%= link "Edit", to: phone_edition_path(@conn, :edit, @phone_edition) %>
-<%= link "Back", to: phone_edition_path(@conn, :index) %>
+<%= link "Edit", to: catalog_phone_edition_path(@conn, :edit, @phone_edition) %>
+<%= link "Back", to: catalog_phone_edition_path(@conn, :index) %>

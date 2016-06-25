@@ -13,6 +13,7 @@ defmodule SiemensCollection.Item do
     field :selling, :boolean, default: false
     belongs_to :phone_edition, SiemensCollection.PhoneEdition
     belongs_to :user, SiemensCollection.User
+    has_many :pictures, SiemensCollection.Picture
 
     timestamps
   end
@@ -29,5 +30,9 @@ defmodule SiemensCollection.Item do
   def changeset(model, params \\ :empty) do
     model
     |> cast(params, @required_fields, @optional_fields)
+  end
+
+  def for_user(query, user_id) do
+    from p in query, where: p.user_id == ^user_id
   end
 end

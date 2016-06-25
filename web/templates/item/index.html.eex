@@ -14,9 +14,9 @@
       <td><%= full_phone_name(item.phone_edition) %></td>
 
       <td class="text-right">
-        <%= link "Show", to: short_item_path(@conn, :show, @user, item), class: "btn btn-default btn-xs" %>
-        <%= link "Edit", to: short_item_path(@conn, :edit, @user, item), class: "btn btn-default btn-xs" %>
-        <%= link "Delete", to: short_item_path(@conn, :delete, @user, item), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+        <%= link "Show", to: collections_item_path(@conn, :show, @user, item), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: collections_item_path(@conn, :edit, @user, item), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: collections_item_path(@conn, :delete, @user, item), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
       </td>
     </tr>
 <% end %>
@@ -24,5 +24,5 @@
 </table>
 
 <div class="footer_buttons">
-  <%= link "New item", to: short_item_path(@conn, :new, @user), class: "siemens-text" %>
+  <%= link "New item", to: collections_item_path(@conn, :new, @user), class: "siemens-text" %>
 </div>

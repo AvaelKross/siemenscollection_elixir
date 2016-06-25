@@ -32,16 +32,23 @@ defmodule SiemensCollection.Router do
   #   resources "/phone_editions", PhoneEditionController
   # end
 
-  scope "/", SiemensCollection, as: :short do
+  scope "/", SiemensCollection do
     pipe_through :browser
     get "/", BrandController, :index
-    scope "/collections" do
+
+    scope "/collections", as: :collections do
       get "/", CollectionController, :index
       scope "/:user_id" do
         resources "/", ItemController
+        scope "/:item_id/images" do
+          get "/new", PictureController, :new
+          post "/", PictureController, :create
+          delete "/:id", PictureController, :delete
+        end
       end
     end
-    scope "/:brand_id" do
+
+    scope "/:brand_id", as: :catalog do
       resources "/", PhoneController
       scope "/:phone_id" do
         resources "/", PhoneEditionController, except: [:index, :show]
@@ -52,6 +59,8 @@ defmodule SiemensCollection.Router do
         end
       end
     end
+
+
   end
 
   # Other scopes may use custom stacks.

@@ -2,11 +2,11 @@
 
 <%= render "form.html", changeset: @changeset,
                         phone: @phone,
-                        action: short_phone_edition_path(@conn, :update, @brand.id, @phone.id, @phone_edition) %>
+                        action: catalog_phone_edition_path(@conn, :update, @brand.id, @phone.id, @phone_edition) %>
 
 <h2>Images</h2>
 
-<%= link "Upload new images", to: short_picture_path(@conn, :new, @brand.id, @phone.id, @phone_edition.id) %>
+<%= link "Upload new images", to: catalog_picture_path(@conn, :new, @brand.id, @phone.id, @phone_edition.id) %>
 <br><br>
 <%= if length(@phone_edition.pictures) > 0 do %>
   <div class="edit_images">
@@ -14,12 +14,12 @@
       <% image_url = SiemensCollection.Picture.get_url(picture) %>
       <div class="image">
         <img src="<%= image_url %>"/>
-        <%= link "Destroy", to: short_picture_path(@conn, :delete, @brand.id, @phone.id, @phone_edition.id, picture.id), method: :delete %>
+        <%= link "Destroy", to: catalog_picture_path(@conn, :delete, @brand.id, @phone.id, @phone_edition.id, picture.id), method: :delete %>
       </div>
     <% end %>
   </div>
 <% end %>
 
 <div class="footer_buttons">
-  <%= link "Back", to: short_phone_path(@conn, :show, @brand.id, @phone.id), class: "siemens-text" %>
+  <%= link "Back", to: catalog_phone_path(@conn, :show, @brand.id, @phone.id), class: "siemens-text" %>
 </div>

@@ -49,7 +49,19 @@
 
 </ul>
 
+<h2>Images</h2>
+<%= if length(@item.pictures) > 0 do %>
+  <div class="images">
+    <%= for picture <- @item.pictures do %>
+      <% image_url = SiemensCollection.Picture.get_url(picture) %>
+      <a href="<%= image_url %>" target="_blank">
+        <img src="<%= image_url %>" width="100"/>
+      </a>
+    <% end %>
+  </div>
+<% end %>
+
 <div class="footer_buttons">
-  <%= link "Edit", to: short_item_path(@conn, :edit, @user, @item), class: "siemens-text" %>
-  <%= link "Back", to: short_item_path(@conn, :index, @user), class: "siemens-text" %>
+  <%= link "Edit", to: collections_item_path(@conn, :edit, @user, @item), class: "siemens-text" %>
+  <%= link "Back", to: collections_item_path(@conn, :index, @user), class: "siemens-text" %>
 </div>

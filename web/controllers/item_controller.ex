@@ -15,7 +15,10 @@ defmodule SiemensCollection.ItemController do
   plug :set_user
 
   def index(conn, _params) do
-    items = Repo.all(Item) |> Repo.preload([phone_edition: [phone: :brand]])
+    user_id = conn.assigns.user.id
+    query = Item |> Item.for_user(user_id)
+    items = Repo.all(query) |> Repo.preload([phone_edition: [phone: :brand]])
+
     render(conn, "index.html", items: items)
   end
 
@@ -33,19 +36,19 @@ defmodule SiemensCollection.ItemController do
       {:ok, _item} ->
         conn
         |> put_flash(:info, "Item created successfully.")
-        |> redirect(to: short_item_path(conn, :index, conn.assigns.user.id))
+        |> redirect(to: collections_item_path(conn, :index, conn.assigns.user.id))
       {:error, changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
   end
 
   def show(conn, %{"id" => id}) do
-    item = Repo.get!(Item, id) |> Repo.preload([phone_edition: [phone: :brand]])
+    item = Repo.get!(Item, id) |> Repo.preload([:pictures, phone_edition: [phone: :brand]])
     render(conn, "show.html", item: item)
   end
 
   def edit(conn, %{"id" => id}) do
-    item = Repo.get!(Item, id)
+    item = Repo.get!(Item, id) |> Repo.preload([:pictures])
     phone_editions = Repo.all(PhoneEdition) |> Repo.preload([phone: :brand])
     changeset = Item.changeset(item)
     render(conn, "edit.html", item: item, phone_editions: phone_editions, changeset: changeset)
@@ -59,7 +62,7 @@ defmodule SiemensCollection.ItemController do
       {:ok, item} ->
         conn
         |> put_flash(:info, "Item updated successfully.")
-        |> redirect(to: short_item_path(conn, :show, conn.assigns.user.id, item))
+        |> redirect(to: collections_item_path(conn, :show, conn.assigns.user.id, item))
       {:error, changeset} ->
         render(conn, "edit.html", item: item, changeset: changeset)
     end
@@ -74,7 +77,7 @@ defmodule SiemensCollection.ItemController do
 
     conn
     |> put_flash(:info, "Item deleted successfully.")
-    |> redirect(to: short_item_path(conn, :index, conn.assigns.user.id))
+    |> redirect(to: collections_item_path(conn, :index, conn.assigns.user.id))
   end
 
   defp set_user(conn, _) do
@@ -87,12 +90,22 @@ defmodule SiemensCollection.ItemController do
   end
 
   defp check_rights(conn, _) do
-    if Addict.Helper.current_user(conn) && Integer.to_string(Addict.Helper.current_user(conn).id) != conn.params["user_id"] do
+    if Addict.Helper.current_user(conn) do
+      if Integer.to_string(Addict.Helper.current_user(conn).id) == conn.params["user_id"] do
+        success = true
+      else
+        success = false
+      end
+    else
+      success = false
+    end
+
+    if success do
       conn
-      |> put_flash(:info, "You have no rights to do it")
-      |> redirect(to: short_brand_path(conn, :index))
     else
       conn
+      |> put_flash(:info, "You have no rights to do it")
+      |> redirect(to: brand_path(conn, :index))
     end
   end
 end
