@@ -90,15 +90,15 @@ defmodule SiemensCollection.ItemController do
   end
 
   defp check_rights(conn, _) do
-    if Addict.Helper.current_user(conn) do
-      if Integer.to_string(Addict.Helper.current_user(conn).id) == conn.params["user_id"] do
-        success = true
-      else
-        success = false
-      end
-    else
-      success = false
-    end
+    success = if Addict.Helper.current_user(conn) do
+                if Integer.to_string(Addict.Helper.current_user(conn).id) == conn.params["user_id"] do
+                  true
+                else
+                  false
+                end
+              else
+                false
+              end
 
     if success do
       conn
