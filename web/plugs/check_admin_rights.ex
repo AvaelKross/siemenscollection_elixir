@@ -1,6 +1,6 @@
 defmodule SiemensCollection.Plugs.CheckAdminRights do
   import Plug.Conn
-  import Phoenix.Controller
+  import Phoenix.Controller, only: [put_flash: 3, redirect: 2]
 
   def init(_) do
     nil
@@ -12,7 +12,7 @@ defmodule SiemensCollection.Plugs.CheckAdminRights do
     else
       conn
       |> put_flash(:info, "You have no rights to do it")
-      |> redirect(to: SiemensCollection.Router.Helpers.catalog_brand_path(conn, :index))
+      |> redirect(to: SiemensCollection.Router.Helpers.brand_path(conn, :index))
     end
   end
 

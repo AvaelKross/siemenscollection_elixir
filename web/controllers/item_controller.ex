@@ -1,12 +1,7 @@
 defmodule SiemensCollection.ItemController do
   use SiemensCollection.Web, :controller
 
-  alias SiemensCollection.Item
-
-  alias SiemensCollection.Phone
-  alias SiemensCollection.PhoneEdition
-  alias SiemensCollection.Brand
-  alias SiemensCollection.User
+  alias SiemensCollection.{Item, PhoneEdition, User}
 
   plug Addict.Plugs.Authenticated when action in [:new, :create, :edit, :update, :delete]
   plug :check_rights when action in [:edit, :update, :delete]
@@ -90,17 +85,7 @@ defmodule SiemensCollection.ItemController do
   end
 
   defp check_rights(conn, _) do
-    success = if Addict.Helper.current_user(conn) do
-                if Integer.to_string(Addict.Helper.current_user(conn).id) == conn.params["user_id"] do
-                  true
-                else
-                  false
-                end
-              else
-                false
-              end
-
-    if success do
+    if Addict.Helper.current_user(conn) && Integer.to_string(Addict.Helper.current_user(conn).id) == conn.params["user_id"] do
       conn
     else
       conn

@@ -1,9 +1,7 @@
 defmodule SiemensCollection.PhoneEditionController do
   use SiemensCollection.Web, :controller
 
-  alias SiemensCollection.Phone
-  alias SiemensCollection.PhoneEdition
-  alias SiemensCollection.Brand
+  alias SiemensCollection.{Phone, PhoneEdition}
 
   plug :scrub_params, "phone_edition" when action in [:create, :update]
 

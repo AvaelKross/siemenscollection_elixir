@@ -1,11 +1,7 @@
 defmodule SiemensCollection.PhoneController do
   use SiemensCollection.Web, :controller
 
-  alias SiemensCollection.Repo
-
-  alias SiemensCollection.Phone
-  alias SiemensCollection.PhoneEdition
-  alias SiemensCollection.Brand
+  alias SiemensCollection.{Phone, PhoneEdition}
 
   plug SiemensCollection.Plugs.CheckAdminRights when action in [:new, :create, :edit, :update, :delete]
 
