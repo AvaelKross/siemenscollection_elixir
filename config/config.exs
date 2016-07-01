@@ -30,7 +30,7 @@ config :phoenix, :generators,
 
 config :addict,
   secret_key: "24326224313224416248435730693841675759536a3642347161584b4f",
-  #extra_validation: &SiemensCollection.User.validate/2, # define extra validation here
+  extra_validation: &SiemensCollection.User.validate/2, # define extra validation here
   user_schema: SiemensCollection.User,
   repo: SiemensCollection.Repo,
   from_email: "no-reply@example.com", # CHANGE THIS
@@ -46,7 +46,8 @@ config :ex_admin,
     SiemensCollection.ExAdmin.Dashboard,
     SiemensCollection.ExAdmin.Phone,
     SiemensCollection.ExAdmin.PhoneEdition,
-    SiemensCollection.ExAdmin.Brand
+    SiemensCollection.ExAdmin.Brand,
+    SiemensCollection.ExAdmin.User
   ]
 
 config :arc,

@@ -1,4 +1,4 @@
-defmodule SiemensCollection.Plugs.CheckAdminRights do
+defmodule SiemensCollection.Plugs.CheckOwnerRights do
   import Phoenix.Controller, only: [put_flash: 3, redirect: 2]
 
   def init(_) do
@@ -16,7 +16,7 @@ defmodule SiemensCollection.Plugs.CheckAdminRights do
   end
 
   def can_edit(conn) do
-    current_user(conn) != nil && current_user(conn).email == "avaelkross@gmail.com"
+    current_user(conn) != nil && "#{current_user(conn).id}" == conn.params["user_id"]
   end
 
   defp current_user(conn) do

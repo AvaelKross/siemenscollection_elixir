@@ -18,7 +18,7 @@
           <ul class="nav nav-pills pull-right login-line">
             <%= if is_logged_in(@conn) do %>
               <li><%= link "/ My", to: collections_item_path(@conn, :index, current_user(@conn).id) %></li>
-              <li><a id="btn-logout"><%= current_user(@conn).name %> / Logout</a></li>
+              <li><a id="btn-logout">/ Logout</a></li>
             <% else %>
               <li><a href="/login">/ Login</a></li>
             <% end %>

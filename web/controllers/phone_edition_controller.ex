@@ -39,7 +39,7 @@ defmodule SiemensCollection.PhoneEditionController do
     changeset = PhoneEdition.changeset(phone_edition, phone_edition_params)
 
     case Repo.update(changeset) do
-      {:ok, phone_edition} ->
+      {:ok, _phone_edition} ->
         conn
         |> put_flash(:info, "Phone edition updated successfully.")
         |> redirect(to: catalog_phone_path(conn, :show, conn.assigns.brand.id, conn.assigns.phone.id))

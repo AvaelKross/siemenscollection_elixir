@@ -36,6 +36,11 @@ defmodule SiemensCollection.Router do
     pipe_through :browser
     get "/", BrandController, :index
 
+    scope "/profile" do
+      get "/", ProfileController, :edit
+      put "/", ProfileController, :update
+    end
+
     scope "/collections", as: :collections do
       get "/", CollectionController, :index
       scope "/:user_id" do

@@ -4,7 +4,7 @@
 <%= for user <- @users do %>
     <tr>
       <td>
-        <%= link user.email, to: collections_item_path(@conn, :index, user.id) %>
+        <%= link user.name, to: collections_item_path(@conn, :index, user.id) %>
       </td>
     </tr>
 <% end %>

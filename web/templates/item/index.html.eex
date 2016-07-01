@@ -1,9 +1,11 @@
-<h2>Listing items</h2>
-
 <table class="table">
   <thead>
     <tr>
-      <th>Collection of <%= @user.email %></th>
+      <th>Collection of <%= @user.name %>
+        <%= if can_edit(@conn) do %>
+          (<%= link "Edit", to: profile_path(@conn, :edit) %>)
+        <% end %>
+      </th>
 
       <th></th>
     </tr>
@@ -15,8 +17,10 @@
 
       <td class="text-right">
         <%= link "Show", to: collections_item_path(@conn, :show, @user, item), class: "btn btn-default btn-xs" %>
-        <%= link "Edit", to: collections_item_path(@conn, :edit, @user, item), class: "btn btn-default btn-xs" %>
-        <%= link "Delete", to: collections_item_path(@conn, :delete, @user, item), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+        <%= if can_edit(@conn) do %>
+          <%= link "Edit", to: collections_item_path(@conn, :edit, @user, item), class: "btn btn-default btn-xs" %>
+          <%= link "Delete", to: collections_item_path(@conn, :delete, @user, item), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+        <% end %>
       </td>
     </tr>
 <% end %>
@@ -24,5 +28,7 @@
 </table>
 
 <div class="footer_buttons">
-  <%= link "New item", to: collections_item_path(@conn, :new, @user), class: "siemens-text" %>
+  <%= if can_edit(@conn) do %>
+    <%= link "New item", to: collections_item_path(@conn, :new, @user), class: "siemens-text" %>
+  <% end %>
 </div>

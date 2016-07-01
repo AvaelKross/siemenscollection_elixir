@@ -3,8 +3,8 @@ defmodule SiemensCollection.ItemController do
 
   alias SiemensCollection.{Item, PhoneEdition, User}
 
-  plug Addict.Plugs.Authenticated when action in [:new, :create, :edit, :update, :delete]
-  plug :check_rights when action in [:edit, :update, :delete]
+  plug Addict.Plugs.Authenticated when action in [:new, :create]
+  plug SiemensCollection.Plugs.CheckOwnerRights when action in [:edit, :update, :delete]
 
   plug :scrub_params, "item" when action in [:create, :update]
   plug :set_user
@@ -84,13 +84,4 @@ defmodule SiemensCollection.ItemController do
     end
   end
 
-  defp check_rights(conn, _) do
-    if Addict.Helper.current_user(conn) && Integer.to_string(Addict.Helper.current_user(conn).id) == conn.params["user_id"] do
-      conn
-    else
-      conn
-      |> put_flash(:info, "You have no rights to do it")
-      |> redirect(to: brand_path(conn, :index))
-    end
-  end
 end

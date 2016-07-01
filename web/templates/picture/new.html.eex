@@ -6,7 +6,7 @@
             SiemensCollection.Router.Helpers.collections_picture_path(@conn, :create, @conn.params["user_id"], @conn.params["item_id"])
           end %>
 
-<%= form_for @conn, path, [multipart: true, as: :images], fn f -> %>
+<%= form_for @conn, path, [multipart: true, as: :images], fn _ -> %>
   <div class="images_upload_form">
     <h4>From PC:</h4>
     <input type="file" name="images[]">
