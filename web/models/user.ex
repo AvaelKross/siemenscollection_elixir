@@ -26,7 +26,7 @@ defmodule SiemensCollection.User do
     |> validate_length(:name, min: 3)
   end
 
-  def validate({:ok, _}, user_params) do
+  def addict_validate({:ok, _}, user_params) do
     responce = {:ok, []}
     users_with_this_email = Repo.one(from p in SiemensCollection.User, where: p.email == ^user_params["email"], select: count("*"))
     if users_with_this_email > 0 do
@@ -38,7 +38,7 @@ defmodule SiemensCollection.User do
     responce
   end
 
-  def validate({:error, errors}, _user_params) do
+  def addict_validate({:error, errors}, _user_params) do
     #IO.puts "I could do something fancy here. But I won't."
     {:error, errors}
   end

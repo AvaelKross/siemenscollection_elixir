@@ -21,7 +21,7 @@ defmodule SiemensCollection.ProfileController do
     changeset = User.changeset(user, user_params)
 
     case Repo.update(changeset) do
-      {:ok, user} ->
+      {:ok, _user} ->
         conn
         |> put_flash(:info, "Profile updated successfully.")
         |> redirect(to: profile_path(conn, :edit))
