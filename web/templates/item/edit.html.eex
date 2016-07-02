@@ -21,5 +21,5 @@
 <% end %>
 
 <div class="footer_buttons">
-  <%= link "Back", to: collections_item_path(@conn, :show, @user, @user), class: "siemens-text" %>
+  <%= link "Back", to: collections_item_path(@conn, :show, @user, @item.id), class: "siemens-text" %>
 </div>
