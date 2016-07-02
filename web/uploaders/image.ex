@@ -12,7 +12,7 @@ defmodule SiemensCollection.Image do
 
   # Whitelist file extensions:
   def validate({file, _}) do
-    ~w(.jpg .jpeg .gif .png) |> Enum.member?(Path.extname(file.file_name))
+    ~w(.jpg .jpeg .gif .png) |> Enum.member?(String.downcase(Path.extname(file.file_name)))
   end
 
   # Define a thumbnail transformation:
