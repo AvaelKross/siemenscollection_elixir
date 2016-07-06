@@ -3,7 +3,7 @@ defmodule SiemensCollection.PhoneController do
 
   alias SiemensCollection.{Phone, PhoneEdition}
 
-  plug SiemensCollection.Plugs.CheckAdminRights when action in [:new, :create, :edit, :update, :delete]
+  plug SiemensCollection.Plugs.CheckAdminRights when action in [:new, :create, :edit, :update, :delete, :set_main_edition]
 
   plug :scrub_params, "phone" when action in [:create, :update]
   plug SiemensCollection.Plugs.SetBrand
@@ -71,6 +71,20 @@ defmodule SiemensCollection.PhoneController do
     conn
     |> put_flash(:info, "Phone deleted successfully.")
     |> redirect(to: catalog_phone_path(conn, :index, conn.assigns.brand.id))
+  end
+
+  def set_main_edition(conn, %{"phone_id" => id, "edition_id" => edition_id}) do
+    phone = Repo.get!(Phone, id)
+    changeset = Phone.changeset(phone, %{main_edition_id: edition_id})
+
+    case Repo.update(changeset) do
+      {:ok, phone} ->
+        conn
+        |> put_flash(:info, "Main edition updated successfully.")
+        |> redirect(to: catalog_phone_path(conn, :show, conn.assigns.brand.id, phone))
+      {:error, changeset} ->
+        render(conn, "edit.html", phone: phone, changeset: changeset)
+    end
   end
 
 end

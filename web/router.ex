@@ -57,6 +57,7 @@ defmodule SiemensCollection.Router do
       resources "/", PhoneController
       scope "/:phone_id" do
         resources "/", PhoneEditionController, except: [:index, :show]
+        get "/:edition_id/set_main", PhoneController, :set_main_edition
         scope "/:edition_id/images" do
           get "/new", PictureController, :new
           post "/", PictureController, :create

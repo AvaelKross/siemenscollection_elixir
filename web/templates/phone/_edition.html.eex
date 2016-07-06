@@ -1,8 +1,20 @@
 <div class="edition">
   <h3 class="siemens-text">
     <%= @edition.name %>
+
+    <%= if @edition.limited do %>
+      <div class="btn btn-xs limited-label">Limited</div>
+    <% end %>
+
+    <%= if @edition.prototype do %>
+      <div class="btn btn-xs prototype-label">Prototype</div>
+    <% end %>
+
     <%= if can_edit(@conn) do %>
       <%= link "Edit", to: catalog_phone_edition_path(@conn, :edit, @brand.id, @phone.id, @edition), class: "btn btn-default btn-xs" %>
+      <%= if @edition.id != @phone.main_edition_id do %>
+        <%= link "Set main", to: catalog_phone_path(@conn, :set_main_edition, @brand.id, @phone.id, @edition.id), class: "btn btn-default btn-xs" %>
+      <% end %>
       <%= link "Delete", to: catalog_phone_edition_path(@conn, :delete, @brand.id, @phone.id, @edition), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
     <% end %>
     </h3>

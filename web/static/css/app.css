@@ -130,16 +130,32 @@ ul.menu-line {
   padding-left: 20px;
 }
 
-.edition .siemens-text .btn {
+.edition .siemens-text a.btn {
   margin-top: 2px;
   float: right;
   margin-right: 2px;
 }
 
-.siemens-text.editions .btn {
+.siemens-text.editions a.btn {
   margin-top: 6px;
   float: right;
   margin-right: 2px;
+}
+
+.edition .siemens-text .limited-label {
+  margin-top: -5px;
+  margin-right: 2px;
+  cursor: default;
+  background-color: green;
+  color: white;
+}
+
+.edition .siemens-text .prototype-label {
+  margin-top: -5px;
+  margin-right: 2px;
+  cursor: default;
+  background-color: rgb(106, 0, 255);
+  color: white;
 }
 
 a.siemens-text {
