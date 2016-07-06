@@ -11,7 +11,9 @@ defmodule SiemensCollection.PhoneEditionController do
   plug :set_phone
 
   def new(conn, _params) do
-    changeset = PhoneEdition.changeset(%PhoneEdition{})
+    main_edition = Repo.get!(PhoneEdition, conn.assigns.phone.main_edition_id)
+    changeset = PhoneEdition.changeset(%PhoneEdition{}, Map.from_struct(main_edition))
+
     render(conn, "new.html", changeset: changeset)
   end
 

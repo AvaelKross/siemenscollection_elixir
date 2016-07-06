@@ -3,13 +3,8 @@ defmodule SiemensCollection.Phone do
 
   schema "phones" do
     field :name, :string
-    field :network, :string #remove
-    field :features, :string #remove
-    field :weight, :string #remove
-    field :size, :string #remove
-    field :battery, :string #remove
     field :notes, :string
-    field :release, :string #remove
+    field :main_edition_id, :integer
     belongs_to :brand, SiemensCollection.Brand
 
     has_many :phone_editions, SiemensCollection.PhoneEdition
@@ -18,7 +13,7 @@ defmodule SiemensCollection.Phone do
   end
 
   @required_fields ~w(name)
-  @optional_fields ~w(notes brand_id)
+  @optional_fields ~w(notes brand_id main_edition_id)
 
   @doc """
   Creates a changeset based on the `model` and `params`.
@@ -29,6 +24,11 @@ defmodule SiemensCollection.Phone do
   def changeset(model, params \\ :empty) do
     model
     |> cast(params, @required_fields, @optional_fields)
+  end
+
+  def editions_count(%{id: phone_id}) do
+    query = from(pe in SiemensCollection.PhoneEdition, where: pe.phone_id == ^phone_id, select: count(pe.id))
+    List.first SiemensCollection.Repo.all(query)
   end
 
   def editions_count(query) do

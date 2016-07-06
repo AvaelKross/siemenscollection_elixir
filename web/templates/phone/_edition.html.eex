@@ -1,0 +1,33 @@
+<div class="edition">
+  <h3 class="siemens-text">
+    <%= @edition.name %>
+    <%= if can_edit(@conn) do %>
+      <%= link "Edit", to: catalog_phone_edition_path(@conn, :edit, @brand.id, @phone.id, @edition), class: "btn btn-default btn-xs" %>
+      <%= link "Delete", to: catalog_phone_edition_path(@conn, :delete, @brand.id, @phone.id, @edition), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+    <% end %>
+    </h3>
+  <%= if length(@edition.pictures) > 0 do %>
+    <div class="images">
+      <%= for picture <- @edition.pictures do %>
+        <% image_url = SiemensCollection.Picture.get_url(picture) %>
+        <a href="<%= image_url %>" target="_blank">
+          <img src="<%= image_url %>"/>
+        </a>
+      <% end %>
+    </div>
+  <% end %>
+  <div class="info">
+    <ul>
+
+      <%= for feature <- ~w(Release Limited Prototype Form_factor Network Weight Size Java LTE 3G Memory_card_support Memory_card_type IrDA Bluetooth GPRS Battery Notes) do %>
+        <li>
+          <% field = String.downcase(feature) |> String.to_atom %>
+          <% %{^field => value} = @edition %>
+          <strong><%= String.replace(feature, "_", " ") %>:</strong>
+          <%= value %>
+        </li>
+      <% end %>
+
+    </ul>
+  </div>
+</div>
