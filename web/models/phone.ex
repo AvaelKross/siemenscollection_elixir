@@ -3,13 +3,13 @@ defmodule SiemensCollection.Phone do
 
   schema "phones" do
     field :name, :string
-    field :network, :string
-    field :features, :string
-    field :weight, :string
-    field :size, :string
-    field :battery, :string
+    field :network, :string #remove
+    field :features, :string #remove
+    field :weight, :string #remove
+    field :size, :string #remove
+    field :battery, :string #remove
     field :notes, :string
-    field :release, :string
+    field :release, :string #remove
     belongs_to :brand, SiemensCollection.Brand
 
     has_many :phone_editions, SiemensCollection.PhoneEdition
@@ -18,7 +18,7 @@ defmodule SiemensCollection.Phone do
   end
 
   @required_fields ~w(name)
-  @optional_fields ~w(network features weight size battery notes release brand_id)
+  @optional_fields ~w(notes brand_id)
 
   @doc """
   Creates a changeset based on the `model` and `params`.

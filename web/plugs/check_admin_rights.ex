@@ -16,7 +16,7 @@ defmodule SiemensCollection.Plugs.CheckAdminRights do
   end
 
   def can_edit(conn) do
-    current_user(conn) != nil && current_user(conn).email == "avaelkross@gmail.com"
+    current_user(conn) != nil && current_user(conn).role == "Admin"
   end
 
   defp current_user(conn) do

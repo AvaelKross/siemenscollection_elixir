@@ -33,7 +33,7 @@ config :addict,
   # extra_validation: &SiemensCollection.User.validate/2, # define extra validation here
   user_schema: SiemensCollection.User,
   repo: SiemensCollection.Repo,
-  from_email: "no-reply@example.com", # CHANGE THIS
+  from_email: "no-reply@siemenscollection.ru", # CHANGE THIS
   mail_service: nil
 
 config :xain, :quote, "'"

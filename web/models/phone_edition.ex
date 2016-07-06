@@ -8,6 +8,22 @@ defmodule SiemensCollection.PhoneEdition do
     field :notes, :string
     field :photo_url, :string
     field :release, :string
+
+    field :form_factor, :string
+    field :java, :boolean, default: true
+    field :lte, :boolean, default: false
+    field :"3g", :boolean, default: false
+    field :memory_card_support, :boolean, default: false
+    field :memory_card_type, :string
+    field :irda, :boolean, default: false
+    field :bluetooth, :boolean, default: false
+    field :gprs, :boolean, default: false
+
+    field :network, :string
+    field :weight, :string
+    field :size, :string
+    field :battery, :string
+
     belongs_to :phone, SiemensCollection.Phone, foreign_key: :phone_id
     has_many :pictures, SiemensCollection.Picture
 
@@ -15,7 +31,9 @@ defmodule SiemensCollection.PhoneEdition do
   end
 
   @required_fields ~w(name)
-  @optional_fields ~w(limited prototype notes photo_url phone_id release)
+  @optional_fields ~w(limited prototype notes photo_url phone_id release form_factor 
+                      java lte 3g memory_card_support memory_card_type irda bluetooth gprs
+                      network weight size battery)
 
   @doc """
   Creates a changeset based on the `model` and `params`.

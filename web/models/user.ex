@@ -7,11 +7,12 @@ defmodule SiemensCollection.User do
     field :encrypted_password, :string
     field :name, :string
     field :location, :string
+    field :role, :string
 
     timestamps
   end
 
-  @required_fields ~w(email encrypted_password name)
+  @required_fields ~w(name) # + email encrypted_password
   @optional_fields ~w(location)
 
   @doc """

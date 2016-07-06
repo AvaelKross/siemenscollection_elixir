@@ -3,31 +3,6 @@
 <ul>
 
   <li>
-    <strong>Network:</strong>
-    <%= @phone.network %>
-  </li>
-
-  <li>
-    <strong>Features:</strong>
-    <%= @phone.features %>
-  </li>
-
-  <li>
-    <strong>Weight:</strong>
-    <%= @phone.weight %>
-  </li>
-
-  <li>
-    <strong>Size:</strong>
-    <%= @phone.size %>
-  </li>
-
-  <li>
-    <strong>Battery:</strong>
-    <%= @phone.battery %>
-  </li>
-
-  <li>
     <strong>Notes:</strong>
     <%= @phone.notes %>
   </li>
@@ -80,6 +55,16 @@
           <strong>Notes:</strong>
           <%= edition.notes %>
         </li>
+
+        <%= for feature <- ~w(Form_factor Network Weight Size Java LTE 3G Memory_card_support Memory_card_type IrDA Bluetooth GPRS Battery) do %>
+          <li>
+            <% field = String.downcase(feature) |> String.to_atom %>
+            <% %{^field => value} = edition %>
+            <strong><%= String.replace(feature, "_", " ") %>:</strong>
+            <%= value %>
+          </li>
+        <% end %>
+
       </ul>
     </div>
   </div>
