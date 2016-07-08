@@ -5,6 +5,8 @@
         <%= if can_edit(@conn) do %>
           (<%= link "Edit", to: profile_path(@conn, :edit) %>)
         <% end %>
+        <br>
+        <%= @user.location %>
       </th>
 
       <th></th>
