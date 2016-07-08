@@ -1,9 +1,9 @@
-<h4>
+<h2 class="siemens-text">
   <%= @user.name %>
   <%= if can_edit_user(@conn, @user) do %>
-    (<%= link "Edit", to: profile_path(@conn, :edit) %>)
+    <%= link "Edit", to: profile_path(@conn, :edit), class: "btn btn-default btn-xs" %>
   <% end %>
-</h4>
+</h2>
 <%= @user.location %>
 
 <table class="table">

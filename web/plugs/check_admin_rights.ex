@@ -19,6 +19,10 @@ defmodule SiemensCollection.Plugs.CheckAdminRights do
     current_user(conn) != nil && current_user(conn).role == "Admin"
   end
 
+  def can_edit_user(conn, user) do
+    can_edit(conn) && current_user(conn).id != user.id
+  end
+
   defp current_user(conn) do
     Addict.Helper.current_user(conn)
   end

@@ -6,10 +6,18 @@ defmodule SiemensCollection.ItemView do
   end
 
   def can_edit(conn, item) do
-    Addict.Helper.current_user(conn).id == item.user_id
+    current_user_id(conn) == item.user_id
   end
 
   def can_edit_user(conn, user) do
-    Addict.Helper.current_user(conn).id == user.id
+    current_user_id(conn) == user.id
+  end
+
+  def current_user_id(conn) do
+    if Addict.Helper.current_user(conn) do
+      Addict.Helper.current_user(conn).id
+    else
+      nil
+    end
   end
 end

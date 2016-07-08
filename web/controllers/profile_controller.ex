@@ -4,6 +4,7 @@ defmodule SiemensCollection.ProfileController do
   alias SiemensCollection.User
 
   plug Addict.Plugs.Authenticated when action in [:edit, :update]
+  plug SiemensCollection.Plugs.CheckAdminRights when action in [:delete]
 
   # def show(conn, %{"user_id" => id}) do
   #   user = Repo.get!(User, id)
@@ -25,7 +26,7 @@ defmodule SiemensCollection.ProfileController do
 
     conn
     |> put_flash(:info, "User deleted successfully.")
-    |> redirect(to: collections_collection_path(@conn, :index))
+    |> redirect(to: collections_collection_path(conn, :index))
   end
 
   def update(conn, %{"user" => user_params}) do
@@ -36,7 +37,7 @@ defmodule SiemensCollection.ProfileController do
       {:ok, _user} ->
         conn
         |> put_flash(:info, "Profile updated successfully.")
-        |> redirect(to: profile_path(conn, :edit))
+        |> redirect(to: collections_item_path(conn, :index, user.id))
       {:error, changeset} ->
         render(conn, "edit.html", changeset: changeset)
     end

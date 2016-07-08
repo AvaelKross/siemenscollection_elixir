@@ -39,6 +39,7 @@ defmodule SiemensCollection.Router do
     scope "/profile" do
       get "/", ProfileController, :edit
       put "/", ProfileController, :update
+      delete "/:id", ProfileController, :delete
     end
 
     scope "/collections", as: :collections do

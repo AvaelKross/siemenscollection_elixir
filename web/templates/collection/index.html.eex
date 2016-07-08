@@ -5,6 +5,9 @@
     <tr>
       <td>
         <%= link user.name, to: collections_item_path(@conn, :index, user.id) %>
+        <%= if can_edit_admin(@conn, user) do %>
+          <%= link "Delete", to: profile_path(@conn, :delete, user.id), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+        <% end %>
       </td>
     </tr>
 <% end %>

@@ -183,6 +183,10 @@ a.siemens-text:hover {
   text-decoration: none;
 }
 
+.edition a:hover {
+  text-decoration: none;
+}
+
 .edition img {
   /*float: left;*/
   max-width: 100px;
