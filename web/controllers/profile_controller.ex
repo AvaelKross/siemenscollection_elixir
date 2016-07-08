@@ -16,6 +16,18 @@ defmodule SiemensCollection.ProfileController do
     render(conn, "edit.html", changeset: changeset)
   end
 
+  def delete(conn, %{"id" => id}) do
+    user = Repo.get!(User, id)
+
+    # Here we use delete! (with a bang) because we expect
+    # it to always work (and if it does not, it will raise).
+    Repo.delete!(user)
+
+    conn
+    |> put_flash(:info, "User deleted successfully.")
+    |> redirect(to: collections_collection_path(@conn, :index))
+  end
+
   def update(conn, %{"user" => user_params}) do
     user = Repo.get!(User, Addict.Helper.current_user(conn).id)
     changeset = User.changeset(user, user_params)

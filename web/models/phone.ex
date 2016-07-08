@@ -7,7 +7,7 @@ defmodule SiemensCollection.Phone do
     field :main_edition_id, :integer
     belongs_to :brand, SiemensCollection.Brand
 
-    has_many :phone_editions, SiemensCollection.PhoneEdition
+    has_many :phone_editions, SiemensCollection.PhoneEdition, on_delete: :delete_all
 
     timestamps
   end

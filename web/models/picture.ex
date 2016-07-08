@@ -5,7 +5,7 @@ defmodule SiemensCollection.Picture do
   schema "pictures" do
     field :url, :string
     belongs_to :phone_edition, SiemensCollection.PhoneEdition
-    belongs_to :item, SiemensCollection.PhoneEdition
+    belongs_to :item, SiemensCollection.Item
     field :image, SiemensCollection.Image.Type
 
     timestamps

@@ -25,7 +25,7 @@ defmodule SiemensCollection.PhoneEdition do
     field :battery, :string
 
     belongs_to :phone, SiemensCollection.Phone, foreign_key: :phone_id
-    has_many :pictures, SiemensCollection.Picture
+    has_many :pictures, SiemensCollection.Picture, on_delete: :delete_all
 
     timestamps
   end

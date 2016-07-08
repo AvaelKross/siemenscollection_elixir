@@ -8,6 +8,7 @@ defmodule SiemensCollection.User do
     field :name, :string
     field :location, :string
     field :role, :string
+    has_many :items, SiemensCollection.Item, on_delete: :delete_all
 
     timestamps
   end

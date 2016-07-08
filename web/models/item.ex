@@ -13,7 +13,7 @@ defmodule SiemensCollection.Item do
     field :selling, :boolean, default: false
     belongs_to :phone_edition, SiemensCollection.PhoneEdition
     belongs_to :user, SiemensCollection.User
-    has_many :pictures, SiemensCollection.Picture
+    has_many :pictures, SiemensCollection.Picture, on_delete: :delete_all
 
     timestamps
   end
