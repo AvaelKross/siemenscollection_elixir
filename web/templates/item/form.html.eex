@@ -61,8 +61,8 @@
   </div>
 
   <div class="form-group">
-    <%= label f, :selling, class: "control-label" %>
-    <%= checkbox f, :selling, class: "form-control" %>
+    <%= label f, :selling, "Want to sell", class: "control-label" %>:
+    <%= checkbox f, :selling %>
     <%= error_tag f, :selling %>
   </div>
 

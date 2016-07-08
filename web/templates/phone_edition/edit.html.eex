@@ -1,4 +1,11 @@
-<h2>Edit</h2>
+<div class='breadcrumbs'>
+  <%= link "Brands >", to: brand_path(@conn, :index) %>
+  <%= link "#{@brand.name} >", to: catalog_phone_path(@conn, :index, @brand.id) %>
+  <%= link "#{@brand.name} #{@phone.name} >", to: catalog_phone_path(@conn, :show, @brand.id, @phone) %>
+  <%= @phone_edition.name %>
+</div>
+
+<h2>Edit edition</h2>
 
 <%= render "form.html", changeset: @changeset,
                         phone: @phone,
@@ -19,7 +26,3 @@
     <% end %>
   </div>
 <% end %>
-
-<div class="footer_buttons">
-  <%= link "Back", to: catalog_phone_path(@conn, :show, @brand.id, @phone.id), class: "siemens-text" %>
-</div>

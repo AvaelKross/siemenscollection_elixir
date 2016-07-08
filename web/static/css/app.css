@@ -121,9 +121,24 @@ ul.menu-line {
   margin: 35px 0;
 }
 
+
+
+/* CUSTOM SHOP */
+
+.breadcrumbs {
+  margin-top: -20px;
+  margin-bottom: -10px;
+}
+
 .siemens-text {
   background-color: rgb(86,152,150);
   color: white;
+}
+
+.siemens-text.phone a.btn {
+  margin-top: 6px;
+  float: right;
+  margin-right: 2px;
 }
 
 .edition .siemens-text {

@@ -1,25 +1,20 @@
-<table class="table">
-  <thead>
-    <tr>
-      <th>Collection of <%= @user.name %>
-        <%= if can_edit(@conn) do %>
-          (<%= link "Edit", to: profile_path(@conn, :edit) %>)
-        <% end %>
-        <br>
-        <%= @user.location %>
-      </th>
+<h4>
+  <%= @user.name %>
+  <%= if can_edit_user(@conn, @user) do %>
+    (<%= link "Edit", to: profile_path(@conn, :edit) %>)
+  <% end %>
+</h4>
+<%= @user.location %>
 
-      <th></th>
-    </tr>
-  </thead>
+<table class="table">
+  <thead><tr><th>Collection:</th><th></th></tr></thead>
   <tbody>
 <%= for item <- @items do %>
     <tr>
-      <td><%= full_phone_name(item.phone_edition) %></td>
+      <td><%= link full_phone_name(item.phone_edition), to: collections_item_path(@conn, :show, @user, item) %></td>
 
       <td class="text-right">
-        <%= link "Show", to: collections_item_path(@conn, :show, @user, item), class: "btn btn-default btn-xs" %>
-        <%= if can_edit(@conn) do %>
+        <%= if can_edit(@conn, item) do %>
           <%= link "Edit", to: collections_item_path(@conn, :edit, @user, item), class: "btn btn-default btn-xs" %>
           <%= link "Delete", to: collections_item_path(@conn, :delete, @user, item), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
         <% end %>
@@ -30,7 +25,7 @@
 </table>
 
 <div class="footer_buttons">
-  <%= if can_edit(@conn) do %>
+  <%= if can_edit_user(@conn, @user) do %>
     <%= link "New item", to: collections_item_path(@conn, :new, @user), class: "siemens-text" %>
   <% end %>
 </div>

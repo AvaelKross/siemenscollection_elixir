@@ -1,13 +1,17 @@
-<h2 class="siemens-text"><%= @phone.brand.name %> <%= @phone.name %></h2>
+<div class='breadcrumbs'>
+  <%= link "Brands >", to: brand_path(@conn, :index) %>
+  <%= link "#{@brand.name} >", to: catalog_phone_path(@conn, :index, @brand.id) %>
+  <%= @phone.brand.name %> <%= @phone.name %>
+</div>
 
-<ul>
+<h2 class="phone siemens-text">
+  <%= @phone.brand.name %> <%= @phone.name %>
+  <%= if can_edit(@conn) do %>
+    <%= link "Edit", to: catalog_phone_path(@conn, :edit, @brand.id, @phone), class: "btn btn-default btn-xs" %>
+  <% end %>
+</h2>
 
-  <li>
-    <strong>Notes:</strong>
-    <%= @phone.notes %>
-  </li>
-
-</ul>
+<%= @phone.notes %>
 
 <h2 class="siemens-text editions">
   Editions: <%= SiemensCollection.Phone.editions_count @phone %>
@@ -29,8 +33,5 @@
 <% end %>
 
 <div class="footer_buttons">
-  <%= if can_edit(@conn) do %>
-    <%= link "Edit", to: catalog_phone_path(@conn, :edit, @brand.id, @phone), class: "siemens-text" %>
-  <% end %>
   <%= link "Back", to: catalog_phone_path(@conn, :index, @brand.id), class: "siemens-text" %>
 </div>

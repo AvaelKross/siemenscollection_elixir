@@ -19,16 +19,41 @@
   </div>
 
   <div class="form-group">
-    <%= label f, :limited, class: "control-label" %>
-    <%= checkbox f, :limited, class: "form-control" %>
+    <%= label f, :limited, class: "control-label" %>:
+    <%= checkbox f, :limited %>
     <%= error_tag f, :limited %>
   </div>
 
   <div class="form-group">
-    <%= label f, :prototype, class: "control-label" %>
-    <%= checkbox f, :prototype, class: "form-control" %>
+    <%= label f, :prototype, class: "control-label" %>:
+    <%= checkbox f, :prototype %>
     <%= error_tag f, :prototype %>
   </div>
+
+  <!-- string -->
+
+  <%= for feature <- ~w(Form_factor Network Weight Size Memory_card_type Battery) do %>
+
+    <div class="form-group">
+      <% field = String.downcase(feature) |> String.to_atom %>
+      <%= label f, field, class: "control-label" %>
+      <%= text_input f, field, class: "form-control" %>
+      <%= error_tag f, field %>
+    </div>
+    
+  <% end %>
+  <!-- boolean -->
+
+  <%= for feature <- ~w(Java LTE 3G Memory_card_support IrDA Bluetooth GPRS) do %>
+
+    <div class="form-group">
+      <% field = String.downcase(feature) |> String.to_atom %>
+      <%= label f, field, class: "control-label" %>:
+      <%= checkbox f, field %>
+      <%= error_tag f, field %>
+    </div>
+    
+  <% end %>
 
   <div class="form-group">
     <%= label f, :notes, class: "control-label" %>

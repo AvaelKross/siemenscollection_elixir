@@ -43,7 +43,7 @@
   </li>
 
   <li>
-    <strong>Selling:</strong>
+    <strong>Want to sell:</strong>
     <%= @item.selling %>
   </li>
 
@@ -63,7 +63,7 @@
 <% end %>
 
 <div class="footer_buttons">
-  <%= if can_edit(@conn) do %>
+  <%= if can_edit(@conn, @item) do %>
     <%= link "Edit", to: collections_item_path(@conn, :edit, @user, @item), class: "siemens-text" %>
   <% end %>
   <%= link "Back", to: collections_item_path(@conn, :index, @user), class: "siemens-text" %>

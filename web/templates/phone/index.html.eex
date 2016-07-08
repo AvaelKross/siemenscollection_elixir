@@ -1,4 +1,8 @@
-<h2 class="siemens-text">Phones</h2>
+<div class='breadcrumbs'>
+  <%= link "Brands >", to: brand_path(@conn, :index) %>
+  <%= @brand.name %>
+</div>
+<h2 class="siemens-text"><%= @brand.name %></h2>
 
 <table class="table">
   <thead>
@@ -12,11 +16,10 @@
   <tbody>
 <%= for {phone, count} <- @phones do %>
     <tr>
-      <td><%= phone.name %></td>
+      <td><%= link phone.name, to: catalog_phone_path(@conn, :show, @brand.id, phone) %></td>
       <td><%= count %> editions</td>
 
       <td class="text-right">
-        <%= link "Show", to: catalog_phone_path(@conn, :show, @brand.id, phone), class: "btn btn-default btn-xs" %>
         <%= if can_edit(@conn) do %>
           <%= link "Edit", to: catalog_phone_path(@conn, :edit, @brand.id, phone), class: "btn btn-default btn-xs" %>
           <%= link "Delete", to: catalog_phone_path(@conn, :delete, @brand.id, phone), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>

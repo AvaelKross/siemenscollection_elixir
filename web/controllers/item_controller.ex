@@ -4,10 +4,12 @@ defmodule SiemensCollection.ItemController do
   alias SiemensCollection.{Item, PhoneEdition, User}
 
   plug Addict.Plugs.Authenticated when action in [:new, :create]
-  plug SiemensCollection.Plugs.CheckOwnerRights when action in [:edit, :update, :delete]
 
   plug :scrub_params, "item" when action in [:create, :update]
   plug :set_user
+  plug :set_item when action in [:show, :edit, :update, :delete]
+
+  plug :check_rights when action in [:edit, :update, :delete]
 
   def index(conn, _params) do
     user_id = conn.assigns.user.id
@@ -38,19 +40,19 @@ defmodule SiemensCollection.ItemController do
   end
 
   def show(conn, %{"id" => id}) do
-    item = Repo.get!(Item, id) |> Repo.preload([:pictures, phone_edition: [phone: :brand]])
+    item = conn.assigns.item |> Repo.preload([:pictures, phone_edition: [phone: :brand]])
     render(conn, "show.html", item: item)
   end
 
   def edit(conn, %{"id" => id}) do
-    item = Repo.get!(Item, id) |> Repo.preload([:pictures])
+    item = conn.assigns.item |> Repo.preload([:pictures])
     phone_editions = Repo.all(PhoneEdition) |> Repo.preload([phone: :brand])
     changeset = Item.changeset(item)
     render(conn, "edit.html", item: item, phone_editions: phone_editions, changeset: changeset)
   end
 
   def update(conn, %{"id" => id, "item" => item_params}) do
-    item = Repo.get!(Item, id)
+    item = conn.assigns.item
     changeset = Item.changeset(item, item_params)
 
     case Repo.update(changeset) do
@@ -64,7 +66,7 @@ defmodule SiemensCollection.ItemController do
   end
 
   def delete(conn, %{"id" => id}) do
-    item = Repo.get!(Item, id)
+    item = conn.assigns.item
 
     # Here we use delete! (with a bang) because we expect
     # it to always work (and if it does not, it will raise).
@@ -81,6 +83,21 @@ defmodule SiemensCollection.ItemController do
       assign(conn, :user, user)
     else
       conn
+    end
+  end
+
+  defp set_item(conn, _) do
+    item = Repo.get!(Item, conn.params["id"])
+    assign(conn, :item, item)
+  end
+
+  def check_rights(conn, _opts) do
+    if Addict.Helper.current_user(conn).id == conn.assigns.item.user_id do
+      conn
+    else
+      conn
+      |> put_flash(:info, "You have no rights to do it")
+      |> redirect(to: brand_path(conn, :index))
     end
   end
 

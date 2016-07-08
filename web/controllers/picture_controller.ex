@@ -62,13 +62,10 @@ defmodule SiemensCollection.PictureController do
 
   defp check_rights(conn, _) do
     if conn.params["edition_id"] != nil do
-      if SiemensCollection.Plugs.CheckAdminRights.can_edit(conn) do
-        conn
-      else
-        redirect_no_rights(conn)
-      end
+      if SiemensCollection.Plugs.CheckAdminRights.can_edit(conn), do: conn, else: redirect_no_rights(conn)
     else
-      if Integer.to_string(Addict.Helper.current_user(conn).id) == conn.params["user_id"] do
+      item = Repo.get!(SiemensCollection.Item, conn.params["item_id"])
+      if Addict.Helper.current_user(conn).id == item.user_id do
         conn
       else
         redirect_no_rights(conn)
