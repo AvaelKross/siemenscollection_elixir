@@ -53,9 +53,10 @@
 <%= if length(@item.pictures) > 0 do %>
   <div class="images">
     <%= for picture <- @item.pictures do %>
+      <% thumb_image_url = SiemensCollection.Picture.get_url(picture, :thumb) %>
       <% image_url = SiemensCollection.Picture.get_url(picture) %>
       <a href="<%= image_url %>" target="_blank">
-        <img src="<%= image_url %>" width="100"/>
+        <img src="<%= thumb_image_url %>"/>
       </a>
     <% end %>
   </div>

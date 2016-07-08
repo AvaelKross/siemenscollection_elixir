@@ -40,3 +40,7 @@ config :siemens_collection, SiemensCollection.Repo,
   database: "siemens_collection_dev",
   hostname: "localhost",
   pool_size: 10
+
+config :arc,
+  bucket: "siemenscollection-uploads-d",
+  asset_host: "https://s3.eu-central-1.amazonaws.com/siemenscollection-uploads-d/"

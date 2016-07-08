@@ -11,9 +11,10 @@
 <%= if length(@item.pictures) > 0 do %>
   <div class="edit_images">
     <%= for picture <- @item.pictures do %>
+      <% thumb_image_url = SiemensCollection.Picture.get_url(picture, :thumb) %>
       <% image_url = SiemensCollection.Picture.get_url(picture) %>
       <div class="image">
-        <img src="<%= image_url %>"/>
+        <img src="<%= thumb_image_url %>"/>
         <%= link "Destroy", to: collections_picture_path(@conn, :delete, @user, @item.id, picture.id), method: :delete %>
       </div>
     <% end %>

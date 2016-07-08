@@ -11,9 +11,9 @@
 <%= if length(@phone_edition.pictures) > 0 do %>
   <div class="edit_images">
     <%= for picture <- @phone_edition.pictures do %>
-      <% image_url = SiemensCollection.Picture.get_url(picture) %>
+      <% thumb_image_url = SiemensCollection.Picture.get_url(picture, :thumb) %>
       <div class="image">
-        <img src="<%= image_url %>"/>
+        <img src="<%= thumb_image_url %>"/>
         <%= link "Destroy", to: catalog_picture_path(@conn, :delete, @brand.id, @phone.id, @phone_edition.id, picture.id), method: :delete %>
       </div>
     <% end %>

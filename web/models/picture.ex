@@ -29,11 +29,11 @@ defmodule SiemensCollection.Picture do
     |> cast_attachments(params, @required_file_fields, @optional_file_fields)
   end
 
-  def get_url(picture) do
+  def get_url(picture, version \\ :original) do
     if is_bitstring(picture.url) && String.length(picture.url) > 0 do
       picture.url
     else
-      SiemensCollection.Image.url({picture.image, picture}, :original)
+      SiemensCollection.Image.url({picture.image, picture}, version)
     end
   end
 end

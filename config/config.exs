@@ -50,10 +50,6 @@ config :ex_admin,
     SiemensCollection.ExAdmin.User
   ]
 
-config :arc,
-  bucket: "siemenscollection-uploads",
-  asset_host: "https://s3.eu-central-1.amazonaws.com/siemenscollection-uploads/"
-
 config :ex_aws,
   access_key_id: "AKIAIM7J52PY7JYEVISA",
   secret_access_key: "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",

@@ -5,7 +5,7 @@ defmodule SiemensCollection.Image do
   # Include ecto support (requires package arc_ecto installed):
   # use Arc.Ecto.Definition
 
-  @versions [:original]
+  @versions [:original, :thumb, :popup]
 
   # To add a thumbnail version:
   # @versions [:original, :thumb]
@@ -16,14 +16,18 @@ defmodule SiemensCollection.Image do
   end
 
   # Define a thumbnail transformation:
-  # def transform(:thumb, _) do
-  #   {:convert, "-strip -thumbnail 250x250^ -gravity center -extent 250x250 -format png", :png}
-  # end
+  def transform(:thumb, _) do
+    {:convert, "-thumbnail 150x150> -gravity center -format jpg", :jpg}
+  end
+
+  def transform(:popup, _) do
+    {:convert, "-thumbnail 2000x1200> -gravity center -format jpg", :jpg}
+  end
 
   # Override the persisted filenames:
-  # def filename(version, _) do
-  #   version
-  # end
+  def filename(version, _) do
+    version
+  end
 
   # Override the storage directory:
   def storage_dir(_, {_, scope}) do
@@ -40,7 +44,7 @@ defmodule SiemensCollection.Image do
   #    :content_encoding, :content_length, :content_type,
   #    :expect, :expires, :storage_class, :website_redirect_location]
   #
-  # def s3_object_headers(version, {file, scope}) do
-  #   [content_type: Plug.MIME.path(file.file_name)]
-  # end
+  def s3_object_headers(version, {file, scope}) do
+    [content_type: Plug.MIME.path(file.file_name)]
+  end
 end
