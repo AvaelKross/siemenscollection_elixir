@@ -125,6 +125,10 @@ ul.menu-line {
 
 /* CUSTOM SHOP */
 
+main {
+  padding-bottom: 40px;
+}
+
 main p {
   margin-left: 5px;
 }

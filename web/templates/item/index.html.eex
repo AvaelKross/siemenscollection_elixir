@@ -1,3 +1,8 @@
+<div class='breadcrumbs'>
+  <%= link "Collections >", to: collections_collection_path(@conn, :index) %>
+  <%= @user.name %>
+</div>
+
 <h2 class="siemens-text">
   <%= @user.name %>
   <%= if can_edit_user(@conn, @user) do %>

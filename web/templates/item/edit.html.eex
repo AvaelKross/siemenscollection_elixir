@@ -1,4 +1,9 @@
-<h2>Edit item</h2>
+<div class='breadcrumbs'>
+  <%= link "Collections >", to: collections_collection_path(@conn, :index) %>
+  <%= link "#{@user.name} >", to: collections_item_path(@conn, :index, @user) %>
+  <%= link full_phone_name(@item.phone_edition), to: collections_item_path(@conn, :show, @user, @item) %>
+  <%= "> Edit" %>
+</div>
 
 <%= render "form.html", changeset: @changeset,
                         phone_editions: @phone_editions,
@@ -20,7 +25,3 @@
     <% end %>
   </div>
 <% end %>
-
-<div class="footer_buttons">
-  <%= link "Back", to: collections_item_path(@conn, :show, @user, @item.id), class: "siemens-text" %>
-</div>

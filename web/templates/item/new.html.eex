@@ -1,9 +1,9 @@
-<h2>New item</h2>
+<div class='breadcrumbs'>
+  <%= link "Collections >", to: collections_collection_path(@conn, :index) %>
+  <%= link "#{@user.name} >", to: collections_item_path(@conn, :index, @user) %>
+  <%= "Add to collection" %>
+</div>
 
 <%= render "form.html", changeset: @changeset,
                         phone_editions: @phone_editions,
                         action: collections_item_path(@conn, :create, @user) %>
-
-<div class="footer_buttons">
-  <%= link "Back", to: collections_item_path(@conn, :index, @user), class: "siemens-text" %>
-</div>

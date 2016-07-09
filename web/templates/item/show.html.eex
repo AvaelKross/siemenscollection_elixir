@@ -1,4 +1,15 @@
-<h2><%= full_phone_name(@item.phone_edition) %></h2>
+<div class='breadcrumbs'>
+  <%= link "Collections >", to: collections_collection_path(@conn, :index) %>
+  <%= link "#{@user.name} >", to: collections_item_path(@conn, :index, @user) %>
+  <%= "#{full_phone_name(@item.phone_edition)}" %>
+</div>
+
+<h2 class="siemens-text phone">
+  <%= full_phone_name(@item.phone_edition) %>
+  <%= if can_edit(@conn, @item) do %>
+    <%= link "Edit", to: collections_item_path(@conn, :edit, @user, @item), class: "btn btn-default btn-xs" %>
+  <% end %>
+</h2>
 
 <ul>
 
@@ -49,7 +60,7 @@
 
 </ul>
 
-<h2>Images</h2>
+<h2 class="siemens-text editions">Images</h2>
 <%= if length(@item.pictures) > 0 do %>
   <div class="images">
     <%= for picture <- @item.pictures do %>
@@ -72,10 +83,3 @@
     <% end %>
   </div>
 <% end %>
-
-<div class="footer_buttons">
-  <%= if can_edit(@conn, @item) do %>
-    <%= link "Edit", to: collections_item_path(@conn, :edit, @user, @item), class: "siemens-text" %>
-  <% end %>
-  <%= link "Back", to: collections_item_path(@conn, :index, @user), class: "siemens-text" %>
-</div>

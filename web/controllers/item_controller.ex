@@ -50,7 +50,7 @@ defmodule SiemensCollection.ItemController do
   end
 
   def edit(conn, %{"id" => id}) do
-    item = conn.assigns.item |> Repo.preload([:pictures])
+    item = conn.assigns.item |> Repo.preload([:pictures, phone_edition: [:pictures, phone: :brand]])
     phone_editions = Repo.all(PhoneEdition) |> Repo.preload([phone: :brand])
     changeset = Item.changeset(item)
     render(conn, "edit.html", item: item, phone_editions: phone_editions, changeset: changeset)

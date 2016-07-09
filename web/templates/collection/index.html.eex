@@ -1,3 +1,7 @@
+<div class='breadcrumbs'>
+  <%= "Collections >" %>
+</div>
+
 <h2 class="siemens-text">Collections</h2>
 
 <table class="table">

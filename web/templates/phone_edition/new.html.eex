@@ -2,9 +2,8 @@
   <%= link "Brands >", to: brand_path(@conn, :index) %>
   <%= link "#{@brand.name} >", to: catalog_phone_path(@conn, :index, @brand.id) %>
   <%= link "#{@brand.name} #{@phone.name}", to: catalog_phone_path(@conn, :show, @brand.id, @phone) %>
+  <%= "> New edition" %>
 </div>
-
-<h2>New phone edition</h2>
 
 <%= render "form.html", changeset: @changeset,
                         phone: @phone,

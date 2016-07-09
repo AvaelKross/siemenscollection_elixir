@@ -1,4 +1,8 @@
-<h2>My profile</h2>
+<div class='breadcrumbs'>
+  <%= link "Collections >", to: collections_collection_path(@conn, :index) %>
+  <%= link "#{@changeset.model.name} >", to: collections_item_path(@conn, :index, @changeset.model) %>
+  <%= "Edit profile" %>
+</div>
 
 <%= form_for @changeset, profile_path(@conn, :update), fn f -> %>
   <%= if @changeset.action do %>
