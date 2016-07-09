@@ -14,7 +14,8 @@ defmodule SiemensCollection.PhoneEditionController do
     main_edition = Repo.get!(PhoneEdition, conn.assigns.phone.main_edition_id)
     changeset = PhoneEdition.changeset(%PhoneEdition{}, Map.from_struct(main_edition))
 
-    render(conn, "new.html", changeset: changeset)
+    phones = Repo.all(Phone) |> Repo.preload([:brand])
+    render(conn, "new.html", phones: phones, changeset: changeset)
   end
 
   def create(conn, %{"phone_edition" => phone_edition_params}) do
@@ -31,9 +32,10 @@ defmodule SiemensCollection.PhoneEditionController do
   end
 
   def edit(conn, %{"id" => id}) do
+    phones = Repo.all(Phone) |> Repo.preload([:brand])
     phone_edition = Repo.get!(PhoneEdition, id) |> Repo.preload([:pictures])
     changeset = PhoneEdition.changeset(phone_edition)
-    render(conn, "edit.html", phone_edition: phone_edition, changeset: changeset)
+    render(conn, "edit.html", phones: phones, phone_edition: phone_edition, changeset: changeset)
   end
 
   def update(conn, %{"id" => id, "phone_edition" => phone_edition_params}) do
