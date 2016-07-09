@@ -8,13 +8,14 @@ defmodule SiemensCollection.User do
     field :name, :string
     field :location, :string
     field :role, :string
+    field :description, :string
     has_many :items, SiemensCollection.Item, on_delete: :delete_all
 
     timestamps
   end
 
   @required_fields ~w(name) # + email encrypted_password
-  @optional_fields ~w(location)
+  @optional_fields ~w(location description)
 
   @doc """
   Creates a changeset based on the `model` and `params`.

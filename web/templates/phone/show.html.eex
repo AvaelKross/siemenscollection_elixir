@@ -11,7 +11,7 @@
   <% end %>
 </h2>
 
-<%= @phone.notes %>
+<p><%= @phone.notes %></p>
 
 <h2 class="siemens-text editions">
   Editions: <%= SiemensCollection.Phone.editions_count @phone %>
@@ -31,7 +31,3 @@
                               brand: @brand,
                               edition: edition %>
 <% end %>
-
-<div class="footer_buttons">
-  <%= link "Back", to: catalog_phone_path(@conn, :index, @brand.id), class: "siemens-text" %>
-</div>
