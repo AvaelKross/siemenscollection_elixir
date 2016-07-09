@@ -20,7 +20,12 @@ defmodule SiemensCollection.ItemController do
   end
 
   def new(conn, _params) do
-    changeset = Item.changeset(%Item{})
+    hash = if conn.params["edition_id"] do
+      %Item{phone_edition_id: conn.params["edition_id"]}
+    else
+      %Item{}
+    end
+    changeset = Item.changeset(hash)
     phone_editions = Repo.all(PhoneEdition) |> Repo.preload([phone: :brand])
     render(conn, "new.html", phone_editions: phone_editions, changeset: changeset)
   end
@@ -40,7 +45,7 @@ defmodule SiemensCollection.ItemController do
   end
 
   def show(conn, %{"id" => id}) do
-    item = conn.assigns.item |> Repo.preload([:pictures, phone_edition: [phone: :brand]])
+    item = conn.assigns.item |> Repo.preload([:pictures, phone_edition: [:pictures, phone: :brand]])
     render(conn, "show.html", item: item)
   end
 
@@ -78,12 +83,12 @@ defmodule SiemensCollection.ItemController do
   end
 
   defp set_user(conn, _) do
-    if conn.params["user_id"] do
-      user = Repo.get(User, conn.params["user_id"])
-      assign(conn, :user, user)
-    else
-      conn
-    end
+    user = if conn.params["user_id"] do
+             Repo.get(User, conn.params["user_id"])
+           else
+             Repo.get(User, Addict.Helper.current_user(conn).id)
+           end
+    assign(conn, :user, user)
   end
 
   defp set_item(conn, _) do

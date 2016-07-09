@@ -60,6 +60,17 @@
       </a>
     <% end %>
   </div>
+<% else %>
+  These pictures are from the database:<br><br>
+  <div class="images">
+    <%= for picture <- @item.phone_edition.pictures do %>
+      <% thumb_image_url = SiemensCollection.Picture.get_url(picture, :thumb) %>
+      <% image_url = SiemensCollection.Picture.get_url(picture) %>
+      <a href="<%= image_url %>" target="_blank">
+        <img src="<%= thumb_image_url %>"/>
+      </a>
+    <% end %>
+  </div>
 <% end %>
 
 <div class="footer_buttons">

@@ -10,6 +10,10 @@
       <div class="btn btn-xs prototype-label">Prototype</div>
     <% end %>
 
+    <%= if is_logged_in(@conn) do %>
+      <%= link "Add to collection", to: catalog_item_path(@conn, :new, @brand.id, @phone.id, @edition), class: "btn btn-default btn-xs" %>
+    <% end %>
+
     <%= if can_edit(@conn) do %>
       <%= link "Edit", to: catalog_phone_edition_path(@conn, :edit, @brand.id, @phone.id, @edition), class: "btn btn-default btn-xs" %>
       <%= if @edition.id != @phone.main_edition_id do %>
