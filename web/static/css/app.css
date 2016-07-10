@@ -181,6 +181,14 @@ main p {
   color: white;
 }
 
+.edition .siemens-text .owned-label {
+  margin-top: -5px;
+  margin-right: 2px;
+  cursor: default;
+  background-color: #D10707;
+  color: white;
+}
+
 h2.siemens-text {
   padding-left: 5px;
 }

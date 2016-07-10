@@ -23,11 +23,13 @@
 <%= for edition <- @editions, edition.id == @phone.main_edition_id do %>
   <%= render "_edition.html", conn: @conn, phone: @phone,
                               brand: @brand,
-                              edition: edition %>
+                              edition: edition,
+                              owned_edition_ids: @owned_edition_ids %>
 <% end %>
 
 <%= for edition <- @editions, edition.id != @phone.main_edition_id do %>
   <%= render "_edition.html", conn: @conn, phone: @phone,
                               brand: @brand,
-                              edition: edition %>
+                              edition: edition,
+                              owned_edition_ids: @owned_edition_ids %>
 <% end %>

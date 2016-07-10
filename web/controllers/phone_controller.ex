@@ -1,7 +1,7 @@
 defmodule SiemensCollection.PhoneController do
   use SiemensCollection.Web, :controller
 
-  alias SiemensCollection.{Phone, PhoneEdition}
+  alias SiemensCollection.{Phone, PhoneEdition, Item}
 
   plug SiemensCollection.Plugs.CheckAdminRights when action in [:new, :create, :edit, :update, :delete, :set_main_edition]
 
@@ -38,7 +38,13 @@ defmodule SiemensCollection.PhoneController do
     phone = Repo.get!(Phone, id) |> Repo.preload([:brand])
     query = from pe in PhoneEdition, where: pe.phone_id == ^phone.id, preload: [:pictures]
     editions = Repo.all(query)
-    render(conn, "show.html", phone: phone, editions: editions)
+    owned_edition_ids = if Addict.Helper.current_user(conn) != nil do
+      query = from item in Item, select: item.phone_edition_id, where: item.user_id == ^Addict.Helper.current_user(conn).id
+      Repo.all(query)
+    else
+      []
+    end
+    render(conn, "show.html", phone: phone, editions: editions, owned_edition_ids: owned_edition_ids)
   end
 
   def edit(conn, %{"id" => id}) do

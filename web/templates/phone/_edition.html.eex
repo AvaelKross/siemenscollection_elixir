@@ -10,6 +10,10 @@
       <div class="btn btn-xs prototype-label">Prototype</div>
     <% end %>
 
+    <%= if @edition.id in @owned_edition_ids do %>
+      <div class="btn btn-xs owned-label">Owned</div>
+    <% end %>
+
     <%= if is_logged_in(@conn) do %>
       <%= link "Add to collection", to: catalog_item_path(@conn, :new, @brand.id, @phone.id, @edition), class: "btn btn-default btn-xs" %>
     <% end %>
