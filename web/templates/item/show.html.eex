@@ -68,7 +68,7 @@
       <% thumb_image_url = SiemensCollection.Picture.get_url(picture, :thumb) %>
       <% image_url = SiemensCollection.Picture.get_url(picture) %>
       <a href="<%= image_url %>" target="_blank">
-        <img src="<%= thumb_image_url %>"/>
+        <img src="<%= thumb_image_url %>" class="thumb"/>
       </a>
     <% end %>
   </div>
@@ -79,7 +79,7 @@
       <% thumb_image_url = SiemensCollection.Picture.get_url(picture, :thumb) %>
       <% image_url = SiemensCollection.Picture.get_url(picture) %>
       <a href="<%= image_url %>" target="_blank">
-        <img src="<%= thumb_image_url %>"/>
+        <img src="<%= thumb_image_url %>" class="thumb"/>
       </a>
     <% end %>
   </div>

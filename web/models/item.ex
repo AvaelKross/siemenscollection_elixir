@@ -3,7 +3,7 @@ defmodule SiemensCollection.Item do
 
   schema "items" do
     field :notes, :string
-    field :condition, :integer
+    field :condition, :integer, default: 10
     field :released, :string
     field :imei, :string
     field :sw, :string

@@ -20,7 +20,7 @@
 
   <div class="form-group">
     <%= label f, :condition, class: "control-label" %>
-    <%= number_input f, :condition, class: "form-control" %>
+    <%= select f, :condition, 1..10 %>
     <%= error_tag f, :condition %>
   </div>
 

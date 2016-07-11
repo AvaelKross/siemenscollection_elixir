@@ -169,7 +169,8 @@ main p {
   margin-top: -5px;
   margin-right: 2px;
   cursor: default;
-  background-color: green;
+  background-color: #0099ff;
+  border: 1px solid #004d80;
   color: white;
 }
 
@@ -177,7 +178,8 @@ main p {
   margin-top: -5px;
   margin-right: 2px;
   cursor: default;
-  background-color: rgb(106, 0, 255);
+  background-color: #974dff;
+  border: 1px solid #4a00b3;
   color: white;
 }
 
@@ -185,7 +187,8 @@ main p {
   margin-top: -5px;
   margin-right: 2px;
   cursor: default;
-  background-color: #D10707;
+  background-color: green;
+  border: 1px solid #004d00;
   color: white;
 }
 
@@ -261,6 +264,33 @@ a.siemens-text:hover {
 
 .images_upload_form .btn {
   margin-top: 10px;
+}
+
+.images a:hover {
+  text-decoration: none;
+}
+
+.images .thumb {
+  max-width: 150px;
+  max-height: 150px;
+}
+
+.items-list .round-label {
+  border-radius: 5px;
+  color: white;
+  width: 20px;
+  display: inline-block;
+  padding: 0px 5px;
+}
+
+.items-list .limited-label {
+  background-color: #0099ff;
+  border: 1px solid #004d80;
+}
+
+.items-list .prototype-label {
+  background-color: #974dff;
+  border: 1px solid #4a00b3;
 }
 
 /* Responsive: Portrait tablets and up */
