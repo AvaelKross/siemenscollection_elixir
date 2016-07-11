@@ -35,10 +35,15 @@ defmodule SiemensCollection.ItemController do
     changeset = Item.changeset(%Item{}, params)
 
     case Repo.insert(changeset) do
-      {:ok, _item} ->
+      {:ok, item} ->
+        redirect_path = if conn.params["save_and_upload"] != nil do
+          collections_picture_path(conn, :new, conn.assigns.user.id, item.id)
+        else
+          collections_item_path(conn, :show, conn.assigns.user.id, item.id)
+        end
         conn
         |> put_flash(:info, "Item created successfully.")
-        |> redirect(to: collections_item_path(conn, :index, conn.assigns.user.id))
+        |> redirect(to: redirect_path)
       {:error, changeset} ->
         render(conn, "new.html", changeset: changeset)
     end

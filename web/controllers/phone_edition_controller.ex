@@ -22,10 +22,15 @@ defmodule SiemensCollection.PhoneEditionController do
     changeset = PhoneEdition.changeset(%PhoneEdition{}, phone_edition_params)
 
     case Repo.insert(changeset) do
-      {:ok, _phone_edition} ->
+      {:ok, phone_edition} ->
+        redirect_path = if conn.params["save_and_upload"] != nil do
+          catalog_picture_path(conn, :new, conn.assigns.brand.id, conn.assigns.phone.id, phone_edition.id)
+        else
+          catalog_phone_path(conn, :show, conn.assigns.brand.id, conn.assigns.phone.id)
+        end
         conn
         |> put_flash(:info, "Phone edition created successfully.")
-        |> redirect(to: catalog_phone_path(conn, :show, conn.assigns.brand.id, conn.assigns.phone.id))
+        |> redirect(to: redirect_path)
       {:error, changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
