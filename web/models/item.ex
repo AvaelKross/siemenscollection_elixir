@@ -32,6 +32,13 @@ defmodule SiemensCollection.Item do
     |> cast(params, @required_fields, @optional_fields)
   end
 
+  def pictures_count(query) do
+    from p in query,
+      group_by: p.id,
+      left_join: c in assoc(p, :pictures),
+      select: {p, count(c.id)}
+  end
+
   def for_user(query, user_id) do
     from p in query, where: p.user_id == ^user_id
   end

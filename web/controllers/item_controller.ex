@@ -1,4 +1,5 @@
 defmodule SiemensCollection.ItemController do
+  require Logger
   use SiemensCollection.Web, :controller
 
   alias SiemensCollection.{Item, PhoneEdition, User}
@@ -13,8 +14,10 @@ defmodule SiemensCollection.ItemController do
 
   def index(conn, _params) do
     user_id = conn.assigns.user.id
-    query = Item |> Item.for_user(user_id)
-    items = Repo.all(query) |> Repo.preload([phone_edition: [phone: :brand]])
+    query = Item |> Item.for_user(user_id) |> Item.pictures_count
+    query = from query, preload: [phone_edition: [phone: :brand]]
+
+    items = Repo.all(query)
 
     render(conn, "index.html", items: items)
   end

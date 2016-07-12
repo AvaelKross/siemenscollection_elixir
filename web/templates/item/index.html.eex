@@ -15,9 +15,12 @@
 <table class="table items-list">
   <thead><tr><th>Collection:</th><th></th><th></th></tr></thead>
   <tbody>
-<%= for item <- @items do %>
+<%= for {item, count} <- @items do %>
     <tr>
-      <td><%= link full_phone_name(item.phone_edition), to: collections_item_path(@conn, :show, @user, item) %></td>
+      <td>
+        <%= link full_phone_name(item.phone_edition), to: collections_item_path(@conn, :show, @user, item) %>
+        <%= if count > 0 do %>[<%= count %>📷]<% end %>
+      </td>
       <td>
         <%= if item.condition != nil do %><%= item.condition%>/10<% end %>
         <%= if item.phone_edition.limited do %><span title="Limited Edition" class="limited-label round-label">L</span><% end %>
