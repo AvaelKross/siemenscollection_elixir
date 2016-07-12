@@ -20,7 +20,7 @@
       <td><%= link full_phone_name(item.phone_edition), to: collections_item_path(@conn, :show, @user, item) %></td>
       <td>
         <%= if item.condition != nil do %><%= item.condition%>/10<% end %>
-        <%= if item.phone_edition.limited do %><span title="Limited edition" class="limited-label round-label">L</span><% end %>
+        <%= if item.phone_edition.limited do %><span title="Limited Edition" class="limited-label round-label">L</span><% end %>
         <%= if item.phone_edition.prototype do %><span title="Prototype" class="prototype-label round-label">P</span><% end %>
       </td>
 

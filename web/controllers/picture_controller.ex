@@ -4,23 +4,23 @@ defmodule SiemensCollection.PictureController do
   alias SiemensCollection.{Picture, Image}
 
   plug :scrub_params, "images" when action in [:create]
-  plug :redirect_path when action in [:create, :delete]
+  plug :redirect_path when action in [:create, :delete, :rotate]
 
-  plug Addict.Plugs.Authenticated when action in [:new, :create, :delete]
-  plug :check_rights when action in [:new, :create, :delete]
+  plug Addict.Plugs.Authenticated when action in [:new, :create, :delete, :rotate]
+  plug :check_rights when action in [:new, :create, :delete, :rotate]
 
   def new(conn, _params) do
     render(conn, "new.html")
   end
 
-  def create(conn, %{"images" => images_params}) do
+  def create(conn, %{"images" => images}) do
     picture_hash = if conn.params["edition_id"] != nil do
                      %{phone_edition_id: conn.params["edition_id"]}
                    else
                      %{item_id: conn.params["item_id"]}
                    end
 
-    Enum.each images_params, fn n ->
+    Enum.each images, fn n ->
       if n != nil && n != "" do
         changeset = Picture.changeset(%Picture{}, picture_hash)
         {:ok, picture} = Repo.insert(changeset)
@@ -45,6 +45,34 @@ defmodule SiemensCollection.PictureController do
 
     conn
     |> put_flash(:info, "Image deleted successfully.")
+    |> redirect(to: conn.assigns.redirect_path)
+  end
+
+  def rotate(conn, %{"id" => id, "direction" => direction}) do
+    picture = Repo.get!(Picture, id)
+
+    image = picture
+    |> Picture.get_url(:original)
+    |> Arc.File.new
+
+    transformation = case direction do
+      "right" -> "-rotate 90"
+      "left" -> "-rotate -90"
+      _ -> "-rotate 90"
+    end
+
+    rotated_image = Arc.Transformations.Convert.apply(:convert,
+                                                      image,
+                                                      transformation)
+
+    filename = rotated_image.file_name |> String.split("?") |> Enum.at(0)
+
+    prepared_image_hash = %{filename: filename, path: rotated_image.path}
+
+    changeset = Picture.changeset(picture, %{image: prepared_image_hash})
+    {:ok, _} = Repo.update(changeset)
+
+    conn
     |> redirect(to: conn.assigns.redirect_path)
   end
 

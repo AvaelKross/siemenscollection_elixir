@@ -43,4 +43,5 @@ config :siemens_collection, SiemensCollection.Repo,
 
 config :arc,
   bucket: "siemenscollection-uploads-d",
-  asset_host: "https://s3.eu-central-1.amazonaws.com/siemenscollection-uploads-d/"
+  asset_host: "https://s3.eu-central-1.amazonaws.com/siemenscollection-uploads-d/",
+  version_timeout: 40_000

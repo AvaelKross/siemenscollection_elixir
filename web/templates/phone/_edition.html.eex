@@ -3,7 +3,7 @@
     <%= @edition.name %>
 
     <%= if @edition.limited do %>
-      <div class="btn btn-xs limited-label" title="Limited edition">Limited</div>
+      <div class="btn btn-xs limited-label" title="Limited Edition">Limited</div>
     <% end %>
 
     <%= if @edition.prototype do %>

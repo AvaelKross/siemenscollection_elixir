@@ -23,6 +23,8 @@
       <div class="image">
         <img src="<%= thumb_image_url %>"/>
         <%= link "Destroy", to: catalog_picture_path(@conn, :delete, @brand.id, @phone.id, @phone_edition.id, picture.id), method: :delete %>
+        <%= link "Rotate ↻", to: catalog_picture_path(@conn, :rotate, @brand.id, @phone.id, @phone_edition.id, picture.id, "right"), method: :post %>
+        <%= link "Rotate ↺", to: catalog_picture_path(@conn, :rotate, @brand.id, @phone.id, @phone_edition.id, picture.id, "left"), method: :post %>
       </div>
     <% end %>
   </div>

@@ -50,6 +50,7 @@ defmodule SiemensCollection.Router do
           get "/new", PictureController, :new
           post "/", PictureController, :create
           delete "/:id", PictureController, :delete
+          post "/:id/rotate/:direction", PictureController, :rotate
         end
       end
     end
@@ -64,6 +65,7 @@ defmodule SiemensCollection.Router do
           get "/new", PictureController, :new
           post "/", PictureController, :create
           delete "/:id", PictureController, :delete
+          post "/:id/rotate/:direction", PictureController, :rotate
         end
       end
     end

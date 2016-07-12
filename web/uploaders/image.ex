@@ -2,13 +2,7 @@ defmodule SiemensCollection.Image do
   use Arc.Definition
   use Arc.Ecto.Definition
 
-  # Include ecto support (requires package arc_ecto installed):
-  # use Arc.Ecto.Definition
-
   @versions [:original, :thumb, :popup]
-
-  # To add a thumbnail version:
-  # @versions [:original, :thumb]
 
   # Whitelist file extensions:
   def validate({file, _}) do

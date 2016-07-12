@@ -30,10 +30,10 @@ defmodule SiemensCollection.Picture do
   end
 
   def get_url(picture, version \\ :original) do
-    if is_bitstring(picture.url) && String.length(picture.url) > 0 do
-      picture.url
-    else
+    if picture.image != nil do
       SiemensCollection.Image.url({picture.image, picture}, version)
+    else
+      picture.url
     end
   end
 end
