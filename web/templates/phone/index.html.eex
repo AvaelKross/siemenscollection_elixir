@@ -2,7 +2,13 @@
   <%= link "Brands >", to: brand_path(@conn, :index) %>
   <%= @brand.name %>
 </div>
-<h2 class="siemens-text"><%= @brand.name %></h2>
+<h2 class="siemens-text editions">
+  <%= @brand.name %>
+  <%= if can_edit(@conn) do %>
+    <%= link "Edit brand", to: brand_path(@conn, :edit, @brand.id), class: "btn btn-default btn-xs" %>
+    <%= link "Add phone", to: catalog_phone_path(@conn, :new, @brand.id), class: "btn btn-default btn-xs" %>
+  <% end %>
+</h2>
 
 <table class="table">
   <thead>
@@ -29,7 +35,3 @@
 <% end %>
   </tbody>
 </table>
-
-<%= if can_edit(@conn) do %>
-  <%= link "New phone", to: catalog_phone_path(@conn, :new, @brand.id) %>
-<% end %>
