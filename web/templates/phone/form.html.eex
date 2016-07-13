@@ -18,6 +18,16 @@
     <%= error_tag f, :notes %>
   </div>
 
+  <%= if @changeset.model.id == nil do %>
+    <h3>Main edition</h3>
+    <%= inputs_for f, :phone_editions, fn i -> %>
+
+      <%= render SiemensCollection.PhoneEditionView, "_shared_inputs.html", form: i %>
+
+    <% end %>
+
+  <% end %>
+
   <div class="form-group">
     <%= submit "Submit", class: "btn btn-primary" %>
   </div>

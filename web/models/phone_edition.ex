@@ -2,7 +2,7 @@ defmodule SiemensCollection.PhoneEdition do
   use SiemensCollection.Web, :model
 
   schema "phone_editions" do
-    field :name, :string
+    field :name, :string, default: "Default"
     field :limited, :boolean, default: false
     field :prototype, :boolean, default: false
     field :notes, :string

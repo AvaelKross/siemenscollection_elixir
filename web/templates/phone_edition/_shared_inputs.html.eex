@@ -1,0 +1,60 @@
+<div class="form-group">
+  <%= label @form, :name, class: "control-label" %>
+  <%= text_input @form, :name, class: "form-control" %>
+  <%= if message = @form.errors[:name] do %>
+    <span class="help-block"><%= message %></span>
+  <% end %>
+</div>
+
+<div class="form-group">
+  <%= label @form, :release, class: "control-label" %>
+  <%= text_input @form, :release, class: "form-control" %>
+  <%= if message = @form.errors[:release] do %>
+    <span class="help-block"><%= message %></span>
+  <% end %>
+</div>
+
+<div class="form-group">
+  <%= label @form, :limited, class: "control-label" %>:
+  <%= checkbox @form, :limited %>
+  <%= if message = @form.errors[:limited] do %>
+    <span class="help-block"><%= message %></span>
+  <% end %>
+</div>
+
+<div class="form-group">
+  <%= label @form, :prototype, class: "control-label" %>:
+  <%= checkbox @form, :prototype %>
+  <%= if message = @form.errors[:prototype] do %>
+    <span class="help-block"><%= message %></span>
+  <% end %>
+</div>
+
+<!-- string -->
+
+<%= for feature <- ~w(Form_factor Network Weight Size Memory_card_type Battery) do %>
+
+  <div class="form-group">
+    <% field = String.downcase(feature) |> String.to_atom %>
+    <%= label @form, field, class: "control-label" %>
+    <%= text_input @form, field, class: "form-control" %>
+    <%= if message = @form.errors[:field] do %>
+      <span class="help-block"><%= message %></span>
+    <% end %>
+  </div>
+  
+<% end %>
+<!-- boolean -->
+
+<%= for feature <- ~w(Java LTE 3G Memory_card_support IrDA Bluetooth GPRS) do %>
+
+  <div class="form-group">
+    <% field = String.downcase(feature) |> String.to_atom %>
+    <%= label @form, field, class: "control-label" %>:
+    <%= checkbox @form, field %>
+    <%= if message = @form.errors[:field] do %>
+      <span class="help-block"><%= message %></span>
+    <% end %>
+  </div>
+  
+<% end %>

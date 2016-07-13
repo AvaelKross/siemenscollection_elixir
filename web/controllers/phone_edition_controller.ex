@@ -11,8 +11,13 @@ defmodule SiemensCollection.PhoneEditionController do
   plug :set_phone
 
   def new(conn, _params) do
-    main_edition = Repo.get!(PhoneEdition, conn.assigns.phone.main_edition_id)
-    changeset = PhoneEdition.changeset(%PhoneEdition{}, Map.from_struct(main_edition))
+    init_map = if conn.assigns.phone.main_edition_id != nil do
+      main_edition = Repo.get!(PhoneEdition, conn.assigns.phone.main_edition_id)
+      Map.from_struct(main_edition)
+    else
+      %{}
+    end
+    changeset = PhoneEdition.changeset(%PhoneEdition{}, init_map)
 
     phones = Repo.all(Phone) |> Repo.preload([:brand])
     render(conn, "new.html", phones: phones, changeset: changeset)
@@ -32,7 +37,8 @@ defmodule SiemensCollection.PhoneEditionController do
         |> put_flash(:info, "Phone edition created successfully.")
         |> redirect(to: redirect_path)
       {:error, changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        phones = Repo.all(Phone) |> Repo.preload([:brand])
+        render(conn, "new.html", phones: phones, changeset: changeset)
     end
   end
 

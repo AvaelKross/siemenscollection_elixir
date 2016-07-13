@@ -17,15 +17,20 @@ defmodule SiemensCollection.PhoneController do
   end
 
   def new(conn, _params) do
-    changeset = Phone.changeset(%Phone{})
+    changeset = Phone.changeset_on_create(%Phone{phone_editions: [%PhoneEdition{}]})
     render(conn, "new.html", changeset: changeset)
   end
 
   def create(conn, %{"phone" => phone_params}) do
-    changeset = Phone.changeset(%Phone{}, phone_params)
+    changeset = Phone.changeset_on_create(%Phone{}, phone_params)
 
     case Repo.insert(changeset) do
-      {:ok, _phone} ->
+      {:ok, phone} ->
+        # set main edition
+        edition = Enum.at phone.phone_editions, 0
+        changeset = Phone.changeset(phone, %{main_edition_id: edition.id})
+        {:ok, _} = Repo.update(changeset)
+
         conn
         |> put_flash(:info, "Phone created successfully.")
         |> redirect(to: catalog_phone_path(conn, :index, conn.assigns.brand.id))
