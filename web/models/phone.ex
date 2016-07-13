@@ -1,5 +1,8 @@
 defmodule SiemensCollection.Phone do
   use SiemensCollection.Web, :model
+  use Ecto.Model.Callbacks
+
+  alias SiemensCollection.Repo
 
   schema "phones" do
     field :name, :string
@@ -7,13 +10,23 @@ defmodule SiemensCollection.Phone do
     field :main_edition_id, :integer
     belongs_to :brand, SiemensCollection.Brand
 
-    has_many :phone_editions, SiemensCollection.PhoneEdition, on_delete: :delete_all
+    has_many :phone_editions, SiemensCollection.PhoneEdition
 
     timestamps
   end
 
   @required_fields ~w(name)
   @optional_fields ~w(notes brand_id main_edition_id)
+
+  before_delete :destroy_editions
+  def destroy_editions(changeset) do
+    query = from p in SiemensCollection.PhoneEdition, where: p.phone_id == ^changeset.model.id
+    editions = Repo.all(query)
+    Enum.each editions, fn edition ->
+      Repo.delete! edition
+    end
+    changeset
+  end
 
   @doc """
   Creates a changeset based on the `model` and `params`.

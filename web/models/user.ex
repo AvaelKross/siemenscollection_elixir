@@ -1,6 +1,8 @@
 defmodule SiemensCollection.User do
   use SiemensCollection.Web, :model
-  alias SiemensCollection.Repo
+  use Ecto.Model.Callbacks
+
+  alias SiemensCollection.{Repo, Item, User}
 
   schema "users" do
     field :email, :string
@@ -9,13 +11,23 @@ defmodule SiemensCollection.User do
     field :location, :string
     field :role, :string
     field :description, :string
-    has_many :items, SiemensCollection.Item, on_delete: :delete_all
+    has_many :items, Item
 
     timestamps
   end
 
   @required_fields ~w(name) # + email encrypted_password
   @optional_fields ~w(location description)
+
+  before_delete :destroy_items
+  def destroy_items(changeset) do
+    query = from p in Item, where: p.user_id == ^changeset.model.id
+    items = Repo.all(query)
+    Enum.each items, fn item ->
+      Repo.delete! item
+    end
+    changeset
+  end
 
   @doc """
   Creates a changeset based on the `model` and `params`.
@@ -31,7 +43,7 @@ defmodule SiemensCollection.User do
 
   def addict_validate({:ok, _}, user_params) do
     responce = {:ok, []}
-    users_with_this_email = Repo.one(from p in SiemensCollection.User, where: p.email == ^user_params["email"], select: count("*"))
+    users_with_this_email = Repo.one(from p in User, where: p.email == ^user_params["email"], select: count("*"))
     if users_with_this_email > 0 do
       responce = {:error, [email: "Email Address Already in Use"]}
     end

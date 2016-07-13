@@ -36,11 +36,7 @@ defmodule SiemensCollection.PictureController do
 
   def delete(conn, %{"id" => id}) do
     picture = Repo.get!(Picture, id)
-
-    if picture.image != nil do
-      :ok = Image.delete({picture.image.file_name, picture})
-    end
-
+    
     Repo.delete!(picture)
 
     conn

@@ -1,5 +1,8 @@
 defmodule SiemensCollection.PhoneEdition do
+  use Ecto.Model.Callbacks
   use SiemensCollection.Web, :model
+
+  alias SiemensCollection.{Repo, Picture}
 
   schema "phone_editions" do
     field :name, :string, default: "Default"
@@ -25,9 +28,19 @@ defmodule SiemensCollection.PhoneEdition do
     field :battery, :string
 
     belongs_to :phone, SiemensCollection.Phone, foreign_key: :phone_id
-    has_many :pictures, SiemensCollection.Picture, on_delete: :delete_all
+    has_many :pictures, Picture
 
     timestamps
+  end
+
+  before_delete :destroy_pictures
+  def destroy_pictures(changeset) do
+    query = from p in Picture, where: p.phone_edition_id == ^changeset.model.id
+    pictures = Repo.all(query)
+    Enum.each pictures, fn pic ->
+      Repo.delete! pic
+    end
+    changeset
   end
 
   @required_fields ~w(name)
