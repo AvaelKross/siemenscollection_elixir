@@ -66,11 +66,17 @@ defmodule SiemensCollection.PhoneEditionController do
   def delete(conn, %{"id" => id}) do
     phone_edition = Repo.get!(PhoneEdition, id)
 
-    Repo.delete!(phone_edition)
+    if conn.assigns.phone.main_edition_id == phone_edition.id do
+      conn
+      |> put_flash(:error, "You can't delete main edition.")
+      |> redirect(to: catalog_phone_path(conn, :show, conn.assigns.brand.id, conn.assigns.phone.id))
+    else
+      Repo.delete!(phone_edition)
 
-    conn
-    |> put_flash(:info, "Phone edition deleted successfully.")
-    |> redirect(to: catalog_phone_path(conn, :show, conn.assigns.brand.id, conn.assigns.phone.id))
+      conn
+      |> put_flash(:info, "Phone edition deleted successfully.")
+      |> redirect(to: catalog_phone_path(conn, :show, conn.assigns.brand.id, conn.assigns.phone.id))
+    end
   end
 
   defp set_phone(conn, _) do

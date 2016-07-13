@@ -23,8 +23,8 @@
       <%= link "Edit", to: catalog_phone_edition_path(@conn, :edit, @brand.id, @phone.id, @edition), class: "btn btn-default btn-xs" %>
       <%= if @edition.id != @phone.main_edition_id do %>
         <%= link "Set main", to: catalog_phone_path(@conn, :set_main_edition, @brand.id, @phone.id, @edition.id), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: catalog_phone_edition_path(@conn, :delete, @brand.id, @phone.id, @edition), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
       <% end %>
-      <%= link "Delete", to: catalog_phone_edition_path(@conn, :delete, @brand.id, @phone.id, @edition), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
     <% end %>
     </h3>
   <%= if length(@edition.pictures) > 0 do %>

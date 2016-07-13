@@ -29,6 +29,11 @@
   <% end %>
 
   <div class="form-group">
-    <%= submit "Submit", class: "btn btn-primary" %>
+    <%= if @changeset.model.id == nil do %>
+      <%= submit "Create", class: "btn btn-primary" %>
+      <%= submit "Create and Upload images", class: "btn btn-primary", name: "save_and_upload" %>
+    <% else %>
+      <%= submit "Update", class: "btn btn-primary" %>
+    <% end %>
   </div>
 <% end %>

@@ -31,9 +31,15 @@ defmodule SiemensCollection.PhoneController do
         changeset = Phone.changeset(phone, %{main_edition_id: edition.id})
         {:ok, _} = Repo.update(changeset)
 
+        redirect_path = if conn.params["save_and_upload"] != nil do
+          catalog_picture_path(conn, :new, conn.assigns.brand.id, phone.id, edition.id)
+        else
+          catalog_phone_path(conn, :index, conn.assigns.brand.id)
+        end
+
         conn
         |> put_flash(:info, "Phone created successfully.")
-        |> redirect(to: catalog_phone_path(conn, :index, conn.assigns.brand.id))
+        |> redirect(to: redirect_path)
       {:error, changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
