@@ -9,6 +9,7 @@ defmodule SiemensCollection.Phone do
     field :notes, :string
     field :main_edition_id, :integer
     belongs_to :brand, SiemensCollection.Brand
+    belongs_to :series, SiemensCollection.Series
 
     has_many :phone_editions, SiemensCollection.PhoneEdition
 
@@ -16,7 +17,7 @@ defmodule SiemensCollection.Phone do
   end
 
   @required_fields ~w(name)
-  @optional_fields ~w(notes brand_id main_edition_id)
+  @optional_fields ~w(notes brand_id main_edition_id series_id)
 
   before_delete :destroy_editions
   def destroy_editions(changeset) do
@@ -59,6 +60,6 @@ defmodule SiemensCollection.Phone do
   end
 
   def for_brand(query, brand_id) do
-    from p in query, where: p.brand_id == ^brand_id, order_by: p.name
+    from p in query, where: p.brand_id == ^brand_id, order_by: [desc: :name]
   end
 end

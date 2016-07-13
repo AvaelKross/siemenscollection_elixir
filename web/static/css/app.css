@@ -192,6 +192,17 @@ main p {
   color: white;
 }
 
+.siemens-text.series a.btn {
+  margin-top: 0px;
+  float: right;
+  margin-right: 2px;
+}
+
+.siemens-text.series {
+  display: block;
+  padding-bottom: 3px;
+}
+
 h2.siemens-text {
   padding-left: 5px;
 }

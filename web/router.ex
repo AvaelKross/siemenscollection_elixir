@@ -35,7 +35,9 @@ defmodule SiemensCollection.Router do
   scope "/", SiemensCollection do
     pipe_through :browser
 
-    resources "/", BrandController, except: [:show]
+    resources "/", BrandController, except: [:show] do
+      resources "/series", SeriesController, except: [:index, :show]
+    end
 
     scope "/profile" do
       get "/", ProfileController, :edit

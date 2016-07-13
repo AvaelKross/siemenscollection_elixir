@@ -7,6 +7,7 @@
   <%= if can_edit(@conn) do %>
     <%= link "Edit brand", to: brand_path(@conn, :edit, @brand.id), class: "btn btn-default btn-xs" %>
     <%= link "Add phone", to: catalog_phone_path(@conn, :new, @brand.id), class: "btn btn-default btn-xs" %>
+    <%= link "Add series", to: brand_series_path(@conn, :new, @brand.id), class: "btn btn-default btn-xs" %>
   <% end %>
 </h2>
 
@@ -20,7 +21,24 @@
     </tr>
   </thead>
   <tbody>
-<%= for {phone, count} <- @phones do %>
+<%= for {series_id, phones} <- @phones_by_series do %>
+  <% first_phone = Enum.at(phones, 0) |> elem(0) %>
+  <tr>
+    <td colspan="3">
+      <h4 class="siemens-text series">
+        <%= if first_phone.series != nil do %>
+          <%= first_phone.series.name %>
+          <%= if can_edit(@conn) do %>
+            <%= link "Edit", to: brand_series_path(@conn, :edit, @brand.id, first_phone.series_id), class: "btn btn-default btn-xs" %>
+            <%= link "Delete", to: brand_series_path(@conn, :delete, @brand.id, first_phone.series_id), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+          <% end %>
+        <% else %>
+          Unknown series
+        <% end %>
+      </h4>
+    </td>
+  </tr>
+  <%= for {phone, count} <- phones do %>
     <tr>
       <td><%= link phone.name, to: catalog_phone_path(@conn, :show, @brand.id, phone) %></td>
       <td><%= count %> editions</td>
@@ -32,6 +50,7 @@
         <% end %>
       </td>
     </tr>
+  <% end %>
 <% end %>
   </tbody>
 </table>
