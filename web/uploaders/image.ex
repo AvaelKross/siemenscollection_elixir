@@ -10,12 +10,17 @@ defmodule SiemensCollection.Image do
   end
 
   # Define a thumbnail transformation:
+
+  def transform(:original, _) do
+    {:convert, "-auto-orient"}
+  end
+
   def transform(:thumb, _) do
-    {:convert, "-thumbnail 150x150> -gravity center -format jpg", :jpg}
+    {:convert, "-auto-orient -thumbnail 150x150> -gravity center -format jpg", :jpg}
   end
 
   def transform(:popup, _) do
-    {:convert, "-thumbnail 2000x1200> -gravity center -format jpg", :jpg}
+    {:convert, "-auto-orient -thumbnail 2000x1200> -gravity center -format jpg", :jpg}
   end
 
   # Override the persisted filenames:
