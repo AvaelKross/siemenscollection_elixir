@@ -5,6 +5,10 @@ defmodule SiemensCollection.ItemView do
     "#{edition.phone.brand.name} #{edition.phone.name} #{edition.name}"
   end
 
+  def can_edit_admin(conn, user) do
+    SiemensCollection.Plugs.CheckAdminRights.can_edit_user(conn, user)
+  end
+
   def can_edit(conn, item) do
     current_user_id(conn) == item.user_id
   end

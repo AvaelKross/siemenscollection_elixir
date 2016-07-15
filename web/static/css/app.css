@@ -204,6 +204,16 @@ main p {
   padding-bottom: 3px;
 }
 
+h3.collection {
+  padding-left: 5px;
+}
+
+h3.collection a.btn {
+  margin-top: 2px;
+  float: right;
+  margin-right: 2px;
+}
+
 h2.siemens-text {
   padding-left: 5px;
 }

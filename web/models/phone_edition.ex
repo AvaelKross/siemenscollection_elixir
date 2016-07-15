@@ -61,7 +61,7 @@ defmodule SiemensCollection.PhoneEdition do
 
   def owned_amount(edition, user) do
     case {edition, user} do
-      {_, nil} -> false
+      {_, nil} -> 0
       {_, _} -> Repo.all(from i in SiemensCollection.Item, where: i.user_id == ^user.id, where: i.phone_edition_id == ^edition.id, select: count(i.id)) |> List.first
     end
   end

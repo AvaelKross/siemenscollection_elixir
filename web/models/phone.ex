@@ -7,13 +7,12 @@ defmodule SiemensCollection.Phone do
   schema "phones" do
     field :name, :string
     field :notes, :string
-    field :main_edition_id, :integer
     belongs_to :brand, SiemensCollection.Brand
     belongs_to :series, SiemensCollection.Series
 
     has_many :phone_editions, SiemensCollection.PhoneEdition
 
-    has_one :main_edition, SiemensCollection.PhoneEdition
+    belongs_to :main_edition, SiemensCollection.PhoneEdition
 
     timestamps
   end
@@ -62,7 +61,11 @@ defmodule SiemensCollection.Phone do
   end
 
   def cover_image(phone) do
-    Enum.at(phone.main_edition.pictures, 0)
+    if phone.main_edition != nil do
+      Enum.at(phone.main_edition.pictures, 0)
+    else
+      nil
+    end
   end
 
   def for_brand(query, brand_id) do

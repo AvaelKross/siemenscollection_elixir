@@ -8,11 +8,19 @@
   <%= if can_edit_user(@conn, @user) do %>
     <%= link "Edit", to: profile_path(@conn, :edit), class: "btn btn-default btn-xs" %>
   <% end %>
+  <%= if can_edit_admin(@conn, @user) do %>
+    <%= link "Delete", to: profile_path(@conn, :delete, @user.id), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+  <% end %>
 </h2>
 <p><%= @user.location %></p>
 <p><%= @user.description %></p>
 
-<h3 class="siemens-text">Collection:</h3>
+<h3 class="siemens-text collection">
+  Collection:
+  <%= if can_edit_user(@conn, @user) do %>
+    <%= link "New item", to: collections_item_path(@conn, :new, @user), class: "btn btn-default btn-xs" %>
+  <% end %>
+</h3>
 <div class="items-gallery">
   <%= for {item, count} <- @items do %>
 
@@ -33,11 +41,5 @@
         </td>
       </div>
     </div>
-  <% end %>
-</div>
-
-<div class="footer_buttons">
-  <%= if can_edit_user(@conn, @user) do %>
-    <%= link "New item", to: collections_item_path(@conn, :new, @user), class: "siemens-text" %>
   <% end %>
 </div>
