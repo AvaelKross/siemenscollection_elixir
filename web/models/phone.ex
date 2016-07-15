@@ -13,6 +13,8 @@ defmodule SiemensCollection.Phone do
 
     has_many :phone_editions, SiemensCollection.PhoneEdition
 
+    has_one :main_edition, SiemensCollection.PhoneEdition
+
     timestamps
   end
 
@@ -57,6 +59,10 @@ defmodule SiemensCollection.Phone do
       group_by: p.id,
       left_join: c in assoc(p, :phone_editions),
       select: {p, count(c.id)}
+  end
+
+  def cover_image(phone) do
+    Enum.at(phone.main_edition.pictures, 0)
   end
 
   def for_brand(query, brand_id) do

@@ -192,13 +192,13 @@ main p {
   color: white;
 }
 
-.siemens-text.series a.btn {
+.siemens-text.series-header a.btn {
   margin-top: 0px;
   float: right;
   margin-right: 2px;
 }
 
-.siemens-text.series {
+.siemens-text.series-header {
   display: block;
   padding-bottom: 3px;
 }
@@ -316,7 +316,7 @@ a.siemens-text:hover {
 
 .items-gallery-item {
   float: left;
-  width: 33%;
+  width: 25%;
   height: 220px;
   margin-bottom: 60px;
   background-repeat: no-repeat;
@@ -333,6 +333,10 @@ a.siemens-text:hover {
   top: 5px;
   width: 100%;
   text-align: center;
+}
+
+.series-header {
+  clear: both;
 }
 
 /* Responsive: Portrait tablets and up */

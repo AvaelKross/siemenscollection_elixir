@@ -11,7 +11,7 @@ defmodule SiemensCollection.PhoneController do
   def index(conn, _params) do
     brand_id = conn.assigns.brand.id
     query = Phone |> Phone.for_brand(brand_id) |> Phone.editions_count
-    query = from query, preload: [:series]
+    query = from query, preload: [:series, [main_edition: :pictures]]
     phones = Repo.all(query)
 
     # Refactor this please

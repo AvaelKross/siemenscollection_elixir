@@ -18,8 +18,9 @@
 
     <div class="items-gallery-item" style="background-image: url(<%= item |> SiemensCollection.Item.cover_image |> SiemensCollection.Picture.get_url %>)">
       <a href="<%= collections_item_path(@conn, :show, @user, item) %>" class="item-bg-link"></a>
-      <div class="title"></a>
-        <%= link full_phone_name(item.phone_edition), to: collections_item_path(@conn, :show, @user, item) %>
+      <div class="title">
+        <%= link "#{item.phone_edition.phone.brand.name} #{item.phone_edition.phone.name}", to: collections_item_path(@conn, :show, @user, item) %><br>
+        <%= link "#{item.phone_edition.name}", to: collections_item_path(@conn, :show, @user, item) %>
         <%= if count > 0 do %>[<%= count %>📷]<% end %>
         <%= if item.phone_edition.limited do %><span title="Limited Edition" class="limited-label round-label">L</span><% end %>
         <%= if item.phone_edition.prototype do %><span title="Prototype" class="prototype-label round-label">P</span><% end %>
