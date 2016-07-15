@@ -52,6 +52,14 @@ defmodule SiemensCollection.Item do
       select: {p, count(c.id)}
   end
 
+  def cover_image(item) do
+    if length(item.pictures) > 0 do
+      Enum.at(item.pictures, 0)
+    else
+      Enum.at(item.phone_edition.pictures, 0)
+    end
+  end
+
   def for_user(query, user_id) do
     from p in query, where: p.user_id == ^user_id
   end

@@ -15,7 +15,7 @@ defmodule SiemensCollection.ItemController do
   def index(conn, _params) do
     user_id = conn.assigns.user.id
     query = Item |> Item.for_user(user_id) |> Item.pictures_count
-    query = from query, preload: [phone_edition: [phone: :brand]]
+    query = from query, preload: [:pictures, phone_edition: [:pictures, phone: :brand]]
 
     items = Repo.all(query)
 

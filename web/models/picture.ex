@@ -40,10 +40,11 @@ defmodule SiemensCollection.Picture do
   end
 
   def get_url(picture, version \\ :original) do
-    if picture.image != nil do
-      SiemensCollection.Image.url({picture.image, picture}, version)
-    else
-      picture.url
+    cond do
+      picture == nil ->"https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg"
+      picture.image != nil -> SiemensCollection.Image.url({picture.image, picture}, version)
+      picture.url != nil || picture.url != "" -> picture.url
+      true -> "https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg"
     end
   end
 end
