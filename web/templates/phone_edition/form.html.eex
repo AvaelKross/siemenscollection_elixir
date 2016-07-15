@@ -8,7 +8,7 @@
   <div class="form-group">
     <%= label f, :phone_id, class: "control-label" %>
     <%= select f, :phone_id, 
-      Enum.map(@phones, fn p -> {"#{p.brand.name} #{p.name}", p.id} end) %>
+      Enum.map(@phones, fn p -> {"#{p.brand.name} #{p.name}", p.id} end) |> Enum.sort %>
     <%= error_tag f, :phone_id %>
   </div>
 

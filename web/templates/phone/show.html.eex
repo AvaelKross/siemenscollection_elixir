@@ -8,28 +8,22 @@
   <%= @phone.brand.name %> <%= @phone.name %>
   <%= if can_edit(@conn) do %>
     <%= link "Edit", to: catalog_phone_path(@conn, :edit, @brand.id, @phone), class: "btn btn-default btn-xs" %>
+    <%= link "New edition", to: catalog_phone_edition_path(@conn, :new, @brand.id, @phone.id), class: "btn btn-default btn-xs" %>
   <% end %>
 </h2>
 
 <p><%= @phone.notes %></p>
 
-<h2 class="siemens-text editions">
-  Editions: <%= SiemensCollection.Phone.editions_count @phone %>
-  <%= if can_edit(@conn) do %>
-    <%= link "New", to: catalog_phone_edition_path(@conn, :new, @brand.id, @phone.id), class: "btn btn-default btn-xs" %>
+<div class="items-gallery">
+  <%= for edition <- @editions do %>
+    <div class="items-gallery-item" style="background-image: url(<%= Enum.at(edition.pictures, 0) |> SiemensCollection.Picture.get_url %>)">
+      <%= link "", to: catalog_phone_edition_path(@conn, :show, @brand.id, @phone.id, edition), class: "item-bg-link" %>
+      <div class="title">
+        <%= link edition.name, to: catalog_phone_edition_path(@conn, :show, @brand.id, @phone.id, edition) %>
+        <%= if can_edit(@conn) && edition.id == @phone.main_edition_id do %>
+          (Main)
+        <% end %>
+      </div>
+    </div>
   <% end %>
-</h2>
-
-<%= for edition <- @editions, edition.id == @phone.main_edition_id do %>
-  <%= render "_edition.html", conn: @conn, phone: @phone,
-                              brand: @brand,
-                              edition: edition,
-                              owned_edition_ids: @owned_edition_ids %>
-<% end %>
-
-<%= for edition <- @editions, edition.id != @phone.main_edition_id do %>
-  <%= render "_edition.html", conn: @conn, phone: @phone,
-                              brand: @brand,
-                              edition: edition,
-                              owned_edition_ids: @owned_edition_ids %>
-<% end %>
+</div>

@@ -61,7 +61,7 @@ defmodule SiemensCollection.Router do
     scope "/:brand_id", as: :catalog do
       resources "/", PhoneController
       scope "/:phone_id" do
-        resources "/", PhoneEditionController, except: [:index, :show]
+        resources "/", PhoneEditionController, except: [:index]
         get "/:edition_id/set_main", PhoneController, :set_main_edition
         get "/:edition_id/add_to_collection", ItemController, :new
         scope "/:edition_id/images" do

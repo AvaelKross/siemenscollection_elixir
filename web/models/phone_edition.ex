@@ -58,4 +58,12 @@ defmodule SiemensCollection.PhoneEdition do
     model
     |> cast(params, @required_fields, @optional_fields)
   end
+
+  def owned_amount(edition, user) do
+    case {edition, user} do
+      {_, nil} -> false
+      {_, _} -> Repo.all(from i in SiemensCollection.Item, where: i.user_id == ^user.id, where: i.phone_edition_id == ^edition.id, select: count(i.id)) |> List.first
+    end
+  end
+
 end

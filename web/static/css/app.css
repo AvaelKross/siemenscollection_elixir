@@ -199,6 +199,7 @@ main p {
 }
 
 .siemens-text.series-header {
+  padding-left: 12px;
   display: block;
   padding-bottom: 3px;
 }

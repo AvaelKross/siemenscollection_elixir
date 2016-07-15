@@ -1,0 +1,62 @@
+<div class='breadcrumbs'>
+  <%= link "Brands >", to: brand_path(@conn, :index) %>
+  <%= link "#{@brand.name} >", to: catalog_phone_path(@conn, :index, @brand.id) %>
+  <%= link "#{@phone.name} >", to: catalog_phone_path(@conn, :show, @brand.id, @phone) %>
+  <%= @phone_edition.name %>
+</div>
+
+<div class="edition">
+  <h3 class="siemens-text">
+    <%= full_phone_name @phone_edition %>
+
+    <%= if @phone_edition.limited do %>
+      <div class="btn btn-xs limited-label" title="Limited Edition">Limited</div>
+    <% end %>
+
+    <%= if @phone_edition.prototype do %>
+      <div class="btn btn-xs prototype-label" title="Prototype">Prototype</div>
+    <% end %>
+
+    <%= if SiemensCollection.PhoneEdition.owned_amount(@phone_edition, current_user(@conn)) > 0 do %>
+      <div class="btn btn-xs owned-label" title="Owned">Owned</div>
+    <% end %>
+
+    <%= if is_logged_in(@conn) do %>
+      <%= link "Add to collection", to: catalog_item_path(@conn, :new, @brand.id, @phone.id, @phone_edition), class: "btn btn-default btn-xs" %>
+    <% end %>
+
+    <%= if can_edit(@conn) do %>
+      <%= link "Upload pics", to: catalog_picture_path(@conn, :new, @brand.id, @phone.id, @phone_edition.id), class: "btn btn-default btn-xs" %>
+      <%= link "Edit", to: catalog_phone_edition_path(@conn, :edit, @brand.id, @phone.id, @phone_edition), class: "btn btn-default btn-xs" %>
+      <%= if @phone_edition.id != @phone.main_edition_id do %>
+        <%= link "Set main", to: catalog_phone_path(@conn, :set_main_edition, @brand.id, @phone.id, @phone_edition.id), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: catalog_phone_edition_path(@conn, :delete, @brand.id, @phone.id, @phone_edition), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+      <% end %>
+    <% end %>
+    </h3>
+  <%= if length(@phone_edition.pictures) > 0 do %>
+    <div class="images">
+      <%= for picture <- @phone_edition.pictures do %>
+        <% thumb_image_url = SiemensCollection.Picture.get_url(picture, :thumb) %>
+        <% image_url = SiemensCollection.Picture.get_url(picture, :original) %>
+        <a href="<%= image_url %>" target="_blank">
+          <img src="<%= thumb_image_url %>"/>
+        </a>
+      <% end %>
+    </div>
+  <% end %>
+  <div class="info">
+    <ul>
+
+      <%= for feature <- ~w(Release Limited Prototype Form_factor Network Weight Size Java LTE 3G Memory_card_support Memory_card_type IrDA Bluetooth GPRS Battery Notes) do %>
+        <li>
+          <% field = String.downcase(feature) |> String.to_atom %>
+          <% %{^field => value} = @phone_edition %>
+          <strong><%= String.replace(feature, "_", " ") %>:</strong>
+          <%= value %>
+        </li>
+      <% end %>
+
+    </ul>
+  </div>
+</div>

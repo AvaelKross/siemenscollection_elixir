@@ -1,7 +1,7 @@
 defmodule SiemensCollection.PhoneEditionController do
   use SiemensCollection.Web, :controller
 
-  alias SiemensCollection.{Phone, PhoneEdition}
+  alias SiemensCollection.{Phone, PhoneEdition, Item}
 
   plug :scrub_params, "phone_edition" when action in [:create, :update]
 
@@ -31,7 +31,7 @@ defmodule SiemensCollection.PhoneEditionController do
         redirect_path = if conn.params["save_and_upload"] != nil do
           catalog_picture_path(conn, :new, conn.assigns.brand.id, conn.assigns.phone.id, phone_edition.id)
         else
-          catalog_phone_path(conn, :show, conn.assigns.brand.id, conn.assigns.phone.id)
+          catalog_phone_edition_path(@conn, :show, conn.assigns.brand.id, conn.assigns.phone.id, phone_edition.id)
         end
         conn
         |> put_flash(:info, "Phone edition created successfully.")
@@ -40,6 +40,11 @@ defmodule SiemensCollection.PhoneEditionController do
         phones = Repo.all(Phone) |> Repo.preload([:brand])
         render(conn, "new.html", phones: phones, changeset: changeset)
     end
+  end
+
+  def show(conn, %{"id" => id}) do
+    phone_edition = Repo.get!(PhoneEdition, id) |> Repo.preload([:pictures, [phone: :brand]])
+    render(conn, "show.html", phone_edition: phone_edition)
   end
 
   def edit(conn, %{"id" => id}) do
@@ -57,7 +62,7 @@ defmodule SiemensCollection.PhoneEditionController do
       {:ok, _phone_edition} ->
         conn
         |> put_flash(:info, "Phone edition updated successfully.")
-        |> redirect(to: catalog_phone_path(conn, :show, conn.assigns.brand.id, conn.assigns.phone.id))
+        |> redirect(to: catalog_phone_edition_path(@conn, :show, conn.assigns.brand.id, conn.assigns.phone.id, phone_edition.id))
       {:error, changeset} ->
         render(conn, "edit.html", phone_edition: phone_edition, changeset: changeset)
     end
