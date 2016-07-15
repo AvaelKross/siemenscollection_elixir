@@ -16,7 +16,7 @@
 
 <div class="items-gallery">
   <%= for edition <- @editions do %>
-    <div class="items-gallery-item" style="background-image: url(<%= Enum.at(edition.pictures, 0) |> SiemensCollection.Picture.get_url %>)">
+    <div class="items-gallery-item" style="background-image: url(<%= Enum.at(edition.pictures, 0) |> SiemensCollection.Picture.get_url(:thumb) %>)">
       <%= link "", to: catalog_phone_edition_path(@conn, :show, @brand.id, @phone.id, edition), class: "item-bg-link" %>
       <div class="title">
         <%= link edition.name, to: catalog_phone_edition_path(@conn, :show, @brand.id, @phone.id, edition) %>

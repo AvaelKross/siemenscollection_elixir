@@ -25,7 +25,7 @@
   </h4>
   <div class="items-gallery">
     <%= for {phone, count} <- phones do %>
-      <div class="items-gallery-item" style="background-image: url(<%= phone |> SiemensCollection.Phone.cover_image |> SiemensCollection.Picture.get_url %>)">
+      <div class="items-gallery-item" style="background-image: url(<%= phone |> SiemensCollection.Phone.cover_image |> SiemensCollection.Picture.get_url(:thumb) %>)">
         <a href="<%= catalog_phone_path(@conn, :show, @brand.id, phone) %>" class="item-bg-link"></a>
         <div class="title">
           <%= link "#{phone.name} (#{count})", to: catalog_phone_path(@conn, :show, @brand.id, phone) %>
