@@ -14,7 +14,18 @@ defmodule SiemensCollection.PhoneController do
     query = from query, preload: [:series]
     phones = Repo.all(query)
 
-    phones_by_series = phones |> Enum.group_by(fn p -> elem(p, 0).series_id end)
+    # Refactor this please
+
+    phones_by_series = phones
+    |> Enum.group_by(fn e -> 
+                        [elem(e, 0).series_id,
+                         (if elem(e, 0).series, do: elem(e, 0).series.name, else: nil)]
+                     end)
+    |> Enum.sort(fn e1, e2 -> Enum.at(elem(e2, 0), 1) |> case do
+                                                        nil -> Enum.at(elem(e1, 0), 1) > Enum.at(elem(e2, 0), 1)
+                                                        _ -> Enum.at(elem(e1, 0), 1) < Enum.at(elem(e2, 0), 1)
+                                                      end
+                 end)
 
     render(conn, "index.html", phones_by_series: phones_by_series)
   end
