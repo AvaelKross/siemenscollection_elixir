@@ -14,7 +14,7 @@
 
   <div class="form-group">
     <%= label f, :series_id, class: "control-label" %>
-    <%= select f, :series_id, Enum.map(@series, fn s -> {s.name, s.id} end) %>
+    <%= select f, :series_id, [{"", nil} | Enum.map(@series, fn s -> {s.name, s.id} end)] %>
     <%= error_tag f, :series_id %>
   </div>
 
