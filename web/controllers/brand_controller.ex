@@ -8,7 +8,7 @@ defmodule SiemensCollection.BrandController do
   plug :scrub_params, "brand" when action in [:create, :update]
 
   def index(conn, _params) do
-    brands = Repo.all(Brand)
+    brands = from(Brand, order_by: [asc: :name]) |> Repo.all
     render(conn, "index.html", brands: brands)
   end
 
