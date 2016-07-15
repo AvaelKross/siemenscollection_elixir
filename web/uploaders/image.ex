@@ -16,7 +16,7 @@ defmodule SiemensCollection.Image do
   end
 
   def transform(:thumb, _) do
-    {:convert, "-auto-orient -thumbnail 150x150> -gravity center -format jpg", :jpg}
+    {:convert, "-auto-orient -thumbnail 250x250> -gravity center -format jpg", :jpg}
   end
 
   def transform(:popup, _) do
