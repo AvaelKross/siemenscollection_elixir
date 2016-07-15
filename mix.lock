@@ -14,7 +14,7 @@
   "earmark": {:hex, :earmark, "0.2.1", "ba6d26ceb16106d069b289df66751734802777a3cbb6787026dd800ffeb850f3", [:mix], []},
   "ecto": {:hex, :ecto, "1.1.5", "5c181b737a650117466b0540aa323198a0fb9d518e52718ac2c299f4047187e1", [:mix], [{:sbroker, "~> 0.7", [hex: :sbroker, optional: true]}, {:postgrex, "~> 0.11.0", [hex: :postgrex, optional: true]}, {:poolboy, "~> 1.4", [hex: :poolboy, optional: false]}, {:poison, "~> 1.0", [hex: :poison, optional: true]}, {:mariaex, "~> 0.5.0 or ~> 0.6.0", [hex: :mariaex, optional: true]}, {:decimal, "~> 1.0", [hex: :decimal, optional: false]}]},
   "erlware_commons": {:hex, :erlware_commons, "0.19.0", "7b43caf2c91950c5f60dc20451e3c3afba44d3d4f7f27bcdc52469285a5a3e70", [:rebar3], [{:cf, "0.2.1", [hex: :cf, optional: false]}]},
-  "ex_admin": {:git, "https://github.com/AvaelKross/ex_admin.git", "ce54abfbf098b0e660d0f8e5cfe293ac29554daf", [branch: 'v0.7.3']},
+  "ex_admin": {:git, "https://github.com/smpallen99/ex_admin.git", "3c9f2b9736f262fcee96bdd4b2c9e36a886d0eb2", [branch: 'ecto-1.1']},
   "ex_aws": {:hex, :ex_aws, "0.4.19", "84284a2ce936b1aed3d6db4dac4ccf28105f2b617201194b2804d737cd0ef818", [:mix], [{:jsx, "~> 2.5", [hex: :jsx, optional: true]}, {:httpotion, "~> 2.0", [hex: :httpotion, optional: true]}, {:poison, "~> 1.2 or ~> 2.0", [hex: :poison, optional: true]}, {:httpoison, "~> 0.8", [hex: :httpoison, optional: true]}, {:sweet_xml, "~> 0.5", [hex: :sweet_xml, optional: true]}]},
   "ex_queb": {:hex, :ex_queb, "0.1.2", "a7bea897c490875a716042675cec4013b5075de083c26ec1b7f0e0fb5144f5a1", [:mix], [{:ecto, "~> 1.1", [hex: :ecto, optional: false]}]},
   "exactor": {:hex, :exactor, "2.2.0", "2a7418b82d974fe8276edd62c1facf4a9dc06339cdf11b5dcd10359e107fe5c3", [:mix], []},
@@ -32,9 +32,9 @@
   "mimerl": {:hex, :mimerl, "1.0.2", "993f9b0e084083405ed8252b99460c4f0563e41729ab42d9074fd5e52439be88", [:rebar3], []},
   "phoenix": {:hex, :phoenix, "1.1.6", "7bf19002669c8f692f5a9c8d30dab7b49f3dc56228d5bde92a12fb426b4783c2", [:mix], [{:poison, "~> 1.5 or ~> 2.0", [hex: :poison, optional: false]}, {:plug, "~> 1.0", [hex: :plug, optional: false]}, {:cowboy, "~> 1.0", [hex: :cowboy, optional: true]}]},
   "phoenix_ecto": {:hex, :phoenix_ecto, "2.0.1", "24532a443b1686150fd14819a4a366eccf41135da2a2ed6ae2f78597828ecb0a", [:mix], [{:poison, "~> 1.3", [hex: :poison, optional: true]}, {:phoenix_html, "~> 2.2", [hex: :phoenix_html, optional: true]}, {:ecto, "~> 1.1.2", [hex: :ecto, optional: false]}]},
-  "phoenix_html": {:hex, :phoenix_html, "2.5.1", "631053f9e345fecb5c87d9e0ccd807f7266d27e2ee4269817067af425fd81ba8", [:mix], [{:plug, "~> 0.13 or ~> 1.0", [hex: :plug, optional: false]}]},
+  "phoenix_html": {:hex, :phoenix_html, "2.6.1", "7d53fb8d3d0a057a6eb3df24e7c5b86630d8d7495b13221537d9c4130d527d95", [:mix], [{:plug, "~> 1.0", [hex: :plug, optional: false]}]},
   "phoenix_live_reload": {:hex, :phoenix_live_reload, "1.0.4", "77464d6b083a8fbaedafc417b38e64a1c27b17c0c96b5c1da4842770db2a7d88", [:mix], [{:phoenix, "~> 1.0 or ~> 1.2-rc", [hex: :phoenix, optional: false]}, {:fs, "~> 0.9.1", [hex: :fs, optional: false]}, {:earmark, ">= 0.0.0", [hex: :earmark, optional: false]}]},
-  "plug": {:hex, :plug, "1.1.4", "2eee0e85ad420db96e075b3191d3764d6fff61422b101dc5b02e9cce99cacfc7", [:mix], [{:cowboy, "~> 1.0", [hex: :cowboy, optional: true]}]},
+  "plug": {:hex, :plug, "1.1.6", "8927e4028433fcb859e000b9389ee9c37c80eb28378eeeea31b0273350bf668b", [:mix], [{:cowboy, "~> 1.0", [hex: :cowboy, optional: true]}]},
   "poison": {:hex, :poison, "1.5.2", "560bdfb7449e3ddd23a096929fb9fc2122f709bcc758b2d5d5a5c7d0ea848910", [:mix], []},
   "poolboy": {:hex, :poolboy, "1.5.1", "6b46163901cfd0a1b43d692657ed9d7e599853b3b21b95ae5ae0a777cf9b6ca8", [:rebar], []},
   "postgrex": {:hex, :postgrex, "0.11.1", "f48af70c0a58b9bfd1aaa456ec4273624554cfb837726b6a7f0701da4a94b2dd", [:mix], [{:decimal, "~> 1.0", [hex: :decimal, optional: false]}, {:db_connection, "~> 0.2", [hex: :db_connection, optional: false]}, {:connection, "~> 1.0", [hex: :connection, optional: false]}]},
@@ -43,4 +43,4 @@
   "relx": {:hex, :relx, "3.19.0", "286dd5244b4786f56aac75d5c8e2d1fb4cfd306810d4ec8548f3ae1b3aadb8f7", [:rebar3], [{:providers, "1.6.0", [hex: :providers, optional: false]}, {:getopt, "0.8.2", [hex: :getopt, optional: false]}, {:erlware_commons, "0.19.0", [hex: :erlware_commons, optional: false]}, {:cf, "0.2.1", [hex: :cf, optional: false]}, {:bbmustache, "1.0.4", [hex: :bbmustache, optional: false]}]},
   "scrivener": {:hex, :scrivener, "1.1.4", "12227cfbcb5b817cca1f5720ce7ad63f453b58ae009f04b74b1e0078d8f6dfd5", [:mix], [{:postgrex, ">= 0.0.0", [hex: :postgrex, optional: true]}, {:ecto, "~> 1.0", [hex: :ecto, optional: false]}]},
   "ssl_verify_fun": {:hex, :ssl_verify_fun, "1.1.0", "edee20847c42e379bf91261db474ffbe373f8acb56e9079acb6038d4e0bf414f", [:rebar, :make], []},
-  "xain": {:hex, :xain, "0.5.2", "930f260c53bb69b3039d672780cc7ecf214bd16270183132ecb5b8a6df3aa65b", [:mix], []}}
+  "xain": {:hex, :xain, "0.5.3", "0696bf6db7697690f620adf59bd7ced4e4e9ae5eac3240a2a81eae3f93f5ddfe", [:mix], []}}
