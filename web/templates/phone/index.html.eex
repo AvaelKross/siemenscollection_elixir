@@ -10,14 +10,14 @@
     <%= link "Add series", to: brand_series_path(@conn, :new, @brand.id), class: "btn btn-default btn-xs" %>
   <% end %>
 </h2>
-<%= for {series_id, phones} <- @phones_by_series do %>
-  <% first_phone = Enum.at(phones, 0) |> elem(0) %>
+<%= for {series, phones} <- @phones_by_series do %>
+  <% [series_id, series_name] = series %>
   <h4 class="siemens-text series-header">
-    <%= if first_phone.series != nil do %>
-      <%= first_phone.series.name %>
+    <%= if series_name != nil do %>
+      <%= series_name %>
       <%= if can_edit(@conn) do %>
-        <%= link "Delete", to: brand_series_path(@conn, :delete, @brand.id, first_phone.series_id), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
-        <%= link "Edit", to: brand_series_path(@conn, :edit, @brand.id, first_phone.series_id), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: brand_series_path(@conn, :delete, @brand.id, series_id), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+        <%= link "Edit", to: brand_series_path(@conn, :edit, @brand.id, series_id), class: "btn btn-default btn-xs" %>
       <% end %>
     <% else %>
       Other
