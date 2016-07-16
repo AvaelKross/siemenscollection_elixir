@@ -69,6 +69,6 @@ defmodule SiemensCollection.Phone do
   end
 
   def for_brand(query, brand_id) do
-    from p in query, where: p.brand_id == ^brand_id, order_by: [desc: :name]
+    from p in query, where: p.brand_id == ^brand_id
   end
 end
