@@ -10,19 +10,22 @@
     <%= link "Add series", to: brand_series_path(@conn, :new, @brand.id), class: "btn btn-default btn-xs" %>
   <% end %>
 </h2>
+
 <%= for {series, phones} <- @phones_by_series do %>
-  <% [series_id, series_name] = series %>
-  <h4 class="siemens-text series-header">
-    <%= if series_name != nil do %>
-      <%= series_name %>
-      <%= if can_edit(@conn) do %>
-        <%= link "Delete", to: brand_series_path(@conn, :delete, @brand.id, series_id), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
-        <%= link "Edit", to: brand_series_path(@conn, :edit, @brand.id, series_id), class: "btn btn-default btn-xs" %>
+  <%= if length(@phones_by_series) > 1 do %>
+    <% [series_id, series_name] = series %>
+    <h4 class="siemens-text series-header">
+      <%= if series_name != nil do %>
+        <%= series_name %>
+        <%= if can_edit(@conn) do %>
+          <%= link "Delete", to: brand_series_path(@conn, :delete, @brand.id, series_id), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+          <%= link "Edit", to: brand_series_path(@conn, :edit, @brand.id, series_id), class: "btn btn-default btn-xs" %>
+        <% end %>
+      <% else %>
+        Other
       <% end %>
-    <% else %>
-      Other
-    <% end %>
-  </h4>
+    </h4>
+  <% end %>
   <div class="items-gallery">
     <%= for {phone, count} <- phones do %>
       <div class="items-gallery-item" style="background-image: url(<%= phone |> SiemensCollection.Phone.cover_image |> SiemensCollection.Picture.get_url(:thumb) %>)">
