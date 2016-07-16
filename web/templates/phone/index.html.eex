@@ -20,7 +20,7 @@
         <%= link "Edit", to: brand_series_path(@conn, :edit, @brand.id, first_phone.series_id), class: "btn btn-default btn-xs" %>
       <% end %>
     <% else %>
-      Unknown series
+      Other
     <% end %>
   </h4>
   <div class="items-gallery">
