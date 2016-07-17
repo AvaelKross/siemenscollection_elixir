@@ -36,9 +36,6 @@ config :addict,
   from_email: "no-reply@siemenscollection.ru", # CHANGE THIS
   mail_service: nil
 
-config :xain, :quote, "'"
-config :xain, :after_callback, {Phoenix.HTML, :raw}
-
 config :ex_aws,
   access_key_id: "AKIAIM7J52PY7JYEVISA",
   secret_access_key: "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",
