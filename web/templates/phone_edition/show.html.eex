@@ -52,7 +52,7 @@
   <div class="info">
     <ul>
 
-      <%= for feature <- ~w(Release Limited Prototype Form_factor Network Weight Size Java LTE 3G Memory_card_support Memory_card_type IrDA Bluetooth GPRS Battery Notes) do %>
+      <%= for feature <- ~w(Release Form_factor Network Weight Size Java LTE 3G Memory_card_support Memory_card_type IrDA Bluetooth GPRS Battery Notes) do %>
         <li>
           <% field = String.downcase(feature) |> String.to_atom %>
           <% %{^field => value} = @phone_edition %>
