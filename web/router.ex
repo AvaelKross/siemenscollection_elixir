@@ -1,7 +1,6 @@
 defmodule SiemensCollection.Router do
   use SiemensCollection.Web, :router
   use Addict.RoutesHelper
-  use ExAdmin.Router
 
   pipeline :browser do
     plug :accepts, ["html"]
