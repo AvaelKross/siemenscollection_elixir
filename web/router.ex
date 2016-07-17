@@ -15,11 +15,6 @@ defmodule SiemensCollection.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/admin", ExAdmin do
-    pipe_through :browser
-    admin_routes
-  end
-
   scope "/" do
     addict :routes
   end

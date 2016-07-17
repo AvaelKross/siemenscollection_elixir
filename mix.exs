@@ -19,7 +19,7 @@ defmodule SiemensCollection.Mixfile do
   def application do
     [mod: {SiemensCollection, []},
      applications: [:phoenix, :phoenix_html, :cowboy, :logger, :gettext, :inflex,
-                    :phoenix_ecto, :postgrex, :addict, :ex_admin, :ex_aws, :httpoison, :arc, :arc_ecto]]
+                    :phoenix_ecto, :postgrex, :addict, :ex_aws, :httpoison, :arc, :arc_ecto]]
   end
 
   # Specifies which paths to compile per environment.
@@ -38,7 +38,6 @@ defmodule SiemensCollection.Mixfile do
      {:gettext, "~> 0.9"},
      {:cowboy, "~> 1.0"},
      {:addict, github: "AvaelKross/addict"},
-     {:ex_admin, github: "smpallen99/ex_admin", branch: 'ecto-1.1'},
      {:exrm, "~> 1.0.3"},
      {:arc, "~> 0.5.2", github: "AvaelKross/arc", override: true},
      {:arc_ecto, "~> 0.3.2"}, # update after updating ECTO to 2.*

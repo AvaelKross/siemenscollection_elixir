@@ -22,7 +22,6 @@
     <% end %>
   </ul>
 <% end %>
-  
 
 <%= for {[series_id, series_name], phones} <- @phones_by_series do %>
   <%= if length(@phones_by_series) > 1 do %>

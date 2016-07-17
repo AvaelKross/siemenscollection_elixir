@@ -39,17 +39,6 @@ config :addict,
 config :xain, :quote, "'"
 config :xain, :after_callback, {Phoenix.HTML, :raw}
 
-config :ex_admin,
-  repo: SiemensCollection.Repo,
-  module: SiemensCollection,
-  modules: [
-    SiemensCollection.ExAdmin.Dashboard,
-    SiemensCollection.ExAdmin.Phone,
-    SiemensCollection.ExAdmin.PhoneEdition,
-    SiemensCollection.ExAdmin.Brand,
-    SiemensCollection.ExAdmin.User
-  ]
-
 config :ex_aws,
   access_key_id: "AKIAIM7J52PY7JYEVISA",
   secret_access_key: "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",
