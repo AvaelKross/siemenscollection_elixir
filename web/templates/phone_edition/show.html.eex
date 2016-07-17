@@ -9,6 +9,10 @@
   <h3 class="siemens-text">
     <%= full_phone_name @phone_edition %>
 
+    <%= if @phone_edition.real_name do %>
+      <div class="btn btn-xs real-name-label" title="Real name">✓</div>
+    <% end %>
+
     <%= if @phone_edition.limited do %>
       <div class="btn btn-xs limited-label" title="Limited Edition">Limited</div>
     <% end %>

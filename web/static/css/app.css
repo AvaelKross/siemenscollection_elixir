@@ -192,6 +192,15 @@ main p {
   color: white;
 }
 
+.edition .siemens-text .real-name-label {
+  margin-top: -5px;
+  margin-right: 2px;
+  cursor: default;
+  background-color: #377137;
+  border: 1px solid #004d00;
+  color: white;
+}
+
 .siemens-text.series-header a.btn {
   margin-top: -1px;
   float: right;
