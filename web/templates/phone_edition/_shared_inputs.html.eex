@@ -30,15 +30,23 @@
   <% end %>
 </div>
 
+<div class="form-group">
+  <%= label @form, :form_factor, class: "control-label" %>
+  <%= select @form, :form_factor, Enum.map(["Bar", "Flip", "Flip down", "Slide", "Swivel"], &({&1,&1})) %>
+  <%= if message = @form.errors[:form_factor] do %>
+    <span class="help-block"><%= message %></span>
+  <% end %>
+</div>
+
 <!-- string -->
 
-<%= for feature <- ~w(Form_factor Network Weight Size Memory_card_type Battery) do %>
+<%= for feature <- ~w(Network Weight Size Memory_card_type Battery) do %>
 
   <div class="form-group">
     <% field = String.downcase(feature) |> String.to_atom %>
     <%= label @form, field, class: "control-label" %>
     <%= text_input @form, field, class: "form-control" %>
-    <%= if message = @form.errors[:field] do %>
+    <%= if message = @form.errors[field] do %>
       <span class="help-block"><%= message %></span>
     <% end %>
   </div>
@@ -52,7 +60,7 @@
     <% field = String.downcase(feature) |> String.to_atom %>
     <%= label @form, field, class: "control-label" %>:
     <%= checkbox @form, field %>
-    <%= if message = @form.errors[:field] do %>
+    <%= if message = @form.errors[field] do %>
       <span class="help-block"><%= message %></span>
     <% end %>
   </div>

@@ -11,12 +11,25 @@
   <% end %>
 </h2>
 
+<%= if length(@phones_by_series) > 1 do %>
+  <h4 class="siemens-text series-header">Series:</h4>
+  <ul class="series-list">
+    <%= for {[series_id, series_name], phones} <- @phones_by_series do %>
+      <li>
+        <a href="#series-list-<%= if series_name != nil, do: Inflex.parameterize(series_name), else: "other" %>">
+          <%= if series_name != nil, do: series_name, else: "Other" %></a>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
+  
+
 <%= for {series, phones} <- @phones_by_series do %>
   <%= if length(@phones_by_series) > 1 do %>
     <% [series_id, series_name] = series %>
-    <h4 class="siemens-text series-header">
+    <h4 class="siemens-text series-header" id="series-list-<%= if series_name != nil, do: Inflex.parameterize(series_name), else: "other" %>">
       <%= if series_name != nil do %>
-        <%= series_name %>
+        <%= Inflex.parameterize(series_name) %>
         <%= if can_edit(@conn) do %>
           <%= link "Delete", to: brand_series_path(@conn, :delete, @brand.id, series_id), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
           <%= link "Edit", to: brand_series_path(@conn, :edit, @brand.id, series_id), class: "btn btn-default btn-xs" %>

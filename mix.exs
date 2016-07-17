@@ -18,7 +18,7 @@ defmodule SiemensCollection.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [mod: {SiemensCollection, []},
-     applications: [:phoenix, :phoenix_html, :cowboy, :logger, :gettext,
+     applications: [:phoenix, :phoenix_html, :cowboy, :logger, :gettext, :inflex,
                     :phoenix_ecto, :postgrex, :addict, :ex_admin, :ex_aws, :httpoison, :arc, :arc_ecto]]
   end
 
@@ -44,7 +44,8 @@ defmodule SiemensCollection.Mixfile do
      {:arc_ecto, "~> 0.3.2"}, # update after updating ECTO to 2.*
      {:ex_aws, "~> 0.4.10"}, # Required for Amazon S3
      {:httpoison, "~> 0.7"}, # Required for Amazon S3
-     {:poison, "~> 1.2"}     # Required for Amazon S3
+     {:poison, "~> 1.2"},     # Required for Amazon S3
+     {:inflex, "~> 1.7.0"} # it's like a activesupport for strings
     ]
   end
 
