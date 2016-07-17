@@ -1,7 +1,7 @@
 defmodule SiemensCollection.PictureController do
   use SiemensCollection.Web, :controller
 
-  alias SiemensCollection.{Picture, Image}
+  alias SiemensCollection.{Picture}
 
   plug :scrub_params, "images" when action in [:create]
   plug :redirect_path when action in [:create, :delete, :rotate]
@@ -36,7 +36,7 @@ defmodule SiemensCollection.PictureController do
 
   def delete(conn, %{"id" => id}) do
     picture = Repo.get!(Picture, id)
-    
+
     Repo.delete!(picture)
 
     conn
@@ -46,6 +46,8 @@ defmodule SiemensCollection.PictureController do
 
   def rotate(conn, %{"id" => id, "direction" => direction}) do
     picture = Repo.get!(Picture, id)
+
+    # Refactor this! Move rotating code somewhere.
 
     image = picture
     |> Picture.get_url(:original)

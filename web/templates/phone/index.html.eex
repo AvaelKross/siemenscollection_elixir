@@ -14,7 +14,7 @@
 <%= if length(@phones_by_series) > 1 do %>
   <h4 class="siemens-text series-header">Series:</h4>
   <ul class="series-list">
-    <%= for {[series_id, series_name], phones} <- @phones_by_series do %>
+    <%= for {[_, series_name], _} <- @phones_by_series do %>
       <li>
         <a href="#series-list-<%= if series_name != nil, do: Inflex.parameterize(series_name), else: "other" %>">
           <%= if series_name != nil, do: series_name, else: "Other" %></a>

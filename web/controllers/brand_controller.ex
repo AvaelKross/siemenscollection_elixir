@@ -21,7 +21,7 @@ defmodule SiemensCollection.BrandController do
     changeset = Brand.changeset(%Brand{}, brand_params)
 
     case Repo.insert(changeset) do
-      {:ok, brand} ->
+      {:ok, _brand} ->
         conn
         |> put_flash(:info, "Brand created successfully.")
         |> redirect(to: brand_path(conn, :index))

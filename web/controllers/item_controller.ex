@@ -52,19 +52,19 @@ defmodule SiemensCollection.ItemController do
     end
   end
 
-  def show(conn, %{"id" => id}) do
+  def show(conn, _params) do
     item = conn.assigns.item |> Repo.preload([:pictures, phone_edition: [:pictures, phone: :brand]])
     render(conn, "show.html", item: item)
   end
 
-  def edit(conn, %{"id" => id}) do
+  def edit(conn, _params) do
     item = conn.assigns.item |> Repo.preload([:pictures, phone_edition: [:pictures, phone: :brand]])
     phone_editions = Repo.all(PhoneEdition) |> Repo.preload([phone: :brand])
     changeset = Item.changeset(item)
     render(conn, "edit.html", item: item, phone_editions: phone_editions, changeset: changeset)
   end
 
-  def update(conn, %{"id" => id, "item" => item_params}) do
+  def update(conn, %{"item" => item_params}) do
     item = conn.assigns.item
     changeset = Item.changeset(item, item_params)
 
@@ -78,7 +78,7 @@ defmodule SiemensCollection.ItemController do
     end
   end
 
-  def delete(conn, %{"id" => id}) do
+  def delete(conn, _params) do
     item = conn.assigns.item
 
     # Here we use delete! (with a bang) because we expect
