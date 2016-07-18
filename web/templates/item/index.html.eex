@@ -23,7 +23,6 @@
 </h3>
 <div class="items-gallery">
   <%= for {item, count} <- @items do %>
-
     <div class="items-gallery-item" style="background-image: url(<%= item |> SiemensCollection.Item.cover_image |> SiemensCollection.Picture.get_url(:thumb) %>)">
       <a href="<%= collections_item_path(@conn, :show, @user, item) %>" class="item-bg-link"></a>
       <div class="title">

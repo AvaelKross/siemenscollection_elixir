@@ -39,26 +39,19 @@
     <% end %>
     </h3>
   <%= if length(@phone_edition.pictures) > 0 do %>
-    <div class="images">
-      <%= if @phone_edition.cover != nil do %>
-        <% thumb_image_url = SiemensCollection.Picture.get_url(@phone_edition.cover, :thumb) %>
-        <% image_url = SiemensCollection.Picture.get_url(@phone_edition.cover, :original) %>
-        <a href="<%= image_url %>" target="_blank">
-          <img src="<%= thumb_image_url %>"/>
-        </a>
-      <% end %>
-      <%= for picture <- @phone_edition.pictures, picture.id != @phone_edition.cover_id do %>
+    <div class="images" id="lightgallery">
+      <%= for picture <- (Enum.sort(@phone_edition.pictures, &(&2.id != nil && @phone_edition.cover_id == &1.id))) do %>
         <% thumb_image_url = SiemensCollection.Picture.get_url(picture, :thumb) %>
-        <% image_url = SiemensCollection.Picture.get_url(picture, :original) %>
-        <a href="<%= image_url %>" target="_blank">
-          <img src="<%= thumb_image_url %>"/>
+        <% lightbox_image_url = SiemensCollection.Picture.get_url(picture, :popup) %>
+        <% image_url = SiemensCollection.Picture.get_url(picture) %>
+        <a href="<%= lightbox_image_url %>" data-download-url="<%= image_url %>">
+          <img src="<%= thumb_image_url %>" class="thumb"/>
         </a>
       <% end %>
     </div>
   <% end %>
   <div class="info">
     <ul>
-
       <%= for feature <- ~w(Release Form_factor Network Weight Size Java LTE 3G Memory_card_support Memory_card_type IrDA Bluetooth GPRS Battery Notes) do %>
         <li>
           <% field = String.downcase(feature) |> String.to_atom %>
@@ -67,7 +60,6 @@
           <%= value %>
         </li>
       <% end %>
-
     </ul>
   </div>
 </div>

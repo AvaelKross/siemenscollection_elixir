@@ -13,6 +13,12 @@
 // to also remove its path from "config.paths.watched".
 import "phoenix_html"
 import "./addict"
+import "./lightgallery.min"
+import "./lg-zoom.min"
+
+$(document).ready(function() {
+  $("#lightgallery").lightGallery(); 
+});
 // Import local files
 //
 // Local files can be imported directly using relative

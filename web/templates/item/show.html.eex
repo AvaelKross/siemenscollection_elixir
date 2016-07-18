@@ -64,18 +64,12 @@
 
 <h2 class="siemens-text editions">Images</h2>
 <%= if length(@item.pictures) > 0 do %>
-  <div class="images">
-    <%= if @item.cover != nil do %>
-      <% thumb_image_url = SiemensCollection.Picture.get_url(@item.cover, :thumb) %>
-      <% image_url = SiemensCollection.Picture.get_url(@item.cover) %>
-      <a href="<%= image_url %>" target="_blank">
-        <img src="<%= thumb_image_url %>" class="thumb"/>
-      </a>
-    <% end %>
-    <%= for picture <- @item.pictures, picture.id != @item.cover_id do %>
+  <div class="images" id="lightgallery">
+    <%= for picture <- (Enum.sort(@item.pictures, &(&2.id != nil && @item.cover_id == &1.id))) do %>
       <% thumb_image_url = SiemensCollection.Picture.get_url(picture, :thumb) %>
+      <% lightbox_image_url = SiemensCollection.Picture.get_url(picture, :popup) %>
       <% image_url = SiemensCollection.Picture.get_url(picture) %>
-      <a href="<%= image_url %>" target="_blank">
+      <a href="<%= lightbox_image_url %>" data-download-url="<%= image_url %>">
         <img src="<%= thumb_image_url %>" class="thumb"/>
       </a>
     <% end %>
@@ -83,18 +77,12 @@
 <% else %>
   <%= if length(@item.phone_edition.pictures) > 0 do %>
     These pictures are from the database:<br><br>
-    <div class="images">
-      <%= if @item.phone_edition.cover != nil do %>
-        <% thumb_image_url = SiemensCollection.Picture.get_url(@item.phone_edition.cover, :thumb) %>
-        <% image_url = SiemensCollection.Picture.get_url(@item.phone_edition.cover) %>
-        <a href="<%= image_url %>" target="_blank">
-          <img src="<%= thumb_image_url %>" class="thumb"/>
-        </a>
-      <% end %>
-      <%= for picture <- @item.phone_edition.pictures, picture.id != @item.phone_edition.cover_id do %>
+    <div class="images" id="lightgallery">
+      <%= for picture <- (Enum.sort(@item.phone_edition.pictures, &(&2.id != nil && @item.phone_edition.cover_id == &1.id))) do %>
         <% thumb_image_url = SiemensCollection.Picture.get_url(picture, :thumb) %>
+        <% lightbox_image_url = SiemensCollection.Picture.get_url(picture, :popup) %>
         <% image_url = SiemensCollection.Picture.get_url(picture) %>
-        <a href="<%= image_url %>" target="_blank">
+        <a href="<%= lightbox_image_url %>" data-download-url="<%= image_url %>">
           <img src="<%= thumb_image_url %>" class="thumb"/>
         </a>
       <% end %>
