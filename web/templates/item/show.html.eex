@@ -6,7 +6,7 @@
 
 <h2 class="siemens-text phone">
   <%= full_phone_name(@item.phone_edition) %>
-  <%= link "Open in catalog", to: catalog_phone_path(@conn, :show, @item.phone_edition.phone.brand.id, @item.phone_edition.phone), class: "btn btn-default btn-xs" %>
+  <%= link "Open in catalog", to: catalog_phone_edition_path(@conn, :show, @item.phone_edition.phone.brand.id, @item.phone_edition.phone, @item.phone_edition), class: "btn btn-default btn-xs" %>
   <%= if can_edit(@conn, @item) do %>
     <%= link "Edit", to: collections_item_path(@conn, :edit, @user, @item), class: "btn btn-default btn-xs" %>
     <%= link "Upload pics", to: collections_picture_path(@conn, :new, @user, @item.id), class: "btn btn-default btn-xs" %>
