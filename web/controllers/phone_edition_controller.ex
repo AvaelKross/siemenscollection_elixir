@@ -43,7 +43,7 @@ defmodule SiemensCollection.PhoneEditionController do
   end
 
   def show(conn, %{"id" => id}) do
-    phone_edition = Repo.get!(PhoneEdition, id) |> Repo.preload([:pictures, [phone: :brand]])
+    phone_edition = Repo.get!(PhoneEdition, id) |> Repo.preload([:pictures, :cover, [phone: :brand]])
     render(conn, "show.html", phone_edition: phone_edition)
   end
 

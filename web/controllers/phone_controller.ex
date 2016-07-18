@@ -11,7 +11,7 @@ defmodule SiemensCollection.PhoneController do
   def index(conn, _params) do
     brand_id = conn.assigns.brand.id
     query = Phone |> Phone.for_brand(brand_id) |> Phone.editions_count
-    query = from query, preload: [:series, [main_edition: :pictures]]
+    query = from query, preload: [:series, [main_edition: [:cover, :pictures]]]
     query = from query, order_by: [asc: :name]
     phones = Repo.all(query)
 
@@ -63,7 +63,7 @@ defmodule SiemensCollection.PhoneController do
 
   def show(conn, %{"id" => id}) do
     phone = Repo.get!(Phone, id) |> Repo.preload([:brand])
-    query = from pe in PhoneEdition, where: pe.phone_id == ^phone.id, preload: [:pictures]
+    query = from pe in PhoneEdition, where: pe.phone_id == ^phone.id, preload: [:pictures, :cover]
     editions = Repo.all(query)
     owned_edition_ids = if Addict.Helper.current_user(conn) != nil do
       query = from item in Item, select: item.phone_edition_id, where: item.user_id == ^Addict.Helper.current_user(conn).id

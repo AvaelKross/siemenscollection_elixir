@@ -4,10 +4,10 @@ defmodule SiemensCollection.PictureController do
   alias SiemensCollection.{Picture}
 
   plug :scrub_params, "images" when action in [:create]
-  plug :redirect_path when action in [:create, :delete, :rotate]
+  plug :redirect_path when action in [:create, :delete, :rotate, :set_cover]
 
-  plug Addict.Plugs.Authenticated when action in [:new, :create, :delete, :rotate]
-  plug :check_rights when action in [:new, :create, :delete, :rotate]
+  plug Addict.Plugs.Authenticated when action in [:new, :create, :delete, :rotate, :set_cover]
+  plug :check_rights when action in [:new, :create, :delete, :rotate, :set_cover]
 
   def new(conn, _params) do
     render(conn, "new.html")
@@ -71,6 +71,24 @@ defmodule SiemensCollection.PictureController do
     {:ok, _} = Repo.update(changeset)
 
     conn
+    |> redirect(to: conn.assigns.redirect_path)
+  end
+
+  def set_cover(conn, params) do
+    item_id = params["item_id"]
+    edition_id = params["edition_id"]
+    id = params["id"]
+
+    changeset = if edition_id != nil do
+      Repo.get!(SiemensCollection.PhoneEdition, edition_id)
+      |> SiemensCollection.PhoneEdition.changeset(%{cover_id: id})
+    else
+      Repo.get!(SiemensCollection.Item, item_id)
+      |> SiemensCollection.Item.changeset(%{cover_id: id})
+    end
+    {:ok, _imageable} = Repo.update(changeset)
+    conn
+    |> put_flash(:info, "Cover updated successfully.")
     |> redirect(to: conn.assigns.redirect_path)
   end
 

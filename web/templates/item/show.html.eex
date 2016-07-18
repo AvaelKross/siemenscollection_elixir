@@ -65,7 +65,14 @@
 <h2 class="siemens-text editions">Images</h2>
 <%= if length(@item.pictures) > 0 do %>
   <div class="images">
-    <%= for picture <- @item.pictures do %>
+    <%= if @item.cover != nil do %>
+      <% thumb_image_url = SiemensCollection.Picture.get_url(@item.cover, :thumb) %>
+      <% image_url = SiemensCollection.Picture.get_url(@item.cover) %>
+      <a href="<%= image_url %>" target="_blank">
+        <img src="<%= thumb_image_url %>" class="thumb"/>
+      </a>
+    <% end %>
+    <%= for picture <- @item.pictures, picture.id != @item.cover_id do %>
       <% thumb_image_url = SiemensCollection.Picture.get_url(picture, :thumb) %>
       <% image_url = SiemensCollection.Picture.get_url(picture) %>
       <a href="<%= image_url %>" target="_blank">
@@ -74,14 +81,23 @@
     <% end %>
   </div>
 <% else %>
-  These pictures are from the database:<br><br>
-  <div class="images">
-    <%= for picture <- @item.phone_edition.pictures do %>
-      <% thumb_image_url = SiemensCollection.Picture.get_url(picture, :thumb) %>
-      <% image_url = SiemensCollection.Picture.get_url(picture) %>
-      <a href="<%= image_url %>" target="_blank">
-        <img src="<%= thumb_image_url %>" class="thumb"/>
-      </a>
-    <% end %>
-  </div>
+  <%= if length(@item.phone_edition.pictures) > 0 do %>
+    These pictures are from the database:<br><br>
+    <div class="images">
+      <%= if @item.phone_edition.cover != nil do %>
+        <% thumb_image_url = SiemensCollection.Picture.get_url(@item.phone_edition.cover, :thumb) %>
+        <% image_url = SiemensCollection.Picture.get_url(@item.phone_edition.cover) %>
+        <a href="<%= image_url %>" target="_blank">
+          <img src="<%= thumb_image_url %>" class="thumb"/>
+        </a>
+      <% end %>
+      <%= for picture <- @item.phone_edition.pictures, picture.id != @item.phone_edition.cover_id do %>
+        <% thumb_image_url = SiemensCollection.Picture.get_url(picture, :thumb) %>
+        <% image_url = SiemensCollection.Picture.get_url(picture) %>
+        <a href="<%= image_url %>" target="_blank">
+          <img src="<%= thumb_image_url %>" class="thumb"/>
+        </a>
+      <% end %>
+    </div>
+  <% end %>
 <% end %>

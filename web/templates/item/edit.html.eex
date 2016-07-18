@@ -25,6 +25,9 @@
         <%= link "Destroy", to: collections_picture_path(@conn, :delete, @user, @item.id, picture.id), method: :delete %>
         <%= link "Rotate ↻", to: collections_picture_path(@conn, :rotate, @user, @item.id, picture.id, "right"), method: :post %>
         <%= link "Rotate ↺", to: collections_picture_path(@conn, :rotate, @user, @item.id, picture.id, "left"), method: :post %>
+        <%= if picture.id != @item.cover_id do %>
+          <%= link "Set cover", to: collections_picture_path(@conn, :set_cover, @user, @item.id, picture.id), method: :put %>
+        <% end %>
       </div>
     <% end %>
   </div>

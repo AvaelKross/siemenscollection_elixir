@@ -40,7 +40,14 @@
     </h3>
   <%= if length(@phone_edition.pictures) > 0 do %>
     <div class="images">
-      <%= for picture <- @phone_edition.pictures do %>
+      <%= if @phone_edition.cover != nil do %>
+        <% thumb_image_url = SiemensCollection.Picture.get_url(@phone_edition.cover, :thumb) %>
+        <% image_url = SiemensCollection.Picture.get_url(@phone_edition.cover, :original) %>
+        <a href="<%= image_url %>" target="_blank">
+          <img src="<%= thumb_image_url %>"/>
+        </a>
+      <% end %>
+      <%= for picture <- @phone_edition.pictures, picture.id != @phone_edition.cover_id do %>
         <% thumb_image_url = SiemensCollection.Picture.get_url(picture, :thumb) %>
         <% image_url = SiemensCollection.Picture.get_url(picture, :original) %>
         <a href="<%= image_url %>" target="_blank">

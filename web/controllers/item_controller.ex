@@ -15,7 +15,7 @@ defmodule SiemensCollection.ItemController do
   def index(conn, _params) do
     user_id = conn.assigns.user.id
     query = Item |> Item.for_user(user_id) |> Item.pictures_count
-    query = from query, preload: [:pictures, phone_edition: [:pictures, phone: :brand]]
+    query = from query, preload: [:pictures, :cover, phone_edition: [:pictures, :cover, phone: :brand]]
 
     items = Repo.all(query)
 
@@ -53,7 +53,7 @@ defmodule SiemensCollection.ItemController do
   end
 
   def show(conn, _params) do
-    item = conn.assigns.item |> Repo.preload([:pictures, phone_edition: [:pictures, phone: :brand]])
+    item = conn.assigns.item |> Repo.preload([:pictures, :cover, phone_edition: [:pictures, :cover, phone: :brand]])
     render(conn, "show.html", item: item)
   end
 

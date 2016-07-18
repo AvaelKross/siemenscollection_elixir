@@ -47,4 +47,12 @@ defmodule SiemensCollection.Picture do
       true -> "https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg"
     end
   end
+
+  def cover(imageable) do
+    if imageable.cover_id != nil do
+      imageable.cover
+    else
+      Enum.at(imageable.pictures, 0)
+    end
+  end
 end

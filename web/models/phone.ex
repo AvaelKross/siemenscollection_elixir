@@ -62,7 +62,7 @@ defmodule SiemensCollection.Phone do
 
   def cover_image(phone) do
     if phone.main_edition != nil do
-      Enum.at(phone.main_edition.pictures, 0)
+      SiemensCollection.Picture.cover(phone.main_edition)
     else
       nil
     end

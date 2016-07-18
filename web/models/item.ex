@@ -14,15 +14,17 @@ defmodule SiemensCollection.Item do
     field :calls_time, :string
     field :set, :string
     field :selling, :boolean, default: false
+
     belongs_to :phone_edition, SiemensCollection.PhoneEdition
     belongs_to :user, SiemensCollection.User
     has_many :pictures, SiemensCollection.Picture
+    belongs_to :cover, Picture
 
     timestamps
   end
 
   @required_fields ~w(phone_edition_id user_id)
-  @optional_fields ~w(notes condition released imei sw made_in calls_time set selling)
+  @optional_fields ~w(notes condition released imei sw made_in calls_time set selling cover_id)
 
   before_delete :destroy_pictures
   def destroy_pictures(changeset) do
@@ -54,9 +56,9 @@ defmodule SiemensCollection.Item do
 
   def cover_image(item) do
     if length(item.pictures) > 0 do
-      Enum.at(item.pictures, 0)
+      SiemensCollection.Picture.cover(item)
     else
-      Enum.at(item.phone_edition.pictures, 0)
+      SiemensCollection.Picture.cover(item.phone_edition)
     end
   end
 
