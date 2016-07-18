@@ -15,6 +15,14 @@
 </div>
 
 <div class="form-group">
+  <%= label @form, :hide_model_name, class: "control-label" %>:
+  <%= checkbox @form, :hide_model_name %>
+  <%= if message = @form.errors[:hide_model_name] do %>
+    <span class="help-block"><%= message %></span>
+  <% end %>
+</div>
+
+<div class="form-group">
   <%= label @form, :release, class: "control-label" %>
   <%= text_input @form, :release, class: "form-control" %>
   <%= if message = @form.errors[:release] do %>
