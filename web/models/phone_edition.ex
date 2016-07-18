@@ -25,7 +25,7 @@ defmodule SiemensCollection.PhoneEdition do
     field :irda, :boolean, default: false
     field :bluetooth, :boolean, default: false
     field :gprs, :boolean, default: false
-    field :real_name, :boolean, default: true
+    field :real_name, :boolean, default: false
 
     belongs_to :phone, SiemensCollection.Phone, foreign_key: :phone_id
     has_many :pictures, Picture
