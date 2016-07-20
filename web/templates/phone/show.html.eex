@@ -4,26 +4,93 @@
   <%= @phone.brand.name %> <%= @phone.name %>
 </div>
 
-<h2 class="phone siemens-text">
-  <%= @phone.brand.name %> <%= @phone.name %>
-  <%= if can_edit(@conn) do %>
-    <%= link "Edit", to: catalog_phone_path(@conn, :edit, @brand.id, @phone), class: "btn btn-default btn-xs" %>
-    <%= link "New edition", to: catalog_phone_edition_path(@conn, :new, @brand.id, @phone.id), class: "btn btn-default btn-xs" %>
-  <% end %>
-</h2>
+<div class="edition">
+  <h2 class="phone siemens-text">
+    <%= @phone.brand.name %> <%= @phone.name %>
 
-<p><%= @phone.notes %></p>
+    <%= if @phone_edition.real_name do %>
+      <div class="btn btn-xs real-name-label" title="Real name">✓</div>
+    <% end %>
 
-<div class="items-gallery">
-  <%= for edition <- @editions do %>
-    <div class="items-gallery-item" style="background-image: url(<%= SiemensCollection.Picture.cover(edition) |> SiemensCollection.Picture.get_url(:thumb) %>)">
-      <%= link "", to: catalog_phone_edition_path(@conn, :show, @brand.id, @phone.id, edition), class: "item-bg-link" %>
-      <div class="title">
-        <%= link edition.name, to: catalog_phone_edition_path(@conn, :show, @brand.id, @phone.id, edition) %>
-        <%= if can_edit(@conn) && edition.id == @phone.main_edition_id do %>
-          (Main)
-        <% end %>
-      </div>
+    <%= if @phone_edition.limited do %>
+      <div class="btn btn-xs limited-label" title="Limited Edition">Limited</div>
+    <% end %>
+
+    <%= if @phone_edition.prototype do %>
+      <div class="btn btn-xs prototype-label" title="Prototype">Prototype</div>
+    <% end %>
+
+    <%= if SiemensCollection.PhoneEdition.owned_amount(@phone_edition, current_user(@conn)) > 0 do %>
+      <div class="btn btn-xs owned-label" title="Owned">Owned</div>
+    <% end %>
+
+    <%= if is_logged_in(@conn) do %>
+      <%= link "Add to collection", to: catalog_item_path(@conn, :new, @brand.id, @phone.id, @phone_edition), class: "btn btn-default btn-xs" %>
+    <% end %>
+
+    <%= if can_edit(@conn) do %>
+      <%= link "Upload pics", to: catalog_picture_path(@conn, :new, @brand.id, @phone.id, @phone_edition.id), class: "btn btn-default btn-xs" %>
+      <%= link "Edit edition", to: catalog_phone_edition_path(@conn, :edit, @brand.id, @phone.id, @phone_edition), class: "btn btn-default btn-xs" %>
+      <%= if @phone_edition.id != @phone.main_edition_id do %>
+        <%= link "Set main", to: catalog_phone_path(@conn, :set_main_edition, @brand.id, @phone.id, @phone_edition.id), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: catalog_phone_edition_path(@conn, :delete, @brand.id, @phone.id, @phone_edition), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+      <% end %>
+      <%= link "Edit phone", to: catalog_phone_path(@conn, :edit, @brand.id, @phone), class: "btn btn-default btn-xs" %>
+      <%= link "New edition", to: catalog_phone_edition_path(@conn, :new, @brand.id, @phone.id), class: "btn btn-default btn-xs" %>
+    <% end %>
+  </h2>
+  <%= if length(@phone_edition.pictures) > 0 do %>
+    <div class="images" id="lightgallery">
+      <%= for picture <- (Enum.sort(@phone_edition.pictures, &(&2.id != nil && @phone_edition.cover_id == &1.id))) do %>
+        <% thumb_image_url = SiemensCollection.Picture.get_url(picture, :thumb) %>
+        <% lightbox_image_url = SiemensCollection.Picture.get_url(picture, :popup) %>
+        <% image_url = SiemensCollection.Picture.get_url(picture) %>
+        <a href="<%= lightbox_image_url %>" data-download-url="<%= image_url %>">
+          <img src="<%= thumb_image_url %>" class="thumb"/>
+        </a>
+      <% end %>
     </div>
   <% end %>
+  <div class="info">
+    <ul>
+      <%= if @phone_edition.name != "Default" do %>
+        <li><strong>Main edition name:</strong> <%= @phone_edition.name %>
+      <% end %>
+      
+      <%= for feature <- ~w(Release Form_factor Network Weight Size Java LTE 3G Memory_card_support Memory_card_type IrDA Bluetooth GPRS Battery Notes) do %>
+        <li>
+          <% field = String.downcase(feature) |> String.to_atom %>
+          <% %{^field => value} = @phone_edition %>
+          <strong><%= String.replace(feature, "_", " ") %>:</strong>
+          <%= value %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+
+  <%= if @phone.notes != nil && @phone.notes != "" do %>
+    <h3 class="siemens-text">Description</h3>
+  <% end %>
+
+  <p><%= @phone.notes %></p>
+
+  <%= if length(@editions) > 1 do %>
+    <h3 class="siemens-text">Editions</h3>
+
+    <div class="items-gallery">
+      <%= for edition <- @editions do %>
+        <div class="items-gallery-item" style="background-image: url(<%= SiemensCollection.Picture.cover(edition) |> SiemensCollection.Picture.get_url(:thumb) %>)">
+          <%= link "", to: catalog_phone_edition_path(@conn, :show, @brand.id, @phone.id, edition), class: "item-bg-link" %>
+          <div class="title">
+            <%= link edition.name, to: catalog_phone_edition_path(@conn, :show, @brand.id, @phone.id, edition) %>
+            <%= if can_edit(@conn) && edition.id == @phone.main_edition_id do %>
+              (Main)
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+
 </div>
+

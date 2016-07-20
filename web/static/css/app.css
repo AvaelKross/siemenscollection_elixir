@@ -143,14 +143,8 @@ main p {
   color: white;
 }
 
-.siemens-text.phone a.btn {
-  margin-top: 6px;
-  float: right;
-  margin-right: 2px;
-}
-
 .edition .siemens-text {
-  padding-left: 12px;
+  padding-left: 5px;
 }
 
 .edition .siemens-text a.btn {
@@ -199,6 +193,12 @@ main p {
   background-color: #377137;
   border: 1px solid #004d00;
   color: white;
+}
+
+.siemens-text.phone a.btn {
+  margin-top: 6px;
+  float: right;
+  margin-right: 2px;
 }
 
 .siemens-text.series-header a.btn {
