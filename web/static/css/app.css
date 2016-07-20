@@ -145,6 +145,7 @@ main p {
 
 .edition .siemens-text {
   padding-left: 5px;
+  clear: both;
 }
 
 .edition .siemens-text a.btn {
