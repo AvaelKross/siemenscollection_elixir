@@ -59,6 +59,11 @@
             <%= if can_edit(@conn) && edition.id == @phone.main_edition_id do %>
               (Main)
             <% end %>
+            <%= if edition.limited do %><span title="Limited Edition" class="limited-label round-label">L</span><% end %>
+            <%= if edition.prototype do %><span title="Prototype" class="prototype-label round-label">P</span><% end %>
+            <%= if edition.operator_edition do %>
+              <span title="Operator's edition: <%= edition.operator_name %>" class="operator-label round-label">O</span>
+            <% end %>
           </div>
         </div>
       <% end %>

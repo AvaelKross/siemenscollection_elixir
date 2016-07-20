@@ -61,6 +61,12 @@
   </div>
 
   <div class="form-group">
+    <%= label f, :full_set, "Complete set", class: "control-label" %>:
+    <%= checkbox f, :full_set %>
+    <%= error_tag f, :full_set %>
+  </div>
+
+  <div class="form-group">
     <%= label f, :selling, "Want to sell", class: "control-label" %>:
     <%= checkbox f, :selling %>
     <%= error_tag f, :selling %>

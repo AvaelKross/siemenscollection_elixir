@@ -32,6 +32,7 @@
         <%= if count > 0 do %>[<%= count %>📷]<% end %>
         <%= if item.phone_edition.limited do %><span title="Limited Edition" class="limited-label round-label">L</span><% end %>
         <%= if item.phone_edition.prototype do %><span title="Prototype" class="prototype-label round-label">P</span><% end %>
+        <%= if item.full_set do %><span title="Full set" class="fullset-label round-label">S</span><% end %>
 
         <td class="text-right">
           <%= if can_edit(@conn, item) do %>

@@ -159,33 +159,33 @@ main p {
   margin-right: 2px;
 }
 
-.edition .siemens-text .ed-label {
+.siemens-text .ed-label {
   margin-top: -5px;
   cursor: default;
   color: white;
 }
 
-.edition .siemens-text .limited-label {
+.siemens-text .limited-label {
   background-color: #0099ff;
   border: 1px solid #004d80;
 }
 
-.edition .siemens-text .prototype-label {
+.siemens-text .prototype-label {
   background-color: #974dff;
   border: 1px solid #4a00b3;
 }
 
-.edition .siemens-text .operator-label {
+.siemens-text .operator-label {
   background-color: #884d88;
   border: 1px solid #4a00b3;
 }
 
-.edition .siemens-text .owned-label {
+.siemens-text .owned-label {
   background-color: green;
   border: 1px solid #004d00;
 }
 
-.edition .siemens-text .real-name-label {
+.siemens-text .real-name-label {
   background-color: #377137;
   border: 1px solid #004d00;
 }
@@ -305,7 +305,6 @@ a.siemens-text:hover {
 .items-gallery .round-label {
   border-radius: 5px;
   color: white;
-  width: 20px;
   display: inline-block;
   padding: 0px 5px;
 }
@@ -317,6 +316,16 @@ a.siemens-text:hover {
 
 .items-gallery .prototype-label {
   background-color: #974dff;
+  border: 1px solid #4a00b3;
+}
+
+.items-gallery .fullset-label {
+  background-color: green;
+  border: 1px solid #004d00;
+}
+
+.items-gallery .operator-label {
+  background-color: #884d88;
   border: 1px solid #4a00b3;
 }
 

@@ -6,6 +6,14 @@
 
 <h2 class="siemens-text phone">
   <%= full_phone_name(@item.phone_edition) %>
+  <%= if @item.phone_edition.limited do %><span title="Limited Edition" class="btn btn-xs ed-label limited-label">Limited</span><% end %>
+  <%= if @item.phone_edition.prototype do %><span title="Prototype" class="btn btn-xs ed-label prototype-label">Prototype</span><% end %>
+  <%= if @item.phone_edition.operator_edition do %>
+    <div class="btn btn-xs ed-label operator-label" title="Operator's edition: <%= @item.phone_edition.operator_name %>">
+      Operator
+    </div>
+  <% end %>
+  <%= if @item.full_set do %><span title="Full set" class="btn btn-xs ed-label owned-label">Full set</span><% end %>
   <%= link "Open in catalog", to: catalog_phone_edition_path(@conn, :show, @item.phone_edition.phone.brand.id, @item.phone_edition.phone, @item.phone_edition), class: "btn btn-default btn-xs" %>
   <%= if can_edit(@conn, @item) do %>
     <%= link "Edit", to: collections_item_path(@conn, :edit, @user, @item), class: "btn btn-default btn-xs" %>
