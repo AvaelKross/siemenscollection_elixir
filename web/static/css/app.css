@@ -159,40 +159,35 @@ main p {
   margin-right: 2px;
 }
 
-.edition .siemens-text .limited-label {
+.edition .siemens-text .ed-label {
   margin-top: -5px;
-  margin-right: 2px;
   cursor: default;
+  color: white;
+}
+
+.edition .siemens-text .limited-label {
   background-color: #0099ff;
   border: 1px solid #004d80;
-  color: white;
 }
 
 .edition .siemens-text .prototype-label {
-  margin-top: -5px;
-  margin-right: 2px;
-  cursor: default;
   background-color: #974dff;
   border: 1px solid #4a00b3;
-  color: white;
+}
+
+.edition .siemens-text .operator-label {
+  background-color: #884d88;
+  border: 1px solid #4a00b3;
 }
 
 .edition .siemens-text .owned-label {
-  margin-top: -5px;
-  margin-right: 2px;
-  cursor: default;
   background-color: green;
   border: 1px solid #004d00;
-  color: white;
 }
 
 .edition .siemens-text .real-name-label {
-  margin-top: -5px;
-  margin-right: 2px;
-  cursor: default;
   background-color: #377137;
   border: 1px solid #004d00;
-  color: white;
 }
 
 .siemens-text.phone a.btn {
@@ -373,6 +368,20 @@ a.siemens-text:hover {
 
 .series-list li a {
   text-decoration: underline;
+}
+
+.feature_tag {
+  display: inline-block;
+  background: #393;
+  border-radius: 3px;
+  border: 1px solid #161;
+  padding: 0px 2px;
+  color: white;
+}
+
+.feature_tag.red {
+  background: #933;
+  border: 1px solid #611;
 }
 
 /* Responsive: Portrait tablets and up */

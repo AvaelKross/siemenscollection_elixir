@@ -1,5 +1,5 @@
 <div class="form-group">
-  <%= label @form, :name, class: "control-label" %>
+  <%= label @form, :name, "Unique edition's name", class: "control-label" %>:
   <%= text_input @form, :name, class: "form-control" %>
   <%= if message = @form.errors[:name] do %>
     <span class="help-block"><%= message %></span>
@@ -7,23 +7,55 @@
 </div>
 
 <div class="form-group">
-  <%= label @form, :real_name, class: "control-label" %>:
-  <%= checkbox @form, :real_name %>
+  <%= label @form, :real_name, "Real full edition name", class: "control-label" %>:
+  <%= text_input @form, :real_name, class: "form-control" %>
   <%= if message = @form.errors[:real_name] do %>
     <span class="help-block"><%= message %></span>
   <% end %>
 </div>
 
 <div class="form-group">
-  <%= label @form, :hide_model_name, class: "control-label" %>:
-  <%= checkbox @form, :hide_model_name %>
-  <%= if message = @form.errors[:hide_model_name] do %>
+  <%= label @form, :real_name_flag, "This is approved edition's name", class: "control-label" %>:
+  <%= checkbox @form, :real_name_flag %>
+  <%= if message = @form.errors[:real_name_flag] do %>
     <span class="help-block"><%= message %></span>
   <% end %>
 </div>
 
 <div class="form-group">
-  <%= label @form, :release, class: "control-label" %>
+  <%= label @form, :operator_edition, class: "control-label" %>:
+  <%= checkbox @form, :operator_edition %>
+  <%= if message = @form.errors[:operator_edition] do %>
+    <span class="help-block"><%= message %></span>
+  <% end %>
+</div>
+
+<div class="form-group">
+  <%= label @form, :operator_name, class: "control-label" %>:
+  <%= text_input @form, :operator_name, class: "form-control" %>
+  <%= if message = @form.errors[:operator_name] do %>
+    <span class="help-block"><%= message %></span>
+  <% end %>
+</div>
+
+<div class="form-group">
+  <%= label @form, :color_name, class: "control-label" %>:
+  <%= text_input @form, :color_name, class: "form-control" %>
+  <%= if message = @form.errors[:color_name] do %>
+    <span class="help-block"><%= message %></span>
+  <% end %>
+</div>
+
+<div class="form-group">
+  <%= label @form, :real_color_name, "This is approved color's name", class: "control-label" %>:
+  <%= checkbox @form, :real_color_name %>
+  <%= if message = @form.errors[:real_color_name] do %>
+    <span class="help-block"><%= message %></span>
+  <% end %>
+</div>
+
+<div class="form-group">
+  <%= label @form, :release, class: "control-label" %>:
   <%= text_input @form, :release, class: "form-control" %>
   <%= if message = @form.errors[:release] do %>
     <span class="help-block"><%= message %></span>
@@ -47,7 +79,7 @@
 </div>
 
 <div class="form-group">
-  <%= label @form, :form_factor, class: "control-label" %>
+  <%= label @form, :form_factor, class: "control-label" %>:
   <%= select @form, :form_factor, Enum.map(["Bar", "Flip", "Flip down", "Slide", "Swivel"], &({&1,&1})) %>
   <%= if message = @form.errors[:form_factor] do %>
     <span class="help-block"><%= message %></span>
@@ -60,7 +92,7 @@
 
   <div class="form-group">
     <% field = String.downcase(feature) |> String.to_atom %>
-    <%= label @form, field, class: "control-label" %>
+    <%= label @form, field, class: "control-label" %>:
     <%= text_input @form, field, class: "form-control" %>
     <%= if message = @form.errors[field] do %>
       <span class="help-block"><%= message %></span>

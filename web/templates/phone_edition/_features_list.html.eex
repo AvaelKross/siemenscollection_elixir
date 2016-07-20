@@ -1,0 +1,70 @@
+<ul>
+  <%= if @phone_edition.real_name != nil && @phone_edition.real_name != "" do %>
+    <li>
+      <strong>Full edition name:</strong>
+      <%= @phone_edition.real_name %>
+      <%= if @phone_edition.real_name_flag do %>
+        [✓]
+      <% else %>
+        [ ! not approved ! ]
+      <% end %>
+    </li>
+  <% end %>
+
+  <%= if @phone_edition.operator_edition do %>
+    <li><strong>Operator's name:</strong> <%= @phone_edition.operator_name %></li>
+  <% end %>
+
+  <%= if @phone_edition.color_name != nil && @phone_edition.color_name != "" do %>
+    <li>
+      <strong>Color name:</strong>
+      <%= @phone_edition.color_name %>
+      <%= if @phone_edition.real_color_name do %>
+        [✓]
+      <% else %>
+        [ ! not approved ! ]
+      <% end %>
+    </li>
+  <% end %>
+
+  <%= for feature <- ~w(Java IrDA Bluetooth GPRS LTE 3G) do %>
+    <% field = String.downcase(feature) |> String.to_atom %>
+    <% %{^field => value} = @phone_edition %>
+    <%= if value do %>
+      <div class="feature_tag"><%= String.replace(feature, "_", " ") %></div>
+    <% else %>
+      <div class="feature_tag red"><%= String.replace(feature, "_", " ") %></div>
+    <% end %>
+  <% end %>
+
+  <%= if @phone_edition.memory_card_support do %>
+    <div class="feature_tag">Memory card</div>
+  <% else %>
+    <div class="feature_tag red">Memory card</div>
+  <% end %>
+
+  <%= for feature <- ~w(Release Form_factor Network Weight Size) do %>
+    <li>
+      <% field = String.downcase(feature) |> String.to_atom %>
+      <% %{^field => value} = @phone_edition %>
+      <strong><%= String.replace(feature, "_", " ") %>:</strong>
+      <%= value %>
+    </li>
+  <% end %>
+
+  <%= if @phone_edition.memory_card_support && @phone_edition.memory_card_type != nil && @phone_edition.memory_card_type != "" do %>
+    <li><strong>Memory card type:</strong> <%= @phone_edition.memory_card_type %></li>
+  <% end %>
+
+  <%= for feature <- ~w(Battery Notes) do %>
+    <% field = String.downcase(feature) |> String.to_atom %>
+    <% %{^field => value} = @phone_edition %>
+    <%= if value != nil && value != "" do %>
+      <li>
+        <strong><%= String.replace(feature, "_", " ") %>:</strong>
+        <%= value %>
+      </li>
+    <% end %>
+  <% end %>
+
+</ul>

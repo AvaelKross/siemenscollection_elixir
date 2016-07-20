@@ -9,21 +9,7 @@
   <h3 class="siemens-text">
     <%= full_phone_name @phone_edition %>
 
-    <%= if @phone_edition.real_name do %>
-      <div class="btn btn-xs real-name-label" title="Real name">✓</div>
-    <% end %>
-
-    <%= if @phone_edition.limited do %>
-      <div class="btn btn-xs limited-label" title="Limited Edition">Limited</div>
-    <% end %>
-
-    <%= if @phone_edition.prototype do %>
-      <div class="btn btn-xs prototype-label" title="Prototype">Prototype</div>
-    <% end %>
-
-    <%= if SiemensCollection.PhoneEdition.owned_amount(@phone_edition, current_user(@conn)) > 0 do %>
-      <div class="btn btn-xs owned-label" title="Owned">Owned</div>
-    <% end %>
+    <%= render "_labels_for_header.html", conn: @conn, phone_edition: @phone_edition %>
 
     <%= if is_logged_in(@conn) do %>
       <%= link "Add to collection", to: catalog_item_path(@conn, :new, @brand.id, @phone.id, @phone_edition), class: "btn btn-default btn-xs" %>
@@ -37,7 +23,7 @@
         <%= link "Delete", to: catalog_phone_edition_path(@conn, :delete, @brand.id, @phone.id, @phone_edition), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
       <% end %>
     <% end %>
-    </h3>
+  </h3>
   <%= if length(@phone_edition.pictures) > 0 do %>
     <div class="images" id="lightgallery">
       <%= for picture <- (Enum.sort(@phone_edition.pictures, &(&2.id != nil && @phone_edition.cover_id == &1.id))) do %>
@@ -51,15 +37,6 @@
     </div>
   <% end %>
   <div class="info">
-    <ul>
-      <%= for feature <- ~w(Release Form_factor Network Weight Size Java LTE 3G Memory_card_support Memory_card_type IrDA Bluetooth GPRS Battery Notes) do %>
-        <li>
-          <% field = String.downcase(feature) |> String.to_atom %>
-          <% %{^field => value} = @phone_edition %>
-          <strong><%= String.replace(feature, "_", " ") %>:</strong>
-          <%= value %>
-        </li>
-      <% end %>
-    </ul>
+    <%= render "_features_list.html", phone_edition: @phone_edition %>
   </div>
 </div>
