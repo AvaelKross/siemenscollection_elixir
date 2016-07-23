@@ -3,10 +3,14 @@ defmodule SiemensCollection.PhoneEditionView do
 
   def full_phone_name(edition, ignore_default \\ true, separator \\ "") do
     brand_part = "#{edition.phone.brand.name} "
-    phone_name_part = if edition.hide_model_name, do: "", else: "#{edition.phone.name} "
+    phone_name_part = phone_name(edition)
     edition_part = full_edition_name(edition, ignore_default)
 
     brand_part <> phone_name_part <> separator <> edition_part
+  end
+
+  def phone_name(edition) do
+    if edition.hide_model_name, do: "", else: "#{edition.phone.name} "
   end
 
   def full_edition_name(edition, ignore_default \\ true) do

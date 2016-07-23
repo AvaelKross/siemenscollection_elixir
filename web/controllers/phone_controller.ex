@@ -63,7 +63,7 @@ defmodule SiemensCollection.PhoneController do
 
   def show(conn, %{"id" => id}) do
     phone = Repo.get!(Phone, id) |> Repo.preload([:brand, main_edition: [:pictures, :cover]])
-    query = from pe in PhoneEdition, where: pe.phone_id == ^phone.id, preload: [:pictures, :cover]
+    query = from pe in PhoneEdition, where: pe.phone_id == ^phone.id, preload: [:phone, :pictures, :cover]
     editions = Repo.all(query)
     main_edition = if phone.main_edition != nil do
       phone.main_edition
