@@ -1,7 +1,7 @@
 <div class='breadcrumbs'>
   <%= link "Brands >", to: brand_path(@conn, :index) %>
   <%= link "#{@brand.name} >", to: catalog_phone_path(@conn, :index, @brand.id) %>
-  <%= @phone.brand.name %> <%= @phone.name %>
+  <%= @phone.name %>
 </div>
 
 <div class="edition">
@@ -55,7 +55,7 @@
         <div class="items-gallery-item" style="background-image: url(<%= SiemensCollection.Picture.cover(edition) |> SiemensCollection.Picture.get_url(:thumb) %>)">
           <%= link "", to: catalog_phone_edition_path(@conn, :show, @brand.id, @phone.id, edition), class: "item-bg-link" %>
           <div class="title">
-            <%= link SiemensCollection.PhoneEditionView.full_edition_name(edition), to: catalog_phone_edition_path(@conn, :show, @brand.id, @phone.id, edition) %>
+            <%= link SiemensCollection.PhoneEditionView.full_edition_name(edition, false), to: catalog_phone_edition_path(@conn, :show, @brand.id, @phone.id, edition) %>
             <%= if can_edit(@conn) && edition.id == @phone.main_edition_id do %>
               (Main)
             <% end %>

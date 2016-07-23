@@ -1,10 +1,12 @@
 <ul>
-  <li><strong>Approved name: </strong><%= if @phone_edition.real_name_flag do %>
-        Yes
-      <% else %>
-        No
-      <% end %>
-  </li>
+  <%= if @phone_edition.real_name_flag || (@phone_edition.name != nil && @phone_edition.name != "") do %>
+    <li><strong>Approved name: </strong><%= if @phone_edition.real_name_flag do %>
+          Yes
+        <% else %>
+          No
+        <% end %>
+    </li>
+  <% end %>
 
   <%= if @phone_edition.additional_name != nil && @phone_edition.additional_name != "" do %>
     <li>

@@ -2,7 +2,7 @@
   <%= link "Brands >", to: brand_path(@conn, :index) %>
   <%= link "#{@brand.name} >", to: catalog_phone_path(@conn, :index, @brand.id) %>
   <%= link "#{@phone.name} >", to: catalog_phone_path(@conn, :show, @brand.id, @phone) %>
-  <%= link "#{SiemensCollection.PhoneEditionView.full_edition_name(@phone_edition)} >", to: catalog_phone_edition_path(@conn, :show, @brand.id, @phone, @phone_edition) %>
+  <%= link "#{SiemensCollection.PhoneEditionView.full_edition_name(@phone_edition, false)} >", to: catalog_phone_edition_path(@conn, :show, @brand.id, @phone, @phone_edition) %>
   Edit
 </div>
 
