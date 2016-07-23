@@ -55,7 +55,8 @@ defmodule SiemensCollection.PhoneEditionController do
   end
 
   def update(conn, %{"id" => id, "phone_edition" => phone_edition_params}) do
-    phone_edition = Repo.get!(PhoneEdition, id)
+    phones = Repo.all(Phone) |> Repo.preload([:brand])
+    phone_edition = Repo.get!(PhoneEdition, id) |> Repo.preload([:pictures])
     changeset = PhoneEdition.changeset(phone_edition, phone_edition_params)
 
     case Repo.update(changeset) do
@@ -64,7 +65,7 @@ defmodule SiemensCollection.PhoneEditionController do
         |> put_flash(:info, "Phone edition updated successfully.")
         |> redirect(to: catalog_phone_edition_path(conn, :show, conn.assigns.brand.id, conn.assigns.phone.id, phone_edition.id))
       {:error, changeset} ->
-        render(conn, "edit.html", phone_edition: phone_edition, changeset: changeset)
+        render(conn, "edit.html", phones: phones, phone_edition: phone_edition, changeset: changeset)
     end
   end
 

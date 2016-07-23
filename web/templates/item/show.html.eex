@@ -1,11 +1,11 @@
 <div class='breadcrumbs'>
   <%= link "Collections >", to: collections_collection_path(@conn, :index) %>
   <%= link "#{@user.name} >", to: collections_item_path(@conn, :index, @user) %>
-  <%= "#{full_phone_name(@item.phone_edition)}" %>
+  <%= "#{SiemensCollection.PhoneEditionView.full_phone_name(@item.phone_edition)}" %>
 </div>
 
 <h2 class="siemens-text phone">
-  <%= full_phone_name(@item.phone_edition) %>
+  <%= SiemensCollection.PhoneEditionView.full_phone_name(@item.phone_edition) %>
   <%= if @item.phone_edition.limited do %><span title="Limited Edition" class="btn btn-xs ed-label limited-label">Limited</span><% end %>
   <%= if @item.phone_edition.prototype do %><span title="Prototype" class="btn btn-xs ed-label prototype-label">Prototype</span><% end %>
   <%= if @item.phone_edition.operator_edition do %>

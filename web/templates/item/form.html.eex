@@ -8,7 +8,7 @@
   <div class="form-group">
     <%= label f, :phone_edition_id, class: "control-label" %>
     <%= select f, :phone_edition_id, 
-      Enum.map(@phone_editions, fn p -> {full_phone_name(p), p.id} end) %>
+      Enum.map(@phone_editions, fn p -> {SiemensCollection.PhoneEditionView.full_phone_name(p), p.id} end) %>
     <%= error_tag f, :phone_edition_id %>
   </div>
 

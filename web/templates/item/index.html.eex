@@ -27,7 +27,7 @@
       <a href="<%= collections_item_path(@conn, :show, @user, item) %>" class="item-bg-link"></a>
       <div class="title">
         <a href="<%= collections_item_path(@conn, :show, @user, item) %>">
-          <%= raw full_phone_name(item.phone_edition, "<br>") %>
+          <%= raw SiemensCollection.PhoneEditionView.full_phone_name(item.phone_edition, "<br>") %>
         </a>
         <%= if count > 0 do %>[<%= count %>📷]<% end %>
         <%= if item.phone_edition.limited do %><span title="Limited Edition" class="limited-label round-label">L</span><% end %>

@@ -1,15 +1,31 @@
 defmodule SiemensCollection.PhoneEditionView do
   use SiemensCollection.Web, :view
 
-  def full_phone_name(edition) do
-    if edition.hide_model_name do
-      "#{edition.phone.brand.name} #{edition.name}"
+  def full_phone_name(edition, separator \\ "") do
+    brand_part = "#{edition.phone.brand.name} "
+    phone_name_part = if edition.hide_model_name, do: "", else: "#{edition.phone.name} "
+    edition_part = full_edition_name(edition)
+
+    brand_part <> phone_name_part <> separator <> edition_part
+  end
+
+  def full_edition_name(edition) do
+    edition_part = if edition.name == "Default" || edition.name == "(Default)" do
+      ""
     else
-      if edition.name == "Default" || edition.name == "(Default)" do
-        "#{edition.phone.brand.name} #{edition.phone.name}"
-      else
-        "#{edition.phone.brand.name} #{edition.phone.name} #{edition.name}"
-      end
+      "#{edition.name}"
+    end
+
+    if edition.color_name != "" && edition.color_name != nil do
+      edition_part = edition_part <> " #{edition.color_name}"
+    end
+    if edition.operator_edition do
+      edition_part = edition_part <> " #{edition.operator_name}"
+    end
+    edition_part = if edition.additional_name == "Default" || edition.additional_name == "(Default)" do
+      edition_part
+    else
+      edition_part <> " #{edition.additional_name}"
     end
   end
 

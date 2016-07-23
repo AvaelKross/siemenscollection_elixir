@@ -5,7 +5,6 @@ defmodule SiemensCollection.PhoneEdition do
   alias SiemensCollection.{Repo, Picture}
 
   schema "phone_editions" do
-    field :name, :string, default: "Default"
     field :notes, :string
     field :photo_url, :string
     field :release, :string
@@ -27,13 +26,15 @@ defmodule SiemensCollection.PhoneEdition do
     field :bluetooth, :boolean, default: false
     field :gprs, :boolean, default: false
 
+
+    field :name, :string, default: "Default"
     field :real_name_flag, :boolean, default: false
     field :hide_model_name, :boolean, default: false
     field :operator_edition, :boolean, default: false
     field :operator_name, :string
     field :color_name, :string
     field :real_color_name, :boolean, default: false
-    field :real_name, :string
+    field :additional_name, :string
 
     belongs_to :phone, SiemensCollection.Phone, foreign_key: :phone_id
     has_many :pictures, Picture
@@ -55,7 +56,7 @@ defmodule SiemensCollection.PhoneEdition do
   @required_fields ~w(name)
   @optional_fields ~w(limited prototype notes photo_url phone_id release form_factor 
                       java lte 3g memory_card_support memory_card_type irda bluetooth gprs
-                      network weight size battery real_name cover_id hide_model_name real_name_flag
+                      network weight size battery additional_name cover_id hide_model_name real_name_flag
                       color_name real_color_name operator_edition operator_name)
 
   @doc """
