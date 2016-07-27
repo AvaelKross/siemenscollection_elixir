@@ -3,6 +3,8 @@ defmodule SiemensCollection.Picture do
   use Ecto.Model.Callbacks
   use Arc.Ecto.Model
 
+  alias SiemensCollection.{Picture, Repo}
+
   schema "pictures" do
     field :url, :string
     belongs_to :phone_edition, SiemensCollection.PhoneEdition
@@ -55,4 +57,16 @@ defmodule SiemensCollection.Picture do
       Enum.at(imageable.pictures, 0)
     end
   end
+
+  def create_with_image(picture_hash, image) do
+    if image != nil && image != "" do
+      changeset = Picture.changeset(%Picture{}, picture_hash)
+      {:ok, picture} = Repo.insert(changeset)
+      changeset = Picture.changeset(picture, %{image: image})
+      {:ok, picture} = Repo.update(changeset)
+    else
+      {:error, "No Image"}
+    end
+  end
+
 end

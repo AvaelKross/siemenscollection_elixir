@@ -20,14 +20,9 @@ defmodule SiemensCollection.PictureController do
                      %{item_id: conn.params["item_id"]}
                    end
 
-    Enum.each images, fn n ->
-      if n != nil && n != "" do
-        changeset = Picture.changeset(%Picture{}, picture_hash)
-        {:ok, picture} = Repo.insert(changeset)
-        changeset = Picture.changeset(picture, %{image: n})
-        {:ok, _} = Repo.update(changeset)
-      end
-    end
+    images
+    |> Stream.map(fn image -> Task.async(fn -> Picture.create_with_image(picture_hash, image) end) end)
+    |> Enum.map(&(Task.await(&1, 500000)))
 
     conn
     |> put_flash(:info, "Images uploaded successfully.")
