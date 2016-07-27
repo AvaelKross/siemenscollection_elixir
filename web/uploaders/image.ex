@@ -12,15 +12,15 @@ defmodule SiemensCollection.Image do
   # Define a thumbnail transformation:
 
   def transform(:original, _) do
-    {:convert, "-limit memory 128MiB -limit map 256MiB -auto-orient"}
+    {:convert, "-auto-orient"}
   end
 
   def transform(:thumb, _) do
-    {:convert, "-limit memory 128MiB -limit map 256MiB -auto-orient -thumbnail 250x250> -gravity center -format jpg", :jpg}
+    {:convert, "-auto-orient -thumbnail 250x250> -gravity center -format jpg", :jpg}
   end
 
   def transform(:popup, _) do
-    {:convert, "-limit memory 128MiB -limit map 256MiB -auto-orient -thumbnail 2000x1200> -gravity center -format jpg", :jpg}
+    {:convert, "-auto-orient -thumbnail 2000x1200> -gravity center -format jpg", :jpg}
   end
 
   # Override the persisted filenames:
