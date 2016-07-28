@@ -7,5 +7,6 @@
 
 <%= render "form.html", changeset: @changeset,
                         brand: @brand,
+                        brands: nil,
                         series: @series,
                         action: catalog_phone_path(@conn, :create, @brand.id) %>

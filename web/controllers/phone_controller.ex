@@ -32,9 +32,10 @@ defmodule SiemensCollection.PhoneController do
   end
 
   def new(conn, _params) do
+    brands = Repo.all(SiemensCollection.Brand)
     changeset = Phone.changeset_on_create(%Phone{phone_editions: [%PhoneEdition{}]})
     series = Repo.all(from s in SiemensCollection.Series, where: s.brand_id == ^conn.assigns.brand.id)
-    render(conn, "new.html", series: series, changeset: changeset)
+    render(conn, "new.html", brands: brands, series: series, changeset: changeset)
   end
 
   def create(conn, %{"phone" => phone_params}) do
@@ -57,7 +58,9 @@ defmodule SiemensCollection.PhoneController do
         |> put_flash(:info, "Phone created successfully.")
         |> redirect(to: redirect_path)
       {:error, changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        brands = Repo.all(SiemensCollection.Brand)
+        series = Repo.all(from s in SiemensCollection.Series, where: s.brand_id == ^conn.assigns.brand.id)
+        render(conn, "new.html", brands: brands, series: series, changeset: changeset)
     end
   end
 
@@ -74,10 +77,11 @@ defmodule SiemensCollection.PhoneController do
   end
 
   def edit(conn, %{"id" => id}) do
+    brands = Repo.all(SiemensCollection.Brand)
     phone = Repo.get!(Phone, id)
     changeset = Phone.changeset(phone)
     series = Repo.all(from s in SiemensCollection.Series, where: s.brand_id == ^conn.assigns.brand.id)
-    render(conn, "edit.html", series: series, phone: phone, changeset: changeset)
+    render(conn, "edit.html", brands: brands, series: series, phone: phone, changeset: changeset)
   end
 
   def update(conn, %{"id" => id, "phone" => phone_params}) do
@@ -90,8 +94,9 @@ defmodule SiemensCollection.PhoneController do
         |> put_flash(:info, "Phone updated successfully.")
         |> redirect(to: catalog_phone_path(conn, :show, conn.assigns.brand.id, phone))
       {:error, changeset} ->
+        brands = Repo.all(SiemensCollection.Brand)
         series = Repo.all(from s in SiemensCollection.Series, where: s.brand_id == ^conn.assigns.brand.id)
-        render(conn, "edit.html", series: series, phone: phone, changeset: changeset)
+        render(conn, "edit.html", brands: brands, series: series, phone: phone, changeset: changeset)
     end
   end
 
