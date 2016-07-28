@@ -16,11 +16,13 @@ defmodule SiemensCollection.Image do
   end
 
   def transform(:thumb, _) do
-    {:convert, "-auto-orient -thumbnail 250x250> -gravity center -format jpg", :jpg}
+    #{:convert, "-auto-orient -thumbnail 250x250> -gravity center -format jpg", :jpg}
+    {:convert, fn (path, new_path) -> "-size 250x250 #{path} -auto-orient -thumbnail 250x250> -gravity center -format jpg #{new_path}" end}
   end
 
   def transform(:popup, _) do
-    {:convert, "-auto-orient -thumbnail 2000x1200> -gravity center -format jpg", :jpg}
+    {:convert, fn (path, new_path) -> "-size 2000x1200 #{path} -auto-orient -thumbnail 2000x1200> -gravity center -format jpg #{new_path}" end}
+    # {:convert, "-auto-orient -thumbnail 2000x1200> -gravity center -format jpg", :jpg}
   end
 
   # Override the persisted filenames:
