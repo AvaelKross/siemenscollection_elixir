@@ -21,8 +21,7 @@ defmodule SiemensCollection.PictureController do
                    end
 
     images
-    |> Stream.map(fn image -> Task.async(fn -> Picture.create_with_image(picture_hash, image) end) end)
-    |> Enum.map(&(Task.await(&1, 500000)))
+    |> Enum.map(fn image -> Picture.create_with_image(picture_hash, image) end)
 
     conn
     |> put_flash(:info, "Images uploaded successfully.")
