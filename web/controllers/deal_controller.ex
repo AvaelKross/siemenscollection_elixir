@@ -28,7 +28,7 @@ defmodule SiemensCollection.DealController do
       %Deal{}
     end
     changeset = Deal.changeset(hash)
-    phone_editions = Repo.all(PhoneEdition) |> Repo.preload([phone: :brand])
+    phone_editions = preload_editions
     render(conn, "new.html", phone_editions: phone_editions, changeset: changeset)
   end
 
@@ -42,7 +42,7 @@ defmodule SiemensCollection.DealController do
         |> put_flash(:info, "Deal created successfully.")
         |> redirect(to: deal_path(conn, :show, deal.id))
       {:error, changeset} ->
-        phone_editions = Repo.all(PhoneEdition) |> Repo.preload([phone: :brand])
+        phone_editions = preload_editions
         render(conn, "new.html", phone_editions: phone_editions, changeset: changeset)
     end
   end
@@ -54,7 +54,7 @@ defmodule SiemensCollection.DealController do
 
   def edit(conn, _params) do
     deal = conn.assigns.deal |> Repo.preload([phone_edition: [phone: :brand]])
-    phone_editions = Repo.all(PhoneEdition) |> Repo.preload([phone: :brand])
+    phone_editions = preload_editions
     changeset = Deal.changeset(deal)
     render(conn, "edit.html", deal: deal, phone_editions: phone_editions, changeset: changeset)
   end
@@ -69,7 +69,7 @@ defmodule SiemensCollection.DealController do
         |> put_flash(:info, "Deal updated successfully.")
         |> redirect(to: deal_path(conn, :show, deal))
       {:error, changeset} ->
-        phone_editions = Repo.all(PhoneEdition) |> Repo.preload([phone: :brand])
+        phone_editions = preload_editions
         render(conn, "edit.html", deal: deal, phone_editions: phone_editions, changeset: changeset)
     end
   end
@@ -104,6 +104,12 @@ defmodule SiemensCollection.DealController do
       |> put_flash(:info, "You have no rights to do it")
       |> redirect(to: brand_path(conn, :index))
     end
+  end
+
+  defp preload_editions do
+    Repo.all(PhoneEdition)
+    |> Repo.preload([phone: :brand])
+    |> Enum.sort_by(&("#{SiemensCollection.PhoneEditionView.full_phone_name(&1)}"))
   end
 
 end

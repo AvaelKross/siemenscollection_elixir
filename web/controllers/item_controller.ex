@@ -28,7 +28,7 @@ defmodule SiemensCollection.ItemController do
       %Item{}
     end
     changeset = Item.changeset(hash)
-    phone_editions = Repo.all(PhoneEdition) |> Repo.preload([phone: :brand])
+    phone_editions = preload_editions
     render(conn, "new.html", phone_editions: phone_editions, changeset: changeset)
   end
 
@@ -47,7 +47,7 @@ defmodule SiemensCollection.ItemController do
         |> put_flash(:info, "Item created successfully.")
         |> redirect(to: redirect_path)
       {:error, changeset} ->
-        phone_editions = Repo.all(PhoneEdition) |> Repo.preload([phone: :brand])
+        phone_editions = preload_editions
         render(conn, "new.html", phone_editions: phone_editions, changeset: changeset)
     end
   end
@@ -59,7 +59,7 @@ defmodule SiemensCollection.ItemController do
 
   def edit(conn, _params) do
     item = conn.assigns.item |> Repo.preload([:pictures, phone_edition: [:pictures, phone: :brand]])
-    phone_editions = Repo.all(PhoneEdition) |> Repo.preload([phone: :brand])
+    phone_editions = preload_editions
     changeset = Item.changeset(item)
     render(conn, "edit.html", item: item, phone_editions: phone_editions, changeset: changeset)
   end
@@ -74,7 +74,7 @@ defmodule SiemensCollection.ItemController do
         |> put_flash(:info, "Item updated successfully.")
         |> redirect(to: collections_item_path(conn, :show, conn.assigns.user.id, item))
       {:error, changeset} ->
-        phone_editions = Repo.all(PhoneEdition) |> Repo.preload([phone: :brand])
+        phone_editions = preload_editions
         render(conn, "edit.html", item: item, phone_editions: phone_editions, changeset: changeset)
     end
   end
@@ -113,6 +113,12 @@ defmodule SiemensCollection.ItemController do
       |> put_flash(:info, "You have no rights to do it")
       |> redirect(to: brand_path(conn, :index))
     end
+  end
+
+  defp preload_editions do
+    Repo.all(PhoneEdition)
+    |> Repo.preload([phone: :brand])
+    |> Enum.sort_by(&("#{SiemensCollection.PhoneEditionView.full_phone_name(&1)}"))
   end
 
 end
