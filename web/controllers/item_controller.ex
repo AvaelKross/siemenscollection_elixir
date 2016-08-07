@@ -1,5 +1,4 @@
 defmodule SiemensCollection.ItemController do
-  require Logger
   use SiemensCollection.Web, :controller
 
   alias SiemensCollection.{Item, PhoneEdition, User}
@@ -48,7 +47,8 @@ defmodule SiemensCollection.ItemController do
         |> put_flash(:info, "Item created successfully.")
         |> redirect(to: redirect_path)
       {:error, changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        phone_editions = Repo.all(PhoneEdition) |> Repo.preload([phone: :brand])
+        render(conn, "new.html", phone_editions: phone_editions, changeset: changeset)
     end
   end
 
@@ -74,7 +74,8 @@ defmodule SiemensCollection.ItemController do
         |> put_flash(:info, "Item updated successfully.")
         |> redirect(to: collections_item_path(conn, :show, conn.assigns.user.id, item))
       {:error, changeset} ->
-        render(conn, "edit.html", item: item, changeset: changeset)
+        phone_editions = Repo.all(PhoneEdition) |> Repo.preload([phone: :brand])
+        render(conn, "edit.html", item: item, phone_editions: phone_editions, changeset: changeset)
     end
   end
 
@@ -105,7 +106,7 @@ defmodule SiemensCollection.ItemController do
   end
 
   def check_rights(conn, _opts) do
-    if Addict.Helper.current_user(conn).id == conn.assigns.item.user_id do
+    if Addict.Helper.current_user(conn) != nil && Addict.Helper.current_user(conn).id == conn.assigns.item.user_id do
       conn
     else
       conn

@@ -39,6 +39,8 @@ defmodule SiemensCollection.Router do
       delete "/:id", ProfileController, :delete
     end
 
+    resources "/deals", DealController
+
     scope "/collections", as: :collections do
       get "/", CollectionController, :index
       scope "/:user_id" do

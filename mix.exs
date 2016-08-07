@@ -44,7 +44,8 @@ defmodule SiemensCollection.Mixfile do
      {:ex_aws, "~> 0.4.10"}, # Required for Amazon S3
      {:httpoison, "~> 0.7"}, # Required for Amazon S3
      {:poison, "~> 1.2"},     # Required for Amazon S3
-     {:inflex, "~> 1.7.0"} # it's like a activesupport for strings
+     {:inflex, "~> 1.7.0"}, # it's like a activesupport for strings
+     {:calecto, "~> 0.6.1"} # Time formatting 
     ]
   end
 

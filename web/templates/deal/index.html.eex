@@ -1,0 +1,36 @@
+<div class='breadcrumbs'>
+  Deals >
+</div>
+
+<h2 class="siemens-text editions">
+  Deals Manager
+  <%= link "New deal", to: deal_path(@conn, :new), class: "btn btn-default btn-xs" %>
+</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Phone</th>
+      <th>Created At</th>
+      <th>From</th>
+      <th>Status</th>
+      <th>Price</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= for deal <- @deals do %>
+      <tr>
+        <td><%= link SiemensCollection.PhoneEditionView.full_phone_name(deal.phone_edition), to: deal_path(@conn, :show, deal) %></td>
+        <td><%= deal.inserted_at |> Calendar.Strftime.strftime!("%e %B %Y") %></td>
+        <td><%= deal.from %></td>
+        <td><%= deal.status %></td>
+        <td><%= deal.price %></td>
+        <td class="text-right">
+            <%= link "Edit", to: deal_path(@conn, :edit, deal.id), class: "btn btn-default btn-xs" %>
+            <%= link "Delete", to: deal_path(@conn, :delete, deal.id), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+        </td>
+      <tr>
+    <% end %>
+  </tbody>
+</table>
