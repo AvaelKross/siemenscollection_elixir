@@ -13,6 +13,7 @@ defmodule SiemensCollection.Deal do
 
     belongs_to :phone_edition, SiemensCollection.PhoneEdition
     belongs_to :user, SiemensCollection.User
+    has_one :item, SiemensCollection.Item
 
     timestamps
   end
@@ -29,6 +30,18 @@ defmodule SiemensCollection.Deal do
   def changeset(model, params \\ :empty) do
     model
     |> cast(params, @required_fields, @optional_fields)
+  end
+
+  def in_progress(query) do
+    from deal in query, where: deal.status != "Success" and deal.status != "Failed"
+  end
+
+  def successful(query) do
+    from deal in query, where: deal.status == "Success"
+  end
+
+  def failed(query) do
+    from deal in query, where: deal.status == "Failed"
   end
 
   def for_user(query, user_id) do

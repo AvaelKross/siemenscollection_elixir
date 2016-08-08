@@ -14,6 +14,11 @@
   <% end %>
 
   <%= link "Open in catalog", to: catalog_phone_edition_path(@conn, :show, @deal.phone_edition.phone.brand.id, @deal.phone_edition.phone, @deal.phone_edition), class: "btn btn-default btn-xs" %>
+  <%= if @deal.item == nil do %>
+    <%= link "Add to collection", to: item_path(@conn, :new, @deal), class: "btn btn-default btn-xs" %>
+  <% else %>
+    <%= link "Open in collection", to: collections_item_path(@conn, :show, current_user_id(@conn), @deal.item), class: "btn btn-default btn-xs" %>
+  <% end %>
   <%= link "Edit", to: deal_path(@conn, :edit, @deal), class: "btn btn-default btn-xs" %>
 </h2>
 
@@ -57,6 +62,11 @@
   <li>
     <strong>Created at:</strong>
     <%= @deal.inserted_at |> Calendar.Strftime.strftime!("%e %B %Y") %>
+  </li>
+
+  <li>
+    <strong>Updated at:</strong>
+    <%= @deal.updated_at |> Calendar.Strftime.strftime!("%e %B %Y") %>
   </li>
 
   <li>

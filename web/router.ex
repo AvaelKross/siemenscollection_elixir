@@ -38,8 +38,17 @@ defmodule SiemensCollection.Router do
       put "/", ProfileController, :update
       delete "/:id", ProfileController, :delete
     end
-
+    scope "/deals", assigns: %{filter: "successful"} do
+      get "/successful", DealController, :index, as: :successful_deal
+    end
+    scope "/deals", assigns: %{filter: "all"} do
+      get "/all", DealController, :index, as: :all_deal
+    end
+    scope "/deals", assigns: %{filter: "failed"} do
+      get "/failed", DealController, :index, as: :failed_deal
+    end
     resources "/deals", DealController
+    get "/deals/:deal_id/item", ItemController, :new
 
     scope "/collections", as: :collections do
       get "/", CollectionController, :index

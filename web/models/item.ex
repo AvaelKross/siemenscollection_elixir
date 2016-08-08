@@ -20,12 +20,13 @@ defmodule SiemensCollection.Item do
     belongs_to :user, SiemensCollection.User
     has_many :pictures, SiemensCollection.Picture
     belongs_to :cover, Picture
+    belongs_to :deal, SiemensCollection.PhoneEdition
 
     timestamps
   end
 
   @required_fields ~w(phone_edition_id user_id)
-  @optional_fields ~w(notes condition released imei sw made_in calls_time set selling cover_id full_set)
+  @optional_fields ~w(notes condition released imei sw made_in calls_time set selling cover_id full_set deal_id)
 
   before_delete :destroy_pictures
   def destroy_pictures(changeset) do
@@ -46,7 +47,24 @@ defmodule SiemensCollection.Item do
   def changeset(model, params \\ :empty) do
     model
     |> cast(params, @required_fields, @optional_fields)
+    |> validate_deal
   end
+
+  defp validate_deal(changeset) do
+    deal_id = get_field(changeset, :deal_id)
+    user_id = get_field(changeset, :user_id)
+    validate_deal_owner(changeset, deal_id, user_id)
+  end
+
+  defp validate_deal_owner(changeset, deal_id, user_id) when deal_id != nil do
+    deal = Repo.get!(SiemensCollection.Deal, deal_id)
+    if deal.user_id != user_id do
+      add_error(changeset, :deal_id, "You shouldn't be here")
+    else
+      changeset
+    end
+  end
+  defp validate_deal_owner(changeset, _, _), do: changeset
 
   def pictures_count(query) do
     from p in query,

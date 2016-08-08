@@ -68,6 +68,13 @@
     <%= @item.selling %>
   </li>
 
+  <%= if @item.deal_id != nil && can_edit(@conn, @item) do %>
+    <li>
+      <strong>Deal info:</strong>
+      <%= link "Show", to: deal_path(@conn, :show, @item.deal_id) %>
+    </li>
+  <% end %>
+
 </ul>
 
 <h2 class="siemens-text editions">Images</h2>

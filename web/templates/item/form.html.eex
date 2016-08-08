@@ -5,6 +5,8 @@
     </div>
   <% end %>
 
+  <%= hidden_input f, :deal_id, class: "form-control" %>
+
   <div class="form-group">
     <%= label f, :phone_edition_id, class: "control-label" %>
     <%= select f, :phone_edition_id, 

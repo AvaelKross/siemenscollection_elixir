@@ -3,17 +3,27 @@ defmodule SiemensCollection.DealController do
 
   alias SiemensCollection.{Deal, PhoneEdition, User}
 
+  plug :set_deal when action in [:show, :edit, :update, :delete]
+
   plug Addict.Plugs.Authenticated when action in [:index, :new, :create]
+  plug :check_rights when action in [:show, :edit, :update, :delete]
 
   plug :scrub_params, "deal" when action in [:create, :update]
   plug :set_user
-  plug :set_deal when action in [:show, :edit, :update, :delete]
-
-  plug :check_rights when action in [:show, :edit, :update, :delete]
 
   def index(conn, _params) do
     user_id = conn.assigns.user.id
-    query = Deal |> Deal.for_user(user_id) 
+    query = Deal |> Deal.for_user(user_id)
+    query = case conn.assigns[:filter] do
+      "successful" ->
+        Deal.successful(query)
+      "failed" ->
+        Deal.failed(query)
+      "all" ->
+        query
+      _ ->
+        Deal.in_progress(query)
+    end
     query = from query, preload: [phone_edition: [phone: :brand]]
 
     deals = Repo.all(query)
@@ -48,7 +58,7 @@ defmodule SiemensCollection.DealController do
   end
 
   def show(conn, _params) do
-    deal = conn.assigns.deal |> Repo.preload([phone_edition: [phone: :brand]])
+    deal = conn.assigns.deal |> Repo.preload([:item, phone_edition: [phone: :brand]])
     render(conn, "show.html", deal: deal)
   end
 
