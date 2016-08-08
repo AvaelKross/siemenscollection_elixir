@@ -18,7 +18,7 @@ defmodule SiemensCollection.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [mod: {SiemensCollection, []},
-     applications: [:phoenix, :phoenix_html, :cowboy, :logger, :gettext, :inflex,
+     applications: [:phoenix, :phoenix_html, :cowboy, :logger, :gettext, :inflex, :calecto,
                     :phoenix_ecto, :postgrex, :addict, :ex_aws, :httpoison, :arc, :arc_ecto]]
   end
 
