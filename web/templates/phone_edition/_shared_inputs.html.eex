@@ -96,7 +96,7 @@
 
 <!-- string -->
 
-<%= for feature <- ~w(Network Weight Size Memory_card_type Battery) do %>
+<%= for feature <- ~w(Network Weight Size Memory_card_type Battery Made_in) do %>
 
   <div class="form-group">
     <% field = String.downcase(feature) |> String.to_atom %>

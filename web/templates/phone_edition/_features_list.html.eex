@@ -47,7 +47,7 @@
     <div class="feature_tag red">Memory card</div>
   <% end %>
 
-  <%= for feature <- ~w(Release Form_factor Network Weight Size) do %>
+  <%= for feature <- ~w(Release Form_factor Network Weight Size Made_in) do %>
     <li>
       <% field = String.downcase(feature) |> String.to_atom %>
       <% %{^field => value} = @phone_edition %>

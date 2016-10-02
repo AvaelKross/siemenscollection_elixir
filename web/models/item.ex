@@ -10,7 +10,6 @@ defmodule SiemensCollection.Item do
     field :released, :string
     field :imei, :string
     field :sw, :string
-    field :made_in, :string
     field :calls_time, :string
     field :set, :string
     field :selling, :boolean, default: false
@@ -26,7 +25,7 @@ defmodule SiemensCollection.Item do
   end
 
   @required_fields ~w(phone_edition_id user_id)
-  @optional_fields ~w(notes condition released imei sw made_in calls_time set selling cover_id full_set deal_id)
+  @optional_fields ~w(notes condition released imei sw calls_time set selling cover_id full_set deal_id)
 
   before_delete :destroy_pictures
   def destroy_pictures(changeset) do

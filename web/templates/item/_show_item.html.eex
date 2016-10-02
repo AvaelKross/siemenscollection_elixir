@@ -10,6 +10,6 @@
     </div>
   <% end %>
   <div class="info col-sm-8">
-    <%= render "_features_list.html", item: @item %>
+    <%= render "_features_list.html", conn: @conn, item: @item %>
   </div>
 </div>
