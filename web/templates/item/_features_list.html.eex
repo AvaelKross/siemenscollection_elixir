@@ -1,0 +1,71 @@
+<ul>
+  <li>
+    <strong>Condition:</strong>
+    <%= @item.condition %>
+  </li>
+
+  <%= if @item.released != nil && @item.released != "" do %>
+    <li>
+      <strong>Released:</strong>
+      <%= @item.released %>
+    </li>
+  <% end %>
+
+  <%= if @item.imei != nil && @item.imei != "" do %>
+    <li>
+      <strong>Imei:</strong>
+      <%= @item.imei %>
+    </li>
+  <% end %>
+
+  <%= if @item.sw != nil && @item.sw != "" do %>
+    <li>
+      <strong>Sw:</strong>
+      <%= @item.sw %>
+    </li>
+  <% end %>
+
+  <%= if @item.made_in != nil && @item.made_in != "" do %>
+    <li>
+      <strong>Made in:</strong>
+      <%= @item.made_in %>
+    </li>
+  <%= end %>
+
+  <%= if @item.calls_time != nil && @item.calls_time != "" do %>
+  <li>
+    <strong>Calls time:</strong>
+    <%= @item.calls_time %>
+  </li>
+  <% end %>
+
+  <%= if @item.set != nil && @item.set != "" do %>
+  <li>
+    <strong>Set:</strong>
+    <%= @item.set %>
+  </li>
+  <% end %>
+
+  <%= if @item.notes != nil && @item.notes != "" do %>
+  <li>
+    <strong>Notes:</strong>
+    <%= @item.notes %>
+  </li>
+  <% end %>
+
+  <li>
+    <strong>Want to sell:</strong><%= if @item.selling do %>
+          Yes
+        <% else %>
+          No
+        <% end %>
+  </li>
+
+  <%= if @item.deal_id != nil && can_edit(@conn, @item) do %>
+    <li>
+      <strong>Deal info:</strong>
+      <%= link "Show", to: deal_path(@conn, :show, @item.deal_id) %>
+    </li>
+  <% end %>
+
+</ul>

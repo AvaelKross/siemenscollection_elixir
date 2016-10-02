@@ -240,27 +240,23 @@ a.siemens-text:hover {
 
 .edition img {
   /*float: left;*/
-  max-width: 100px;
+  max-width: 250px;
   margin-right: 10px;
   margin-bottom: 10px;
 }
 
-.edition .images {
-  width: 230px;
-  float: left;
-}
-
-.edition .info {
-  margin-left: 230px;
-}
-
-.edition .info ul {
+.phone-info-block .info ul {
   list-style: none;
   padding-left: 0px;
+  margin-top: 5px;
 }
 
 .edition {
   clear: both;
+}
+
+.edition .images{
+  padding-top: 8px;
 }
 
 .footer_buttons {
@@ -300,7 +296,7 @@ a.siemens-text:hover {
 
 .images .thumb {
   max-width: 150px;
-  max-height: 150px;
+  max-height: 120px;
 }
 
 .items-gallery .round-label {
@@ -390,8 +386,8 @@ a.siemens-text:hover {
 }
 
 .feature_tag.red {
-  background: #933;
-  border: 1px solid #611;
+  background: #999;
+  border: 1px solid #444;
 }
 
 /* Responsive: Portrait tablets and up */

@@ -25,27 +25,12 @@
       <%= link "New edition", to: catalog_phone_edition_path(@conn, :new, @brand.id, @phone.id), class: "btn btn-default btn-xs" %>
     <% end %>
   </h2>
-  <%= if length(@phone_edition.pictures) > 0 do %>
-    <div class="images" id="lightgallery">
-      <%= for picture <- (Enum.sort(@phone_edition.pictures, &(&2.id != nil && @phone_edition.cover_id == &1.id))) do %>
-        <% thumb_image_url = SiemensCollection.Picture.get_url(picture, :thumb) %>
-        <% lightbox_image_url = SiemensCollection.Picture.get_url(picture, :popup) %>
-        <% image_url = SiemensCollection.Picture.get_url(picture) %>
-        <a href="<%= lightbox_image_url %>" data-download-url="<%= image_url %>">
-          <img src="<%= thumb_image_url %>" class="thumb"/>
-        </a>
-      <% end %>
-    </div>
-  <% end %>
-  <div class="info">
-    <%= render SiemensCollection.PhoneEditionView, "_features_list.html", phone_edition: @phone_edition %>
-  </div>
+  <%= render SiemensCollection.PhoneEditionView, "_show_edition.html", phone_edition: @phone_edition %>
 
   <%= if @phone.notes != nil && @phone.notes != "" do %>
     <h3 class="siemens-text">Description</h3>
+    <p><%= @phone.notes %></p>
   <% end %>
-
-  <p><%= @phone.notes %></p>
 
   <%= if length(@editions) > 1 do %>
     <h3 class="siemens-text">Editions</h3>

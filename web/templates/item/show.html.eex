@@ -21,63 +21,14 @@
   <% end %>
 </h2>
 
-<ul>
+<%= render "_show_item.html", conn: @conn, item: @item %>
 
-  <li>
-    <strong>Notes:</strong>
-    <%= @item.notes %>
-  </li>
+<%= if @item.notes != nil && @item.notes != "" do %>
+  <h2 class="siemens-text">Notes</h2>
+  <p><%= @item.notes %></p>
+<% end %>
 
-  <li>
-    <strong>Condition:</strong>
-    <%= @item.condition %>
-  </li>
-
-  <li>
-    <strong>Released:</strong>
-    <%= @item.released %>
-  </li>
-
-  <li>
-    <strong>Imei:</strong>
-    <%= @item.imei %>
-  </li>
-
-  <li>
-    <strong>Sw:</strong>
-    <%= @item.sw %>
-  </li>
-
-  <li>
-    <strong>Made in:</strong>
-    <%= @item.made_in %>
-  </li>
-
-  <li>
-    <strong>Calls time:</strong>
-    <%= @item.calls_time %>
-  </li>
-
-  <li>
-    <strong>Set:</strong>
-    <%= @item.set %>
-  </li>
-
-  <li>
-    <strong>Want to sell:</strong>
-    <%= @item.selling %>
-  </li>
-
-  <%= if @item.deal_id != nil && can_edit(@conn, @item) do %>
-    <li>
-      <strong>Deal info:</strong>
-      <%= link "Show", to: deal_path(@conn, :show, @item.deal_id) %>
-    </li>
-  <% end %>
-
-</ul>
-
-<h2 class="siemens-text editions">Images</h2>
+<h2 class="siemens-text editions">All Images</h2>
 <%= if length(@item.pictures) > 0 do %>
   <div class="images" id="lightgallery">
     <%= for picture <- (Enum.sort(@item.pictures, &(&2.id != nil && @item.cover_id == &1.id))) do %>

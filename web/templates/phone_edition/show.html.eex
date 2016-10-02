@@ -24,19 +24,5 @@
       <% end %>
     <% end %>
   </h3>
-  <%= if length(@phone_edition.pictures) > 0 do %>
-    <div class="images" id="lightgallery">
-      <%= for picture <- (Enum.sort(@phone_edition.pictures, &(&2.id != nil && @phone_edition.cover_id == &1.id))) do %>
-        <% thumb_image_url = SiemensCollection.Picture.get_url(picture, :thumb) %>
-        <% lightbox_image_url = SiemensCollection.Picture.get_url(picture, :popup) %>
-        <% image_url = SiemensCollection.Picture.get_url(picture) %>
-        <a href="<%= lightbox_image_url %>" data-download-url="<%= image_url %>">
-          <img src="<%= thumb_image_url %>" class="thumb"/>
-        </a>
-      <% end %>
-    </div>
-  <% end %>
-  <div class="info">
-    <%= render "_features_list.html", phone_edition: @phone_edition %>
-  </div>
+  <%= render "_show_edition.html", conn: @conn, phone_edition: @phone_edition %>
 </div>
