@@ -22,7 +22,7 @@
   <%= link "Edit", to: deal_path(@conn, :edit, @deal), class: "btn btn-default btn-xs" %>
 </h2>
 
-<ul>
+<ul class="deal">
 
   <li>
     <strong>Status:</strong>
