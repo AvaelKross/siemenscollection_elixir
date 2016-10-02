@@ -1,6 +1,6 @@
 <div class="row phone-info-block">
   <%= if @item.cover_id != nil do %>
-    <div class="images cover col-sm-4" id="lightgallery">
+    <div class="images cover col-sm-4" id="lightgallery-cover">
       <% thumb_image_url = SiemensCollection.Picture.get_url(@item.cover, :thumb) %>
       <% lightbox_image_url = SiemensCollection.Picture.get_url(@item.cover, :popup) %>
       <% image_url = SiemensCollection.Picture.get_url(@item.cover) %>

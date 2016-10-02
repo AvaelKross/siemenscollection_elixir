@@ -299,6 +299,11 @@ a.siemens-text:hover {
   max-height: 120px;
 }
 
+.images.cover .thumb {
+  max-width: 100%;
+  max-height: 250px;
+}
+
 .items-gallery .round-label {
   border-radius: 5px;
   color: white;

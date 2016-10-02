@@ -17,7 +17,8 @@ import "./lightgallery.min"
 import "./lg-zoom.min"
 
 $(document).ready(function() {
-  $("#lightgallery").lightGallery(); 
+  $("#lightgallery").lightGallery();
+  $("#lightgallery-cover").lightGallery();
 });
 // Import local files
 //

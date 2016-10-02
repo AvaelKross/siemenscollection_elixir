@@ -39,13 +39,6 @@
   </li>
   <% end %>
 
-  <%= if @item.notes != nil && @item.notes != "" do %>
-  <li>
-    <strong>Notes:</strong>
-    <%= @item.notes %>
-  </li>
-  <% end %>
-
   <li>
     <strong>Want to sell:</strong><%= if @item.selling do %>
           Yes
