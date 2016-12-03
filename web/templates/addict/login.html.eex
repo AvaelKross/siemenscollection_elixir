@@ -2,7 +2,6 @@
   <div class="addict modal">
     <h1 style="text-align: center">Login</h1>
     <div class="addict modal__form">
-      <div class="login_back_link"><%= link("< Back to main page", to: brand_path(@conn, :index)) %></div>
       <div class="addict modal__fields">
         <div class="addict field">
           <input type="text" id="txt-email" class="addict input" required />
@@ -19,7 +18,9 @@
         <a class="addict link" href="/register">Register</a>
         </br>
         <a class="addict link" href="/recover_password">Forgot your password?</a>
+        </br>
+        <%= link("Back to main page", to: brand_path(@conn, :index)) %>
       </div>
-     </div>
+    </div>
   </div>
 </div>

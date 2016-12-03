@@ -20,6 +20,8 @@
           <button id="btn-register" class="addict btn">Register</button>
         </div>
         <a class="addict link" href="/login">Log in</a>
+        </br>
+        <%= link("Back to main page", to: brand_path(@conn, :index)) %>
       </div>
      </div>
   </div>

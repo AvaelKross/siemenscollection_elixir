@@ -56,7 +56,7 @@ img {
   position: relative;
   background: white;
   padding: 2.5em;
-  padding-top: 5em;
+  padding-top: 4em;
   border-radius: .25em;
   -webkit-filter: drop-shadow(0 0 2em rgba(0,0,0,0.2));
 }
@@ -106,6 +106,7 @@ label.addict {
   text-transform: uppercase;
   border-radius: .25rem;
   letter-spacing: .2em;
+  margin-bottom: 1em;
 }
 .addict.btn:focus {
   outline: 0;
