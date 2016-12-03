@@ -38,7 +38,7 @@ defmodule SiemensCollection.Mixfile do
      {:gettext, "~> 0.9"},
      {:cowboy, "~> 1.0"},
      {:addict, github: "AvaelKross/addict"},
-     {:exrm, "~> 1.0.3"},
+     {:exrm, "~> 1.0.8"},
      {:arc, "~> 0.5.2", github: "AvaelKross/arc", override: true},
      {:arc_ecto, "~> 0.3.2"}, # update after updating ECTO to 2.*
      {:ex_aws, "~> 0.4.10"}, # Required for Amazon S3

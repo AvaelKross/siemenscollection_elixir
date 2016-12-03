@@ -5,7 +5,7 @@
 <h2 class="siemens-text editions">
   Brands
   <%= if can_edit(@conn) do %>
-    <%= link "Add brand", to: brand_path(@conn, :new), class: "btn btn-default btn-xs" %>
+    <%= link "Add brand", to: brand_path(@conn, :new), class: "btn btn-default btn-xs", data: [push: true] %>
   <% end %>
 </h2>
 
@@ -13,11 +13,11 @@
 <%= for brand <- @brands do %>
     <tr>
       <td>
-        <%= link brand.name, to: catalog_phone_path(@conn, :index, brand.id) %>
+        <%= link brand.name, to: catalog_phone_path(@conn, :index, brand.id), data: [push: true] %>
       </td>
       <td class="text-right">
         <%= if can_edit(@conn) do %>
-          <%= link "Edit", to: brand_path(@conn, :edit, brand.id), class: "btn btn-default btn-xs" %>
+          <%= link "Edit", to: brand_path(@conn, :edit, brand.id), class: "btn btn-default btn-xs", data: [push: true] %>
           <%= link "Delete", to: brand_path(@conn, :delete, brand.id), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
         <% end %>
       </td>

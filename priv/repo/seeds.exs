@@ -651,12 +651,12 @@ Enum.each siemens_phones, fn n ->
 
   phone = Repo.get_by(Phone, name: model_name)
   if phone == nil do
-    {:ok, phone} = %Phone{brand_id: brand.id, name: model_name, network: hash[:network], features: hash[:features], weight: hash[:weight], size: hash[:size], battery: hash[:battery]}
+    {:ok, phone} = %Phone{brand_id: brand.id, name: model_name}
                   |> Phone.changeset(%{})
                   |> Repo.insert_or_update
   end
 
-  {:ok, edition} = %PhoneEdition{phone_id: phone.id, name: edition_name, limited: hash[:limited], notes: hash[:notes], release: hash[:release]}
+  {:ok, edition} = %PhoneEdition{phone_id: phone.id, name: edition_name, limited: hash[:limited], notes: hash[:notes], release: hash[:release], network: hash[:network], weight: hash[:weight], size: hash[:size], battery: hash[:battery]}
                   |> PhoneEdition.changeset(%{})
                   |> Repo.insert
 

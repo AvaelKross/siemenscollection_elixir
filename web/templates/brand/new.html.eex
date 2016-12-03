@@ -1,6 +1,7 @@
-<h2>New brand</h2>
+<div class='breadcrumbs'>
+  <%= link "Brands >", to: brand_path(@conn, :index), data: [push: true] %>
+  <%= "New" %>
+</div>
 
 <%= render "form.html", changeset: @changeset,
                         action: brand_path(@conn, :create) %>
-
-<%= link "Back", to: brand_path(@conn, :index) %>

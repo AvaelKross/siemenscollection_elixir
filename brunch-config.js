@@ -7,7 +7,6 @@ exports.config = {
         "js/vendor.js": /^(web\/static\/vendor\/js)(?!\/admin)|(deps)|(node_modules\/)/,
         "js/app.js": [/^(web\/static\/js)/],
         "js/jquery-ujs.js.js": ["web/static/vendor/js/admin/jquery-ujs.js.js"],
-        "js/jquery.js": ["web/static/vendor/js/jquery.min.js"],
         "js/jquery-ui.min.js": ["web/static/vendor/js/admin/jquery-ui.min.js"],
         "js/jquery-ujs.js.js": ["web/static/vendor/js/admin/jquery-ujs.js.js"],
         "js/active_admin.js": ["web/static/vendor/js/admin/active_admin.js"],
@@ -88,6 +87,6 @@ exports.config = {
     enabled: true,
     // Whitelist the npm deps to be pulled in as front-end assets.
     // All other deps in package.json will be excluded from the bundle.
-    whitelist: ["phoenix", "phoenix_html"]
+    whitelist: ["phoenix", "phoenix_html", "turbolinks"]
   }
 };

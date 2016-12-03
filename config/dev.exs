@@ -35,8 +35,8 @@ config :phoenix, :stacktrace_depth, 20
 # Configure your database
 config :siemens_collection, SiemensCollection.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "postgres",
-  password: "postgres",
+  username: "siemens",
+  password: "siemens",
   database: "siemens_collection_dev",
   hostname: "localhost",
   pool_size: 10

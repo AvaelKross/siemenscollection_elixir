@@ -1,5 +1,5 @@
 <div class='breadcrumbs'>
-  <%= link "Brands >", to: brand_path(@conn, :index) %>
+  <%= link "Brands >", to: brand_path(@conn, :index), data: [push: true] %>
   <%= @brand.name %>
 </div>
 <h2 class="siemens-text editions">
@@ -39,10 +39,10 @@
   <% end %>
   <div class="items-gallery">
     <%= for {phone, count} <- phones do %>
-      <div class="items-gallery-item" style="background-image: url(<%= phone |> SiemensCollection.Phone.cover_image |> SiemensCollection.Picture.get_url(:thumb) %>)">
-        <a href="<%= catalog_phone_path(@conn, :show, @brand.id, phone) %>" class="item-bg-link"></a>
+      <div class="items-gallery-item col-sm-3" style="background-image: url(<%= phone |> SiemensCollection.Phone.cover_image |> SiemensCollection.Picture.get_url(:thumb) %>)">
+        <a href="<%= catalog_phone_path(@conn, :show, @brand.id, phone) %>" class="item-bg-link" data-push="true"></a>
         <div class="title">
-          <%= link "#{phone.name} (#{count})", to: catalog_phone_path(@conn, :show, @brand.id, phone) %>
+          <%= link "#{phone.name} (#{count})", to: catalog_phone_path(@conn, :show, @brand.id, phone), data: [push: true] %>
           <td class="text-right">
             <%= if can_edit(@conn) do %>
               <%= link "Edit", to: catalog_phone_path(@conn, :edit, @brand.id, phone), class: "btn btn-default btn-xs" %>
@@ -52,5 +52,5 @@
         </div>
       </div>
     <% end %>
-  </div>  
+  </div>
 <% end %>

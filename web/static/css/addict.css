@@ -13,8 +13,11 @@ body {
   margin: 0;
   font-family: 'Work Sans', Arial, Helvetica, sans-serif;
   min-height: 100%;
-  background: white;
-  color: #777;
+  background: url("/images/bg.jpg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 img {
   vertical-align: middle;
@@ -52,7 +55,8 @@ img {
 .addict.modal__form {
   position: relative;
   background: white;
-  padding: 3em;
+  padding: 2.5em;
+  padding-top: 5em;
   border-radius: .25em;
   -webkit-filter: drop-shadow(0 0 2em rgba(0,0,0,0.2));
 }
@@ -131,6 +135,18 @@ h1 {
   color: #F00;
   font-size: 80%;
 }
+
+.login_back_link {
+  position: absolute;
+  top: 1.5em;
+}
+
+.login_back_link a {
+  color: rgb(86,152,150);
+  text-decoration: underline;
+  font-size: 12px;
+}
+
 
 /*body {
   position: relative;

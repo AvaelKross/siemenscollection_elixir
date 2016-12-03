@@ -1,7 +1,7 @@
 <div class='breadcrumbs'>
-  <%= link "Collections >", to: collections_collection_path(@conn, :index) %>
-  <%= link "#{@user.name} >", to: collections_item_path(@conn, :index, @user) %>
-  <%= link SiemensCollection.PhoneEditionView.full_phone_name(@item.phone_edition), to: collections_item_path(@conn, :show, @user, @item) %>
+  <%= link "Collections >", to: collections_collection_path(@conn, :index), data: [push: true] %>
+  <%= link "#{@user.name} >", to: collections_item_path(@conn, :index, @user), data: [push: true] %>
+  <%= link SiemensCollection.PhoneEditionView.full_phone_name(@item.phone_edition), to: collections_item_path(@conn, :show, @user, @item), data: [push: true] %>
   <%= "> Edit" %>
 </div>
 
