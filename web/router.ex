@@ -18,20 +18,10 @@ defmodule SiemensCollection.Router do
     addict :routes
   end
 
-  # scope "/", SiemensCollection do
-  #   pipe_through :browser # Use the default browser stack
-
-  #   get "/", BrandController, :index
-  #   resources "/phones", PhoneController
-  #   resources "/phone_editions", PhoneEditionController
-  # end
-
   scope "/", SiemensCollection do
     pipe_through :browser
 
-    resources "/", BrandController, except: [:show] do
-      resources "/series", SeriesController, except: [:index, :show]
-    end
+
 
     scope "/profile" do
       get "/", ProfileController, :edit
@@ -62,6 +52,10 @@ defmodule SiemensCollection.Router do
           put "/:id/set_cover", PictureController, :set_cover
         end
       end
+    end
+
+    resources "/", BrandController, except: [:show] do
+      resources "/series", SeriesController, except: [:index, :show]
     end
 
     scope "/:brand_id", as: :catalog do
