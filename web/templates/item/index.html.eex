@@ -1,5 +1,5 @@
 <div class='breadcrumbs'>
-  <%= link "Collections >", to: collections_collection_path(@conn, :index), data: [push: true] %>
+  <%= link "Collections >", to: collections_collection_path(@conn, :index) %>
   <%= @user.name %>
 </div>
 
@@ -18,15 +18,15 @@
 <h3 class="siemens-text collection">
   Collection
   <%= if can_edit_user(@conn, @user) do %>
-    <%= link "New item", to: collections_item_path(@conn, :new, @user), class: "btn btn-default btn-xs", data: [push: true] %>
+    <%= link "New item", to: collections_item_path(@conn, :new, @user), class: "btn btn-default btn-xs" %>
   <% end %>
 </h3>
 <div class="items-gallery">
   <%= for {item, count} <- @items do %>
     <div class="items-gallery-item col-sm-3" style="background-image: url(<%= item |> SiemensCollection.Item.cover_image |> SiemensCollection.Picture.get_url(:thumb) %>)">
-      <a href="<%= collections_item_path(@conn, :show, @user, item) %>" class="item-bg-link" data-push="true"]></a>
+      <a href="<%= collections_item_path(@conn, :show, @user, item) %>" class="item-bg-link"]></a>
       <div class="title">
-        <a href="<%= collections_item_path(@conn, :show, @user, item) %>" data-push="true">
+        <a href="<%= collections_item_path(@conn, :show, @user, item) %>">
           <%= raw SiemensCollection.PhoneEditionView.full_phone_name(item.phone_edition, true, "<br>") %>
         </a>
         <%= if count > 0 do %>[<%= count %>📷]<% end %>
@@ -36,7 +36,7 @@
 
         <td class="text-right">
           <%= if can_edit(@conn, item) do %>
-            <%= link "Edit", to: collections_item_path(@conn, :edit, @user, item), class: "btn btn-default btn-xs", data: [push: true] %>
+            <%= link "Edit", to: collections_item_path(@conn, :edit, @user, item), class: "btn btn-default btn-xs" %>
             <%= link "X", to: collections_item_path(@conn, :delete, @user, item), method: :delete, data: [confirm: "Are you sure you want to delete this item from collection?"], class: "btn btn-danger btn-xs" %>
           <% end %>
         </td>

@@ -1,6 +1,6 @@
 <div class='breadcrumbs'>
-  <%= link "Collections >", to: collections_collection_path(@conn, :index), data: [push: true] %>
-  <%= link "#{@user.name} >", to: collections_item_path(@conn, :index, @user), data: [push: true] %>
+  <%= link "Collections >", to: collections_collection_path(@conn, :index) %>
+  <%= link "#{@user.name} >", to: collections_item_path(@conn, :index, @user) %>
   <%= "Add to collection" %>
 </div>
 

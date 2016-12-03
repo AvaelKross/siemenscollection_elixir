@@ -1,7 +1,7 @@
 <div class='breadcrumbs'>
-  <%= link "Brands >", to: brand_path(@conn, :index), data: [push: true] %>
-  <%= link "#{@brand.name} >", to: catalog_phone_path(@conn, :index, @brand.id), data: [push: true] %>
-  <%= link "#{@phone.name}", to: catalog_phone_path(@conn, :show, @brand.id, @phone), data: [push: true] %>
+  <%= link "Brands >", to: brand_path(@conn, :index) %>
+  <%= link "#{@brand.name} >", to: catalog_phone_path(@conn, :index, @brand.id) %>
+  <%= link "#{@phone.name}", to: catalog_phone_path(@conn, :show, @brand.id, @phone) %>
   <%= "> Edit" %>
 </div>
 

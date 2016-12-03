@@ -1,5 +1,5 @@
 <div class='breadcrumbs'>
-  <%= link "Brands >", to: brand_path(@conn, :index), data: [push: true] %>
+  <%= link "Brands >", to: brand_path(@conn, :index) %>
   <%= "New" %>
 </div>
 

@@ -17,7 +17,6 @@ import "./lightgallery.min"
 import "./lg-zoom.min"
 
 $(document).ready(function() {
-  window.wiselinks = new Wiselinks();
   $("#lightgallery").lightGallery();
   $("#lightgallery-cover").lightGallery();
 });
