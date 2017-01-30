@@ -21,8 +21,6 @@ defmodule SiemensCollection.Router do
   scope "/", SiemensCollection do
     pipe_through :browser
 
-
-
     scope "/profile" do
       get "/", ProfileController, :edit
       put "/", ProfileController, :update
@@ -73,8 +71,6 @@ defmodule SiemensCollection.Router do
         end
       end
     end
-
-
   end
 
   # Other scopes may use custom stacks.

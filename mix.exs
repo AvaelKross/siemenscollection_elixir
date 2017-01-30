@@ -9,17 +9,17 @@ defmodule SiemensCollection.Mixfile do
      compilers: [:phoenix, :gettext] ++ Mix.compilers,
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
-     aliases: aliases,
-     deps: deps]
+     aliases: aliases(),
+     deps: deps()]
   end
 
   # Configuration for the OTP application.
   #
   # Type `mix help compile.app` for more information.
   def application do
-    [mod: {SiemensCollection, []},
-     applications: [:phoenix, :phoenix_html, :cowboy, :logger, :gettext, :inflex, :calecto,
-                    :phoenix_ecto, :postgrex, :addict, :ex_aws, :httpoison, :arc, :arc_ecto]]
+    [mod: {SiemensCollection, []}, extra_applications: [:logger]]
+    #  applications: [:phoenix, :phoenix_html, :cowboy, :logger, :gettext, :inflex, :calecto,
+    #                 :phoenix_ecto, :postgrex, :addict, :ex_aws, :httpoison, :arc, :arc_ecto]]
   end
 
   # Specifies which paths to compile per environment.
@@ -45,7 +45,7 @@ defmodule SiemensCollection.Mixfile do
      {:httpoison, "~> 0.7"}, # Required for Amazon S3
      {:poison, "~> 1.2"},     # Required for Amazon S3
      {:inflex, "~> 1.7.0"}, # it's like a activesupport for strings
-     {:calecto, "~> 0.6.1"} # Time formatting 
+     {:calecto, "~> 0.6.1"} # Time formatting
     ]
   end
 
