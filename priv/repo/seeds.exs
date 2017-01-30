@@ -656,7 +656,14 @@ Enum.each siemens_phones, fn n ->
                   |> Repo.insert_or_update
   end
 
-  {:ok, edition} = %PhoneEdition{phone_id: phone.id, name: edition_name, limited: hash[:limited], notes: hash[:notes], release: hash[:release], network: hash[:network], weight: hash[:weight], size: hash[:size], battery: hash[:battery]}
+  {:ok, edition} = %PhoneEdition{phone_id: phone.id, name: edition_name,
+                                 limited: hash[:limited], notes: hash[:notes],
+                                 release: hash[:release],
+                                 network: hash[:network], weight: hash[:weight],
+                                 size: hash[:size], battery: hash[:battery],
+                                 irda: String.contains?(hash[:features], "IrDA"),
+                                 bluetooth: String.contains?(hash[:features], "Bluetooth"),
+                                 gprs: String.contains?(hash[:features], "GPRS")}
                   |> PhoneEdition.changeset(%{})
                   |> Repo.insert
 
@@ -664,6 +671,15 @@ Enum.each siemens_phones, fn n ->
     %Picture{phone_edition_id: edition.id, url: photo}
     |> Picture.changeset(%{})
     |> Repo.insert!
+  end
+
+  # set main
+  phones = Repo.all(Phone) |> Repo.preload([:phone_editions])
+  Enum.each phones, fn phone ->
+    default = Enum.filter(phone.phone_editions, fn(n) -> String.contains?(n.name, "Default") end)
+    main_edition = if length(default) > 0, do: Enum.at(default, 0), else: Enum.at(phone.phone_editions, 0)
+    changeset = Phone.changeset(phone, %{main_edition_id: main_edition.id})
+    Repo.update!(changeset)
   end
 
 end
