@@ -1,5 +1,4 @@
 defmodule SiemensCollection.PhoneEdition do
-  use Ecto.Model.Callbacks
   use SiemensCollection.Web, :model
 
   alias SiemensCollection.{Repo, Picture}
@@ -15,7 +14,7 @@ defmodule SiemensCollection.PhoneEdition do
     field :size, :string
     field :battery, :string
     field :made_in, :string
-    
+
     field :limited, :boolean, default: false
     field :prototype, :boolean, default: false
 
@@ -44,18 +43,18 @@ defmodule SiemensCollection.PhoneEdition do
     timestamps
   end
 
-  before_delete :destroy_pictures
-  def destroy_pictures(changeset) do
-    query = from p in Picture, where: p.phone_edition_id == ^changeset.model.id
-    pictures = Repo.all(query)
-    Enum.each pictures, fn pic ->
-      Repo.delete! pic
-    end
-    changeset
-  end
+  # before_delete :destroy_pictures
+  # def destroy_pictures(changeset) do
+  #   query = from p in Picture, where: p.phone_edition_id == ^changeset.model.id
+  #   pictures = Repo.all(query)
+  #   Enum.each pictures, fn pic ->
+  #     Repo.delete! pic
+  #   end
+  #   changeset
+  # end
 
   @required_fields ~w()
-  @optional_fields ~w(name limited prototype notes photo_url phone_id release form_factor 
+  @optional_fields ~w(name limited prototype notes photo_url phone_id release form_factor
                       java lte 3g memory_card_support memory_card_type irda bluetooth gprs
                       network weight size battery additional_name cover_id hide_model_name real_name_flag
                       color_name real_color_name operator_edition operator_name made_in)
@@ -66,7 +65,7 @@ defmodule SiemensCollection.PhoneEdition do
   If no params are provided, an invalid changeset is returned
   with no validation performed.
   """
-  def changeset(model, params \\ :empty) do
+  def changeset(model, params \\ %{}) do
     model
     |> cast(params, @required_fields, @optional_fields)
   end

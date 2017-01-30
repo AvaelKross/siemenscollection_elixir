@@ -1,6 +1,5 @@
 defmodule SiemensCollection.User do
   use SiemensCollection.Web, :model
-  use Ecto.Model.Callbacks
 
   alias SiemensCollection.{Repo, Item, User}
 
@@ -19,15 +18,16 @@ defmodule SiemensCollection.User do
   @required_fields ~w(name) # + email encrypted_password
   @optional_fields ~w(location description)
 
-  before_delete :destroy_items
-  def destroy_items(changeset) do
-    query = from p in Item, where: p.user_id == ^changeset.model.id
-    items = Repo.all(query)
-    Enum.each items, fn item ->
-      Repo.delete! item
-    end
-    changeset
-  end
+  # TODO: BRING CALLBACK BACK!!
+  # before_delete :destroy_items
+  # def destroy_items(changeset) do
+  #   query = from p in Item, where: p.user_id == ^changeset.model.id
+  #   items = Repo.all(query)
+  #   Enum.each items, fn item ->
+  #     Repo.delete! item
+  #   end
+  #   changeset
+  # end
 
   @doc """
   Creates a changeset based on the `model` and `params`.
@@ -35,7 +35,7 @@ defmodule SiemensCollection.User do
   If no params are provided, an invalid changeset is returned
   with no validation performed.
   """
-  def changeset(model, params \\ :empty) do
+  def changeset(model, params \\ %{}) do
     model
     |> cast(params, @required_fields, @optional_fields)
     |> validate_length(:name, min: 3)

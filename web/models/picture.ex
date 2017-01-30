@@ -1,6 +1,5 @@
 defmodule SiemensCollection.Picture do
   use SiemensCollection.Web, :model
-  use Ecto.Model.Callbacks
   use Arc.Ecto.Model
 
   alias SiemensCollection.{Picture, Repo}
@@ -20,14 +19,14 @@ defmodule SiemensCollection.Picture do
   @required_file_fields ~w()
   @optional_file_fields ~w(image)
 
-  after_delete :delete_from_s3
-  def delete_from_s3(changeset) do
-    picture = changeset.model
-    if picture.image != nil do
-      :ok = SiemensCollection.Image.delete({picture.image.file_name, picture})
-    end
-    changeset
-  end
+  # after_delete :delete_from_s3
+  # def delete_from_s3(changeset) do
+  #   picture = changeset.model
+  #   if picture.image != nil do
+  #     :ok = SiemensCollection.Image.delete({picture.image.file_name, picture})
+  #   end
+  #   changeset
+  # end
 
   @doc """
   Creates a changeset based on the `model` and `params`.
@@ -35,7 +34,7 @@ defmodule SiemensCollection.Picture do
   If no params are provided, an invalid changeset is returned
   with no validation performed.
   """
-  def changeset(model, params \\ :empty) do
+  def changeset(model, params \\ %{}) do
     model
     |> cast(params, @required_fields, @optional_fields)
     |> cast_attachments(params, @required_file_fields, @optional_file_fields)

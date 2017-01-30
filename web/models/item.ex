@@ -1,6 +1,5 @@
 defmodule SiemensCollection.Item do
   use SiemensCollection.Web, :model
-  use Ecto.Model.Callbacks
 
   alias SiemensCollection.{Repo, Picture}
 
@@ -27,15 +26,15 @@ defmodule SiemensCollection.Item do
   @required_fields ~w(phone_edition_id user_id)
   @optional_fields ~w(notes condition released imei sw calls_time set selling cover_id full_set deal_id)
 
-  before_delete :destroy_pictures
-  def destroy_pictures(changeset) do
-    query = from p in Picture, where: p.item_id == ^changeset.model.id
-    pictures = Repo.all(query)
-    Enum.each pictures, fn pic ->
-      Repo.delete! pic
-    end
-    changeset
-  end
+  # before_delete :destroy_pictures
+  # def destroy_pictures(changeset) do
+  #   query = from p in Picture, where: p.item_id == ^changeset.model.id
+  #   pictures = Repo.all(query)
+  #   Enum.each pictures, fn pic ->
+  #     Repo.delete! pic
+  #   end
+  #   changeset
+  # end
 
   @doc """
   Creates a changeset based on the `model` and `params`.
@@ -43,7 +42,7 @@ defmodule SiemensCollection.Item do
   If no params are provided, an invalid changeset is returned
   with no validation performed.
   """
-  def changeset(model, params \\ :empty) do
+  def changeset(model, params \\ %{}) do
     model
     |> cast(params, @required_fields, @optional_fields)
     |> validate_deal

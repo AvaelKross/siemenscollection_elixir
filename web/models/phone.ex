@@ -1,6 +1,5 @@
 defmodule SiemensCollection.Phone do
   use SiemensCollection.Web, :model
-  use Ecto.Model.Callbacks
 
   alias SiemensCollection.Repo
 
@@ -20,15 +19,15 @@ defmodule SiemensCollection.Phone do
   @required_fields ~w(name)
   @optional_fields ~w(notes brand_id main_edition_id series_id)
 
-  before_delete :destroy_editions
-  def destroy_editions(changeset) do
-    query = from p in SiemensCollection.PhoneEdition, where: p.phone_id == ^changeset.model.id
-    editions = Repo.all(query)
-    Enum.each editions, fn edition ->
-      Repo.delete! edition
-    end
-    changeset
-  end
+  # before_delete :destroy_editions
+  # def destroy_editions(changeset) do
+  #   query = from p in SiemensCollection.PhoneEdition, where: p.phone_id == ^changeset.model.id
+  #   editions = Repo.all(query)
+  #   Enum.each editions, fn edition ->
+  #     Repo.delete! edition
+  #   end
+  #   changeset
+  # end
 
   @doc """
   Creates a changeset based on the `model` and `params`.
@@ -37,13 +36,13 @@ defmodule SiemensCollection.Phone do
   with no validation performed.
   """
 
-  def changeset_on_create(model, params \\ :empty) do
+  def changeset_on_create(model, params \\ %{}) do
     model
     |> cast(params, @required_fields, @optional_fields)
     |> cast_assoc(:phone_editions, required: false)
   end
 
-  def changeset(model, params \\ :empty) do
+  def changeset(model, params \\ %{}) do
     model
     |> cast(params, @required_fields, @optional_fields)
   end

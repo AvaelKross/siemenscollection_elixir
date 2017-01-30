@@ -8,7 +8,7 @@ use Mix.Config
 # Configures the endpoint
 config :siemens_collection, SiemensCollection.Endpoint,
   url: [host: "localhost"],
-  root: Path.dirname(__DIR__),
+  ecto_repos: [SiemensCollection.Repo],
   secret_key_base: "+E+SMepQ+DNQ1zjeSjbiyBFUTinc94ZuKRjKz6VCLAf28vwRVvStN5uYWTNDb6RY",
   render_errors: [accepts: ~w(html json)],
   pubsub: [name: SiemensCollection.PubSub,
@@ -30,7 +30,7 @@ config :phoenix, :generators,
 
 config :addict,
   secret_key: "24326224313224416248435730693841675759536a3642347161584b4f",
-  # extra_validation: &SiemensCollection.User.validate/2, # define extra validation here
+  extra_validation: &SiemensCollection.User.addict_validate/2, # define extra validation here
   user_schema: SiemensCollection.User,
   repo: SiemensCollection.Repo,
   from_email: "no-reply@siemenscollection.ru", # CHANGE THIS

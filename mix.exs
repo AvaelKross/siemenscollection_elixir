@@ -30,22 +30,24 @@ defmodule SiemensCollection.Mixfile do
   #
   # Type `mix help deps` for examples and options.
   defp deps do
-    [{:phoenix, "~> 1.1.4"},
+    [{:phoenix, "~> 1.2.1", override: true},
+     {:phoenix_pubsub, "~> 1.0"},
      {:postgrex, ">= 0.0.0"},
-     {:phoenix_ecto, "~> 2.0"},
-     {:phoenix_html, "~> 2.4"},
+     {:phoenix_ecto, "~> 3.0"},
+     {:phoenix_html, "~> 2.9"},
      {:phoenix_live_reload, "~> 1.0", only: :dev},
-     {:gettext, "~> 0.9"},
+     {:gettext, "~> 0.13"}, # I18n
      {:cowboy, "~> 1.0"},
-     {:addict, github: "AvaelKross/addict"},
+     {:addict, "~> 0.3.0"}, # users
      {:exrm, "~> 1.0.8"},
+     {:calecto, "~> 0.16.0"}, # Time formatting
+     {:inflex, "~> 1.7.0"}, # it's like a activesupport for strings
+     #TODO: VVVVVV UPDATE THIS VVVVVV
      {:arc, "~> 0.5.2", github: "AvaelKross/arc", override: true},
      {:arc_ecto, "~> 0.3.2"}, # update after updating ECTO to 2.*
      {:ex_aws, "~> 0.4.10"}, # Required for Amazon S3
      {:httpoison, "~> 0.7"}, # Required for Amazon S3
-     {:poison, "~> 1.2"},     # Required for Amazon S3
-     {:inflex, "~> 1.7.0"}, # it's like a activesupport for strings
-     {:calecto, "~> 0.6.1"} # Time formatting
+     {:poison, "~> 1.2"}     # Required for Amazon S3
     ]
   end
 
@@ -57,6 +59,7 @@ defmodule SiemensCollection.Mixfile do
   # See the documentation for `Mix` for more info on aliases.
   defp aliases do
     ["ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
-     "ecto.reset": ["ecto.drop", "ecto.setup"]]
+     "ecto.reset": ["ecto.drop", "ecto.setup"],
+     "test": ["ecto.create --quiet", "ecto.migrate", "test"]]
   end
 end

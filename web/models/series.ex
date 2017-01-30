@@ -1,6 +1,5 @@
 defmodule SiemensCollection.Series do
   use SiemensCollection.Web, :model
-  use Ecto.Model.Callbacks
 
   schema "series" do
     field :name, :string
@@ -13,12 +12,12 @@ defmodule SiemensCollection.Series do
   @required_fields ~w(name brand_id)
   @optional_fields ~w()
 
-  before_delete :remove_foreign_keys
-  def remove_foreign_keys(changeset) do
-    query = from p in SiemensCollection.Phone, where: p.series_id == ^changeset.model.id
-    SiemensCollection.Repo.update_all(query, set: [series_id: nil])
-    changeset
-  end
+  # before_delete :remove_foreign_keys
+  # def remove_foreign_keys(changeset) do
+  #   query = from p in SiemensCollection.Phone, where: p.series_id == ^changeset.model.id
+  #   SiemensCollection.Repo.update_all(query, set: [series_id: nil])
+  #   changeset
+  # end
 
   @doc """
   Creates a changeset based on the `model` and `params`.
@@ -26,7 +25,7 @@ defmodule SiemensCollection.Series do
   If no params are provided, an invalid changeset is returned
   with no validation performed.
   """
-  def changeset(model, params \\ :empty) do
+  def changeset(model, params \\ %{}) do
     model
     |> cast(params, @required_fields, @optional_fields)
   end
