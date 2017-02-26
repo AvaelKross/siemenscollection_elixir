@@ -10,8 +10,6 @@
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
 
-import Ecto.Query
-
 alias SiemensCollection.Repo
 alias SiemensCollection.Phone
 alias SiemensCollection.Brand
@@ -630,8 +628,7 @@ siemens_phones = [%{:name=>"Siemens one2one m200", :network=>"GSM1800MHz", :rele
 %{:name=>"Xelibri X7 (Midnight Blue)", :network=>"GSM900/1800MHz", :release=>"2003", :features=>"", :weight=>"78 g", :size=>"104 mm / 45 mm / 24 mm", :akkum=>"Li-ION / 3,8V / 510mAh", :limited=>false, :notes=>"Designlinie von Siemens, Modell 3 der zweiten Kollektion", :photos=>["http://www.siesam.de/handy/fotos/xelibri7_blue_klein.gif"]},
 %{:name=>"Xelibri X8 (Silver Glam)", :network=>"GSM900/1800MHz", :release=>"2003", :features=>"", :weight=>"88 g", :size=>"90 mm / 55 mm / 28 mm", :akkum=>"Li-ION / 3,8V / 510mAh", :limited=>false, :notes=>"Designlinie von Siemens, Modell 4 der zweiten Kollektion, incl. Radio und Stereo-Headset", :photos=>["http://www.siesam.de/handy/fotos/xelibri8_silver_klein.gif"]}]
 
-Enum.each siemens_phones, fn n ->
-  hash = n
+Enum.each siemens_phones, fn hash ->
   parsed_name = Regex.run(~r/(.+?)\s(\S+)(\s(.*))?/, hash[:name])
 
   brand_name = parsed_name |> Enum.at(1)
@@ -644,39 +641,28 @@ Enum.each siemens_phones, fn n ->
     edition_name = edition_name |> String.slice(1..-1)
   end
 
-  brand = Repo.get_by(Brand, name: brand_name)
-  if brand == nil do
-    {:ok, brand} = %Brand{name: brand_name} |> Brand.changeset(%{}) |> Repo.insert_or_update
-  end
+  brand = Repo.insert!(%Brand{name: brand_name}, on_conflict: :nothing)
 
-  phone = Repo.get_by(Phone, name: model_name)
-  if phone == nil do
-    {:ok, phone} = %Phone{brand_id: brand.id, name: model_name}
-                  |> Phone.changeset(%{})
-                  |> Repo.insert_or_update
-  end
+  phone = Repo.insert!(%Phone{brand_id: brand.id, name: model_name}, on_conflict: :nothing)
 
-  {:ok, edition} = %PhoneEdition{phone_id: phone.id, name: edition_name,
-                                 limited: hash[:limited], notes: hash[:notes],
-                                 release: hash[:release],
-                                 network: hash[:network], weight: hash[:weight],
-                                 size: hash[:size], battery: hash[:battery],
-                                 irda: String.contains?(hash[:features], "IrDA"),
-                                 bluetooth: String.contains?(hash[:features], "Bluetooth"),
-                                 gprs: String.contains?(hash[:features], "GPRS")}
-                  |> PhoneEdition.changeset(%{})
-                  |> Repo.insert
+  raw_edition = %PhoneEdition{phone_id: phone.id, name: edition_name,
+                              limited: hash[:limited], notes: hash[:notes],
+                              release: hash[:release],
+                              network: hash[:network], weight: hash[:weight],
+                              size: hash[:size], battery: hash[:battery],
+                              irda: String.contains?(hash[:features], "IrDA"),
+                              bluetooth: String.contains?(hash[:features], "Bluetooth"),
+                              gprs: String.contains?(hash[:features], "GPRS")}
+  edition = Repo.insert!(raw_edition)
 
   Enum.each hash[:photos], fn photo ->
-    %Picture{phone_edition_id: edition.id, url: photo}
-    |> Picture.changeset(%{})
-    |> Repo.insert!
+    Repo.insert!(%Picture{phone_edition_id: edition.id, url: photo})
   end
 
   # set main
   phones = Repo.all(Phone) |> Repo.preload([:phone_editions])
   Enum.each phones, fn phone ->
-    default = Enum.filter(phone.phone_editions, fn(n) -> String.contains?(n.name, "Default") end)
+    default = Enum.filter(phone.phone_editions, fn(p_e) -> String.contains?(p_e.name, "Default") end)
     main_edition = if length(default) > 0, do: Enum.at(default, 0), else: Enum.at(phone.phone_editions, 0)
     changeset = Phone.changeset(phone, %{main_edition_id: main_edition.id})
     Repo.update!(changeset)

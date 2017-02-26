@@ -14,6 +14,8 @@ config :siemens_collection, SiemensCollection.Endpoint,
   pubsub: [name: SiemensCollection.PubSub,
            adapter: Phoenix.PubSub.PG2]
 
+config :siemens_collection, ecto_repos: [SiemensCollection.Repo]
+
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",

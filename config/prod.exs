@@ -13,7 +13,7 @@ use Mix.Config
 # which you typically run after static files are built.
 config :siemens_collection, SiemensCollection.Endpoint,
   http: [port: 8888],
-  url: [host: "siemenscollection.ru", port: 80],
+  url: [host: "avael.name", port: 80],
   cache_static_manifest: "priv/static/manifest.json",
   server: true
 

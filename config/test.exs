@@ -12,8 +12,8 @@ config :logger, level: :warn
 # Configure your database
 config :siemens_collection, SiemensCollection.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "postgres",
-  password: "postgres",
+  username: "siemens",
+  password: "siemens",
   database: "siemens_collection_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox

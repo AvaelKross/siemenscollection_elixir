@@ -1,5 +1,5 @@
 defmodule SiemensCollection.PhoneTest do
-  use SiemensCollection.ModelCase
+  use SiemensCollection.ModelCase, async: true
 
   alias SiemensCollection.Phone
 
