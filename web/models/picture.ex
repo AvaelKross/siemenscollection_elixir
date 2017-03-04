@@ -1,6 +1,6 @@
 defmodule SiemensCollection.Picture do
   use SiemensCollection.Web, :model
-  use Arc.Ecto.Model
+  use Arc.Ecto.Schema
 
   alias SiemensCollection.{Picture, Repo}
 

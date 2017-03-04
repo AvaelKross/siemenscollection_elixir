@@ -32,6 +32,7 @@ defmodule SiemensCollection.Mixfile do
   defp deps do
     [{:phoenix, "~> 1.2.1", override: true},
      {:phoenix_pubsub, "~> 1.0"},
+     {:ecto, "~> 2.1"},
      {:postgrex, ">= 0.0.0"},
      {:phoenix_ecto, "~> 3.0"},
      {:phoenix_html, "~> 2.9"},
@@ -42,12 +43,12 @@ defmodule SiemensCollection.Mixfile do
      {:exrm, "~> 1.0.8"},
      {:calecto, "~> 0.16.0"}, # Time formatting
      {:inflex, "~> 1.7.0"}, # it's like a activesupport for strings
-     #TODO: VVVVVV UPDATE THIS VVVVVV
-     {:arc, "~> 0.5.2", github: "AvaelKross/arc", override: true},
-     {:arc_ecto, "~> 0.3.2"}, # update after updating ECTO to 2.*
-     {:ex_aws, "~> 0.4.10"}, # Required for Amazon S3
-     {:httpoison, "~> 0.7"}, # Required for Amazon S3
-     {:poison, "~> 1.2"}     # Required for Amazon S3
+     {:arc, "~> 0.7.0", override: true},
+     {:arc_ecto, "~> 0.5.0"},
+     {:ex_aws, "~> 1.1"},    # Required for Amazon S3
+     {:hackney, "~> 1.6"},   # Required for Amazon S3
+     {:poison, "~> 2.0", override: true},    # Required for Amazon S3
+     {:sweet_xml, "~> 0.6"}  # Required for Amazon S3
     ]
   end
 

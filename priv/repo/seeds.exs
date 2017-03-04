@@ -641,9 +641,15 @@ Enum.each siemens_phones, fn hash ->
     edition_name = edition_name |> String.slice(1..-1)
   end
 
-  brand = Repo.insert!(%Brand{name: brand_name}, on_conflict: :nothing)
+  brand = Repo.get_by(Brand, name: brand_name)
+  if brand == nil do
+    brand = Repo.insert!(%Brand{name: brand_name})
+  end
 
-  phone = Repo.insert!(%Phone{brand_id: brand.id, name: model_name}, on_conflict: :nothing)
+  phone = Repo.get_by(Phone, name: model_name)
+  if phone == nil do
+    phone = Repo.insert!(%Phone{brand_id: brand.id, name: model_name})
+  end
 
   raw_edition = %PhoneEdition{phone_id: phone.id, name: edition_name,
                               limited: hash[:limited], notes: hash[:notes],
