@@ -17,9 +17,9 @@ defmodule SiemensCollection.Mixfile do
   #
   # Type `mix help compile.app` for more information.
   def application do
-    [mod: {SiemensCollection, []}, extra_applications: [:logger]]
-    #  applications: [:phoenix, :phoenix_html, :cowboy, :logger, :gettext, :inflex, :calecto,
-    #                 :phoenix_ecto, :postgrex, :addict, :ex_aws, :httpoison, :arc, :arc_ecto]]
+    [mod: {SiemensCollection, []},
+     applications: [:mix, :phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext, :inflex, :calecto,
+                    :phoenix_ecto, :postgrex, :addict, :ex_aws, :httpoison, :arc, :arc_ecto]]
   end
 
   # Specifies which paths to compile per environment.
