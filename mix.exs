@@ -18,7 +18,7 @@ defmodule SiemensCollection.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [mod: {SiemensCollection, []},
-     applications: [:mix, :phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext, :inflex, :calecto,
+     applications: [:mix, :phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext, :inflex, :calendar,
                     :phoenix_ecto, :postgrex, :addict, :ex_aws, :httpoison, :arc, :arc_ecto]]
   end
 
@@ -41,7 +41,7 @@ defmodule SiemensCollection.Mixfile do
      {:cowboy, "~> 1.0"},
      {:addict, "~> 0.3.0"}, # users
      {:exrm, "~> 1.0.8"},
-     {:calecto, "~> 0.16.0"}, # Time formatting
+     {:calendar, "~> 0.16.1"}, # Time formatting
      {:inflex, "~> 1.7.0"}, # it's like a activesupport for strings
      {:arc, "~> 0.7.0", override: true},
      {:arc_ecto, "~> 0.5.0"},

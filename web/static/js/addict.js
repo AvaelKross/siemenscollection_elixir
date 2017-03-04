@@ -37,7 +37,7 @@ $(document).ready(function() {
   $('#btn-logout').click(function () {
     var csrf_token = $('#csrf-token').val();
     $.ajax({
-      type: 'POST',
+      type: 'DELETE',
       url: '/logout',
       headers: {
         'x-csrf-token': csrf_token
