@@ -38,13 +38,15 @@ defmodule SiemensCollection.Phone do
 
   def changeset_on_create(model, params \\ %{}) do
     model
-    |> cast(params, @required_fields, @optional_fields)
+    |> cast(params, @required_fields ++ @optional_fields)
+    |> validate_required(@required_fields)
     |> cast_assoc(:phone_editions, required: false)
   end
 
   def changeset(model, params \\ %{}) do
     model
-    |> cast(params, @required_fields, @optional_fields)
+    |> cast(params, @required_fields ++ @optional_fields)
+    |> validate_required(@required_fields)
   end
 
   def editions_count(%{id: phone_id}) do

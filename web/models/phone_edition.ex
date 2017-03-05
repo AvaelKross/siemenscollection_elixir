@@ -67,7 +67,8 @@ defmodule SiemensCollection.PhoneEdition do
   """
   def changeset(model, params \\ %{}) do
     model
-    |> cast(params, @required_fields, @optional_fields)
+    |> cast(params, @required_fields ++ @optional_fields)
+    |> validate_required(@required_fields)
   end
 
   def owned_amount(edition, user) do
