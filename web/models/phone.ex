@@ -16,8 +16,8 @@ defmodule SiemensCollection.Phone do
     timestamps
   end
 
-  @required_fields ~w(name)
-  @optional_fields ~w(notes brand_id main_edition_id series_id)
+  @required_fields ~w(name)a
+  @optional_fields ~w(notes brand_id main_edition_id series_id)a
 
   # before_delete :destroy_editions
   # def destroy_editions(changeset) do

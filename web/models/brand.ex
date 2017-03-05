@@ -10,8 +10,8 @@ defmodule SiemensCollection.Brand do
     timestamps
   end
 
-  @required_fields ~w(name)
-  @optional_fields ~w()
+  @required_fields ~w(name)a
+  @optional_fields ~w()a
 
   # before_delete :destroy_phones
   # def destroy_phones(changeset) do

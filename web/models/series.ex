@@ -9,8 +9,8 @@ defmodule SiemensCollection.Series do
     timestamps
   end
 
-  @required_fields ~w(name brand_id)
-  @optional_fields ~w()
+  @required_fields ~w(name brand_id)a
+  @optional_fields ~w()a
 
   # before_delete :remove_foreign_keys
   # def remove_foreign_keys(changeset) do

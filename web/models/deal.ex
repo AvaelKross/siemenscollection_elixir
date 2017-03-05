@@ -18,8 +18,8 @@ defmodule SiemensCollection.Deal do
     timestamps
   end
 
-  @required_fields ~w(phone_edition_id user_id status)
-  @optional_fields ~w(link contact_name contact_email contact_phone price status notes from)
+  @required_fields ~w(phone_edition_id user_id status)a
+  @optional_fields ~w(link contact_name contact_email contact_phone price status notes from)a
 
   @doc """
   Creates a changeset based on the `model` and `params`.

@@ -13,11 +13,11 @@ defmodule SiemensCollection.Picture do
     timestamps
   end
 
-  @required_fields ~w()
-  @optional_fields ~w(url phone_edition_id item_id)
+  @required_fields ~w()a
+  @optional_fields ~w(url phone_edition_id item_id)a
 
-  @required_file_fields ~w()
-  @optional_file_fields ~w(image)
+  @required_file_fields ~w()a
+  @optional_file_fields ~w(image)a
 
   # after_delete :delete_from_s3
   # def delete_from_s3(changeset) do

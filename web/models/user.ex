@@ -15,8 +15,8 @@ defmodule SiemensCollection.User do
     timestamps
   end
 
-  @required_fields ~w(name) # + email encrypted_password
-  @optional_fields ~w(location description)
+  @required_fields ~w(name)a # + email encrypted_password
+  @optional_fields ~w(location description)a
 
   # TODO: BRING CALLBACK BACK!!
   # before_delete :destroy_items

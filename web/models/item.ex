@@ -23,8 +23,8 @@ defmodule SiemensCollection.Item do
     timestamps
   end
 
-  @required_fields ~w(phone_edition_id user_id)
-  @optional_fields ~w(notes condition released imei sw calls_time set selling cover_id full_set deal_id)
+  @required_fields ~w(phone_edition_id user_id)a
+  @optional_fields ~w(notes condition released imei sw calls_time set selling cover_id full_set deal_id)a
 
   # before_delete :destroy_pictures
   # def destroy_pictures(changeset) do

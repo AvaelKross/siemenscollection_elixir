@@ -53,11 +53,11 @@ defmodule SiemensCollection.PhoneEdition do
   #   changeset
   # end
 
-  @required_fields ~w()
+  @required_fields ~w()a
   @optional_fields ~w(name limited prototype notes photo_url phone_id release form_factor
                       java lte 3g memory_card_support memory_card_type irda bluetooth gprs
                       network weight size battery additional_name cover_id hide_model_name real_name_flag
-                      color_name real_color_name operator_edition operator_name made_in)
+                      color_name real_color_name operator_edition operator_name made_in)a
 
   @doc """
   Creates a changeset based on the `model` and `params`.
