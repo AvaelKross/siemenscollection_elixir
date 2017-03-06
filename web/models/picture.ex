@@ -13,11 +13,8 @@ defmodule SiemensCollection.Picture do
     timestamps
   end
 
+  @allowed_fields ~w(url phone_edition_id item_id)a
   @required_fields ~w()a
-  @optional_fields ~w(url phone_edition_id item_id)a
-
-  @required_file_fields ~w()a
-  @optional_file_fields ~w(image)a
 
   # after_delete :delete_from_s3
   # def delete_from_s3(changeset) do
@@ -36,14 +33,13 @@ defmodule SiemensCollection.Picture do
   """
   def changeset(model, params \\ %{}) do
     model
-    |> cast(params, @required_fields ++ @optional_fields)
-    |> validate_required(@required_fields)
-    |> cast_attachments(params, @required_file_fields, @optional_file_fields)
+    |> cast(params, @allowed_fields)
+    |> cast_attachments(params, [:image])
   end
 
   def get_url(picture, version \\ :original) do
     cond do
-      picture == nil ->"https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg"
+      picture == nil -> "https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg"
       picture.image != nil -> SiemensCollection.Image.url({picture.image, picture}, version)
       picture.url != nil || picture.url != "" -> picture.url
       true -> "https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg"

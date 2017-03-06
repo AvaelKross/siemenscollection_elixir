@@ -24,12 +24,12 @@ defmodule SiemensCollection.ItemController do
   def new(conn, _params) do
     hash = cond do
       conn.params["edition_id"] ->
-        %Item{phone_edition_id: conn.params["edition_id"]}
+        %Item{user_id: Addict.Helper.current_user(conn).id, phone_edition_id: conn.params["edition_id"]}
       conn.params["deal_id"] ->
         deal = Repo.get!(SiemensCollection.Deal, conn.params["deal_id"])
-        %Item{deal_id: deal.id, phone_edition_id: deal.phone_edition_id}
+        %Item{user_id: Addict.Helper.current_user(conn).id, deal_id: deal.id, phone_edition_id: deal.phone_edition_id}
       true ->
-        %Item{}
+        %Item{user_id: Addict.Helper.current_user(conn).id}
     end
     changeset = Item.changeset(hash)
     phone_editions = preload_editions

@@ -3,10 +3,12 @@ defmodule SiemensCollection.Image do
   use Arc.Ecto.Definition
 
   @versions [:original, :thumb, :popup]
+  @extension_whitelist ~w(.jpg .jpeg .gif .png)
 
   # Whitelist file extensions:
   def validate({file, _}) do
-    ~w(.jpg .jpeg .gif .png) |> Enum.member?(String.downcase(Path.extname(file.file_name)))
+    file_extension = file.file_name |> Path.extname() |> String.downcase()
+    Enum.member?(@extension_whitelist, file_extension)
   end
 
   # Define a thumbnail transformation:
@@ -31,7 +33,7 @@ defmodule SiemensCollection.Image do
   end
 
   # Override the storage directory:
-  def storage_dir(_, {_, scope}) do
+  def storage_dir(version, {file, scope}) do
     "uploads/pictures/#{scope.id}"
   end
 
