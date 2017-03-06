@@ -43,6 +43,7 @@ config :siemens_collection, SiemensCollection.Repo,
   pool_size: 10
 
 config :arc,
+  storage: Arc.Storage.S3,
   bucket: "siemenscollection-uploads-d",
   asset_host: "https://s3.eu-central-1.amazonaws.com/siemenscollection-uploads-d/",
   version_timeout: 40_000

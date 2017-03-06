@@ -19,7 +19,7 @@ defmodule SiemensCollection.Mixfile do
   def application do
     [mod: {SiemensCollection, []},
      applications: [:mix, :phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext, :inflex, :calendar,
-                    :phoenix_ecto, :postgrex, :addict, :ex_aws, :httpoison, :arc, :arc_ecto, :sweet_xml]]
+                    :phoenix_ecto, :postgrex, :addict, :ex_aws, :poison, :arc, :arc_ecto, :sweet_xml, :hackney]]
   end
 
   # Specifies which paths to compile per environment.
@@ -45,8 +45,8 @@ defmodule SiemensCollection.Mixfile do
      {:inflex, "~> 1.7.0"}, # it's like a activesupport for strings
      {:arc, "~> 0.7.0", override: true},
      {:arc_ecto, "~> 0.5.0"},
-     {:ex_aws, "~> 1.1"},    # Required for Amazon S3
-     {:hackney, "~> 1.6"},   # Required for Amazon S3
+     {:ex_aws, "~> 1.1", override: true},    # Required for Amazon S3
+     {:hackney, "~> 1.7", override: true},   # Required for Amazon S3
      {:poison, "~> 3.1", override: true},    # Required for Amazon S3
      {:sweet_xml, "~> 0.6"}  # Required for Amazon S3
     ]

@@ -21,6 +21,7 @@ config :siemens_collection, SiemensCollection.Endpoint,
 config :logger, level: :info
 
 config :arc,
+  storage: Arc.Storage.S3,
   bucket: "siemenscollection-uploads",
   asset_host: "https://s3.eu-central-1.amazonaws.com/siemenscollection-uploads/",
   version_timeout: 40_000

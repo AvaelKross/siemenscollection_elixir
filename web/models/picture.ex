@@ -10,11 +10,10 @@ defmodule SiemensCollection.Picture do
     belongs_to :item, SiemensCollection.Item
     field :image, SiemensCollection.Image.Type
 
-    timestamps
+    timestamps()
   end
 
   @allowed_fields ~w(url phone_edition_id item_id)a
-  @required_fields ~w()a
 
   # after_delete :delete_from_s3
   # def delete_from_s3(changeset) do
