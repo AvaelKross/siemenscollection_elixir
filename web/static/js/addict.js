@@ -13,6 +13,16 @@ $(document).ready(function() {
     }
   }
 
+  $('#txt-name, #txt-email, #txt-password').keypress(function (e) {
+    if (e.which == 13) {
+      $('#btn-register').click();
+      $('#btn-login').click();
+      $('#btn-reset-password').click();
+      $('#btn-send-reset-password-link').click();
+      return false;    //<---- Add this line
+    }
+  });
+
   $('#btn-register').click(function () {
     var name = $('#txt-name').val();
     var email = $('#txt-email').val();
@@ -46,7 +56,6 @@ $(document).ready(function() {
   });
 
   $('#btn-login').click(function () {
-    var csrf_token = $('#csrf-token').val();
     var email = $('#txt-email').val();
     var password = $('#txt-password').val();
     var csrf_token = $('#csrf-token').val();
