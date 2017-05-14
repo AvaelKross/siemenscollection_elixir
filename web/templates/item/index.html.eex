@@ -23,8 +23,10 @@
 </h3>
 <div class="items-gallery">
   <%= for {item, count} <- @items do %>
-    <div class="items-gallery-item col-sm-3" style="background-image: url(<%= item |> SiemensCollection.Item.cover_image |> SiemensCollection.Picture.get_url(:thumb) %>)">
-      <a href="<%= collections_item_path(@conn, :show, @user, item) %>" class="item-bg-link"></a>
+    <div class="items-gallery-item col-sm-3">
+      <a href="<%= collections_item_path(@conn, :show, @user, item) %>" class="item-bg-link">
+        <img src="<%= item |> SiemensCollection.Item.cover_image |> SiemensCollection.Picture.get_url(:thumb) %>">
+      </a>
       <div class="title">
         <a href="<%= collections_item_path(@conn, :show, @user, item) %>">
           <%= raw SiemensCollection.PhoneEditionView.full_phone_name(item.phone_edition, true, "<br>") %>

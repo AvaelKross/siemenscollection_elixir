@@ -7,7 +7,6 @@
 /* Space out content a bit */
 
 body {
-  margin: 0 100px;
   background: url("/images/bg.jpg") no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -353,7 +352,13 @@ a.siemens-text:hover {
 }
 
 .items-gallery-item img {
-  width: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  height: inherit !important;
+  margin: 0 auto;
+  display: block;
+  border: 1px solid #999;
+  border-radius: 4px;
 }
 
 .items-gallery-item .title {
@@ -404,6 +409,9 @@ ul.deal {
 
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
+  body {
+    margin: 10px 100px;
+  }
   /* Remove the padding we set earlier */
   .header,
   .marketing {

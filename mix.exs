@@ -41,7 +41,7 @@ defmodule SiemensCollection.Mixfile do
      {:cowboy, "~> 1.0"},
      {:addict, "~> 0.3.0"}, # users
      {:exrm, "~> 1.0.8"},
-     {:calendar, "~> 0.16.1"}, # Time formatting
+     {:calendar, "~> 0.17.2"}, # Time formatting
      {:inflex, "~> 1.7.0"}, # it's like a activesupport for strings
      {:arc, "~> 0.7.0", override: true},
      {:arc_ecto, "~> 0.5.0"},

@@ -37,8 +37,10 @@
 
     <div class="items-gallery">
       <%= for edition <- @editions do %>
-        <div class="items-gallery-item col-sm-3" style="background-image: url(<%= SiemensCollection.Picture.cover(edition) |> SiemensCollection.Picture.get_url(:thumb) %>)">
-          <%= link "", to: catalog_phone_edition_path(@conn, :show, @brand.id, @phone.id, edition), class: "item-bg-link" %>
+        <div class="items-gallery-item col-sm-3">
+          <%= link to: catalog_phone_edition_path(@conn, :show, @brand.id, @phone.id, edition), class: "item-bg-link" do %>
+            <img src="<%= SiemensCollection.Picture.cover(edition) |> SiemensCollection.Picture.get_url(:thumb) %>">
+          <% end %>
           <div class="title">
             <%= link SiemensCollection.PhoneEditionView.phone_name(edition) <> SiemensCollection.PhoneEditionView.full_edition_name(edition, false), to: catalog_phone_edition_path(@conn, :show, @brand.id, @phone.id, edition) %>
             <%= if can_edit(@conn) && edition.id == @phone.main_edition_id do %>
