@@ -299,6 +299,8 @@ a.siemens-text:hover {
 .images .thumb {
   max-width: 150px;
   max-height: 120px;
+  border: 1px solid #aaa;
+  border-radius: 3px;
 }
 
 .images.cover .thumb {
