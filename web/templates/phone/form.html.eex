@@ -32,7 +32,7 @@
     <%= error_tag f, :notes %>
   </div>
 
-  <%= if @changeset.model.id == nil do %>
+  <%= if @changeset.data.id == nil do %>
     <h3>Main edition</h3>
     <%= inputs_for f, :phone_editions, fn i -> %>
 
@@ -43,7 +43,7 @@
   <% end %>
 
   <div class="form-group">
-    <%= if @changeset.model.id == nil do %>
+    <%= if @changeset.data.id == nil do %>
       <%= submit "Create", class: "btn btn-primary" %>
       <%= submit "Create and Upload images", class: "btn btn-primary", name: "save_and_upload" %>
     <% else %>

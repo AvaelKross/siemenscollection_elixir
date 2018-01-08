@@ -7,7 +7,7 @@
 
   <div class="form-group">
     <%= label f, :phone_id, class: "control-label" %>
-    <%= select f, :phone_id, 
+    <%= select f, :phone_id,
       Enum.map(@phones, fn p -> {"#{p.brand.name} #{p.name}", p.id} end) |> Enum.sort %>
     <%= error_tag f, :phone_id %>
   </div>
@@ -21,7 +21,7 @@
   </div>
 
   <div class="form-group">
-    <%= if @changeset.model.id == nil do %>
+    <%= if @changeset.data.id == nil do %>
       <%= submit "Create", class: "btn btn-primary" %>
       <%= submit "Create and Upload images", class: "btn btn-primary", name: "save_and_upload" %>
     <% else %>

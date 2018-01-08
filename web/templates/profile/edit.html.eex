@@ -1,6 +1,6 @@
 <div class='breadcrumbs'>
   <%= link "Collections >", to: collections_collection_path(@conn, :index) %>
-  <%= link "#{@changeset.model.name} >", to: collections_item_path(@conn, :index, @changeset.model) %>
+  <%= link "#{@changeset.data.name} >", to: collections_item_path(@conn, :index, @changeset.data) %>
   <%= "Edit profile" %>
 </div>
 
