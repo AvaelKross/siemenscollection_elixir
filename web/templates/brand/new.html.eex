@@ -1,7 +1,0 @@
-<div class='breadcrumbs'>
-  <%= link "Brands >", to: brand_path(@conn, :index) %>
-  <%= "New" %>
-</div>
-
-<%= render "form.html", changeset: @changeset,
-                        action: brand_path(@conn, :create) %>

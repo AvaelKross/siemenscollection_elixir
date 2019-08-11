@@ -1,7 +1,7 @@
 defmodule SiemensCollection.ItemTest do
   use SiemensCollection.ModelCase
 
-  alias SiemensCollection.Item
+  alias PhonesCollectionWeb.Item
 
   @valid_attrs %{calls_time: "some content", condition: 42, imei: "some content", made_in: "some content", notes: "some content", released: "some content", selling: true, set: "some content", sw: "some content"}
   @invalid_attrs %{}

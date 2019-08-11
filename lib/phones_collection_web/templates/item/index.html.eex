@@ -1,0 +1,48 @@
+<div class='breadcrumbs'>
+  <%= link "Collections >", to: Routes.collections_collection_path(@conn, :index) %>
+  <%= @user.name %>
+</div>
+
+<h2 class="siemens-text editions">
+  <%= @user.name %>
+  <%= if can_edit_user(@conn, @user) do %>
+    <%= link "Edit", to: Routes.profile_path(@conn, :edit), class: "btn btn-default btn-xs" %>
+  <% end %>
+  <%= if can_edit_admin(@conn, @user) do %>
+    <%= link "Delete", to: Routes.profile_path(@conn, :delete, @user.id), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+  <% end %>
+</h2>
+<p><%= @user.location %></p>
+<p><%= @user.description %></p>
+
+<h3 class="siemens-text collection">
+  Collection
+  <%= if can_edit_user(@conn, @user) do %>
+    <%= link "New item", to: Routes.collections_item_path(@conn, :new, @user), class: "btn btn-default btn-xs" %>
+  <% end %>
+</h3>
+<div class="items-gallery">
+  <%= for {item, count} <- @items do %>
+    <div class="items-gallery-item col-sm-3">
+      <a href="<%= Routes.collections_item_path(@conn, :show, @user, item) %>" class="item-bg-link">
+        <img src="<%= item |> PhonesCollectionWeb.Item.cover_image |> PhonesCollectionWeb.Picture.get_url(:thumb) %>">
+      </a>
+      <div class="title">
+        <a href="<%= Routes.collections_item_path(@conn, :show, @user, item) %>">
+          <%= raw PhonesCollectionWeb.PhoneEditionView.full_phone_name(item.phone_edition, true, "<br>") %>
+        </a>
+        <%= if count > 0 do %>[<%= count %>📷]<% end %>
+        <%= if item.phone_edition.limited do %><span title="Limited Edition" class="limited-label round-label">L</span><% end %>
+        <%= if item.phone_edition.prototype do %><span title="Prototype" class="prototype-label round-label">P</span><% end %>
+        <%= if item.full_set do %><span title="Full set" class="fullset-label round-label">S</span><% end %>
+
+        <td class="text-right">
+          <%= if can_edit(@conn, item) do %>
+            <%= link "Edit", to: Routes.collections_item_path(@conn, :edit, @user, item), class: "btn btn-default btn-xs" %>
+            <%= link "X", to: Routes.collections_item_path(@conn, :delete, @user, item), method: :delete, data: [confirm: "Are you sure you want to delete this item from collection?"], class: "btn btn-danger btn-xs" %>
+          <% end %>
+        </td>
+      </div>
+    </div>
+  <% end %>
+</div>

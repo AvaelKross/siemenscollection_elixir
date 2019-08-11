@@ -1,7 +1,7 @@
 defmodule SiemensCollection.PictureTest do
   use SiemensCollection.ModelCase
 
-  alias SiemensCollection.Picture
+  alias PhonesCollectionWeb.Picture
 
   @valid_attrs %{url: "some content"}
   @invalid_attrs %{}

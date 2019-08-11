@@ -1,7 +1,7 @@
 defmodule SiemensCollection.SeriesTest do
   use SiemensCollection.ModelCase
 
-  alias SiemensCollection.Series
+  alias PhonesCollectionWeb.Series
 
   @valid_attrs %{name: "some content"}
   @invalid_attrs %{}

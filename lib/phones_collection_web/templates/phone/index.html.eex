@@ -1,0 +1,58 @@
+<div class='breadcrumbs'>
+  <%= link "Brands >", to: Routes.brand_path(@conn, :index) %>
+  <%= @brand.name %>
+</div>
+<h2 class="siemens-text editions">
+  <%= @brand.name %>
+  <%= if can_edit(@conn) do %>
+    <%= link "Edit brand", to: Routes.brand_path(@conn, :edit, @brand.id), class: "btn btn-default btn-xs" %>
+    <%= link "Add phone", to: Routes.catalog_phone_path(@conn, :new, @brand.id), class: "btn btn-default btn-xs" %>
+    <%= link "Add series", to: Routes.brand_series_path(@conn, :new, @brand.id), class: "btn btn-default btn-xs" %>
+  <% end %>
+</h2>
+
+<%= if length(@phones_by_series) > 1 do %>
+  <h4 class="siemens-text series-header">Series:</h4>
+  <ul class="series-list">
+    <%= for {[_, series_name], _} <- @phones_by_series do %>
+      <li>
+        <a href="#series-list-<%= if series_name != nil, do: Inflex.parameterize(series_name), else: "other" %>">
+          <%= if series_name != nil, do: series_name, else: "Other" %></a>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= for {[series_id, series_name], phones} <- @phones_by_series do %>
+  <%= if length(@phones_by_series) > 1 do %>
+    <h4 class="siemens-text series-header" id="series-list-<%= if series_name != nil, do: Inflex.parameterize(series_name), else: "other" %>">
+      <%= if series_name != nil do %>
+        <%= series_name %>
+        <%= if can_edit(@conn) do %>
+          <%= link "Delete", to: Routes.brand_series_path(@conn, :delete, @brand.id, series_id), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+          <%= link "Edit", to: Routes.rand_series_path(@conn, :edit, @brand.id, series_id), class: "btn btn-default btn-xs" %>
+        <% end %>
+      <% else %>
+        Other
+      <% end %>
+    </h4>
+  <% end %>
+  <div class="items-gallery">
+    <%= for {phone, count} <- phones do %>
+      <div class="items-gallery-item col-sm-3">
+        <a href="<%= Routes.catalog_phone_path(@conn, :show, @brand.id, phone) %>" class="item-bg-link">
+          <img src="<%= phone |> PhonesCollectionWeb.Phone.cover_image |> PhonesCollectionWeb.Picture.get_url(:thumb) %>">
+        </a>
+        <div class="title">
+          <%= link "#{phone.name} (#{count})", to: Routes.catalog_phone_path(@conn, :show, @brand.id, phone) %>
+          <td class="text-right">
+            <%= if can_edit(@conn) do %>
+              <%= link "Edit", to: Routes.catalog_phone_path(@conn, :edit, @brand.id, phone), class: "btn btn-default btn-xs" %>
+              <%= link "Delete", to: Routes.catalog_phone_path(@conn, :delete, @brand.id, phone), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+            <% end %>
+          </td>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>

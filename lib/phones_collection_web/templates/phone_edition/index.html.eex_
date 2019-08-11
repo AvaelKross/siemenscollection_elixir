@@ -1,0 +1,36 @@
+<h2>Listing phone editions</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Phone</th>
+      <th>Name</th>
+      <th>Limited</th>
+      <th>Prototype</th>
+      <th>Photo</th>
+      <th>Notes</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for phone_edition <- @phone_editions do %>
+    <tr>
+      <td><%= phone_edition.phone_id %></td>
+      <td><%= phone_edition.name %></td>
+      <td><%= phone_edition.limited %></td>
+      <td><%= phone_edition.prototype %></td>
+      <td><%= phone_edition.photo_url %></td>
+      <td><%= phone_edition.notes %></td>
+
+      <td class="text-right">
+        <%= link "Show", to: Routes.catalog_phone_edition_path(@conn, :show, phone_edition), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: Routes.catalog_phone_edition_path(@conn, :edit, phone_edition), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: Routes.catalog_phone_edition_path(@conn, :delete, phone_edition), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<%= link "New phone edition", to: Routes.catalog_phone_edition_path(@conn, :new) %>

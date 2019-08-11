@@ -1,7 +1,7 @@
 defmodule SiemensCollection.BrandTest do
   use SiemensCollection.ModelCase
 
-  alias SiemensCollection.Brand
+  alias PhonesCollectionWeb.Brand
 
   @valid_attrs %{name: "some content"}
   @invalid_attrs %{}

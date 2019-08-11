@@ -1,0 +1,26 @@
+<div class='breadcrumbs'>
+  <%= "Brands >" %>
+</div>
+
+<h2 class="siemens-text editions">
+  Brands
+  <%= if can_edit(@conn) do %>
+    <%= link "Add brand", to: Routes.brand_path(@conn, :new), class: "btn btn-default btn-xs" %>
+  <% end %>
+</h2>
+
+<table class="table">
+<%= for brand <- @brands do %>
+    <tr>
+      <td>
+        <%= link brand.name, to: Routes.catalog_phone_path(@conn, :index, brand.id) %>
+      </td>
+      <td class="text-right">
+        <%= if can_edit(@conn) do %>
+          <%= link "Edit", to: Routes.brand_path(@conn, :edit, brand.id), class: "btn btn-default btn-xs" %>
+          <%= link "Delete", to: Routes.brand_path(@conn, :delete, brand.id), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+        <% end %>
+      </td>
+    </tr>
+<% end %>
+</table>

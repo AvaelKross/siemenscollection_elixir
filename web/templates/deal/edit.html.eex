@@ -1,9 +1,0 @@
-<div class='breadcrumbs'>
-  <%= link "Deals >", to: deal_path(@conn, :index) %>
-  <%= link SiemensCollection.PhoneEditionView.full_phone_name(@deal.phone_edition), to: deal_path(@conn, :show, @deal) %>
-  <%= "> Edit" %>
-</div>
-
-<%= render "form.html", changeset: @changeset,
-                        phone_editions: @phone_editions,
-                        action: deal_path(@conn, :update, @deal) %>

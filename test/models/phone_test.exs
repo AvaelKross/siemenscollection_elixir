@@ -1,7 +1,7 @@
 defmodule SiemensCollection.PhoneTest do
   use SiemensCollection.ModelCase, async: true
 
-  alias SiemensCollection.Phone
+  alias PhonesCollectionWeb.Phone
 
   @valid_attrs %{battery: "some content", features: "some content", name: "some content", network: "some content", notes: "some content", photo_url: "some content", release: "some content", size: "some content", weight: "some content"}
   @invalid_attrs %{}

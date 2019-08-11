@@ -1,0 +1,17 @@
+.dockerignore  # check and see if this is excluded by default
+.git
+.gitignore
+.log
+tmp
+
+_build
+deps
+node_modules
+test
+*.ez
+
+releases
+erl_crash.dump
+
+node_modules
+.DS_Store

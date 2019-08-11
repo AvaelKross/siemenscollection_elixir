@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Phones Collection</title>
+    <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>">
+  </head>
+
+  <body>
+    <div class="container">
+      <input type="hidden" id="csrf-token" value="<%= csrf_token(@conn) %>"/>
+      <header class="header">
+        <nav role="navigation">
+          <ul class="nav nav-pills pull-right login-line">
+            <%= if is_logged_in(@conn) do %>
+              <li><%= link "/ Deals", to: Routes.deal_path(@conn, :index) %></li>
+              <li><%= link "/ My", to: Routes.collections_item_path(@conn, :index, current_user(@conn).id) %></li>
+              <li><a id="btn-logout">/ Logout</a></li>
+            <% else %>
+              <li><a href="/login">/ Login</a></li>
+            <% end %>
+          </ul>
+        </nav>
+        <span class="logo"><a href="/"><h2>Phones Collection</h2></a></span>
+        <nav role="navigation">
+          <ul class="nav menu-line">
+              <li><%= link "Database /", to: Routes.brand_path(@conn, :index) %></li>
+              <li><%= link "Collections /", to: Routes.collections_collection_path(@conn, :index) %></li>
+          </ul>
+        </nav>
+      </header>
+
+      <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
+      <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+
+      <main role="main">
+        <%= render @view_module, @view_template, assigns %>
+      </main>
+
+    </div> <!-- /container -->
+    <script src="<%= Routes.static_path(@conn, "/js/vendor.js") %>"></script>
+    <script src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
+  </body>
+</html>

@@ -1,0 +1,15 @@
+<div class='breadcrumbs'>
+  <%= "Collections >" %>
+</div>
+
+<h2 class="siemens-text">Collections</h2>
+
+<table class="table">
+<%= for user <- @users do %>
+    <tr>
+      <td>
+        <%= link user.name, to: Routes.collections_item_path(@conn, :index, user.id) %>
+      </td>
+    </tr>
+<% end %>
+</table>

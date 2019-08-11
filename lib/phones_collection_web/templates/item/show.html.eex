@@ -1,0 +1,57 @@
+<div class='breadcrumbs'>
+  <%= link "Collections >", to: Routes.collections_collection_path(@conn, :index) %>
+  <%= link "#{@user.name} >", to: Routes.collections_item_path(@conn, :index, @user) %>
+  <%= "#{PhonesCollectionWeb.PhoneEditionView.full_phone_name(@item.phone_edition)}" %>
+</div>
+
+<h2 class="siemens-text phone">
+  <%= PhonesCollectionWeb.PhoneEditionView.full_phone_name(@item.phone_edition) %>
+  <%= if @item.phone_edition.limited do %><span title="Limited Edition" class="btn btn-xs ed-label limited-label">Limited</span><% end %>
+  <%= if @item.phone_edition.prototype do %><span title="Prototype" class="btn btn-xs ed-label prototype-label">Prototype</span><% end %>
+  <%= if @item.phone_edition.operator_edition do %>
+    <div class="btn btn-xs ed-label operator-label" title="Operator's edition: <%= @item.phone_edition.operator_name %>">
+      Operator
+    </div>
+  <% end %>
+  <%= if @item.full_set do %><span title="Full set" class="btn btn-xs ed-label owned-label">Full set</span><% end %>
+  <%= link "Open in catalog", to: Routes.catalog_phone_edition_path(@conn, :show, @item.phone_edition.phone.brand.id, @item.phone_edition.phone, @item.phone_edition), class: "btn btn-default btn-xs" %>
+  <%= if can_edit(@conn, @item) do %>
+    <%= link "Edit", to: Routes.collections_item_path(@conn, :edit, @user, @item), class: "btn btn-default btn-xs" %>
+    <%= link "Upload pics", to: Routes.collections_picture_path(@conn, :new, @user, @item.id), class: "btn btn-default btn-xs" %>
+  <% end %>
+</h2>
+
+<%= render "_show_item.html", conn: @conn, item: @item %>
+
+<%= if @item.notes != nil && @item.notes != "" do %>
+  <h2 class="siemens-text">Notes</h2>
+  <p><%= @item.notes %></p>
+<% end %>
+
+<h2 class="siemens-text editions">All Images</h2>
+<%= if length(@item.pictures) > 0 do %>
+  <div class="images" id="lightgallery">
+    <%= for picture <- (Enum.sort(@item.pictures, &(&2.id != nil && @item.cover_id == &1.id))) do %>
+      <% thumb_image_url = PhonesCollectionWeb.Picture.get_url(picture, :thumb) %>
+      <% lightbox_image_url = PhonesCollectionWeb.Picture.get_url(picture, :popup) %>
+      <% image_url = PhonesCollectionWeb.Picture.get_url(picture) %>
+      <a href="<%= lightbox_image_url %>" data-download-url="<%= image_url %>">
+        <img src="<%= thumb_image_url %>" class="thumb"/>
+      </a>
+    <% end %>
+  </div>
+<% else %>
+  <%= if length(@item.phone_edition.pictures) > 0 do %>
+    These pictures are from the database:<br><br>
+    <div class="images" id="lightgallery">
+      <%= for picture <- (Enum.sort(@item.phone_edition.pictures, &(&2.id != nil && @item.phone_edition.cover_id == &1.id))) do %>
+        <% thumb_image_url = PhonesCollectionWeb.Picture.get_url(picture, :thumb) %>
+        <% lightbox_image_url = PhonesCollectionWeb.Picture.get_url(picture, :popup) %>
+        <% image_url = PhonesCollectionWeb.Picture.get_url(picture) %>
+        <a href="<%= lightbox_image_url %>" data-download-url="<%= image_url %>">
+          <img src="<%= thumb_image_url %>" class="thumb"/>
+        </a>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>

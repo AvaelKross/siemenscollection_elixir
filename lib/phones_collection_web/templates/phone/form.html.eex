@@ -1,0 +1,53 @@
+<%= form_for @changeset, @action, fn f -> %>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Oops, something went wrong! Please check the errors below.</p>
+    </div>
+  <% end %>
+  <%= hidden_input f, :brand_id, value: @brand.id %>
+
+  <div class="form-group">
+    <%= label f, :name, class: "control-label" %>
+    <%= text_input f, :name, class: "form-control" %>
+    <%= error_tag f, :name %>
+  </div>
+
+  <%= if @brands != nil do %>
+    <div class="form-group">
+      <%= label f, :brand_id, class: "control-label" %>
+      <%= select f, :brand_id, [{"", nil} | Enum.map(@brands, fn s -> {s.name, s.id} end)] %>
+      <%= error_tag f, :brand_id %>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= label f, :series_id, class: "control-label" %>
+    <%= select f, :series_id, [{"", nil} | Enum.map(@series, fn s -> {s.name, s.id} end)] %>
+    <%= error_tag f, :series_id %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :notes, class: "control-label" %>
+    <%= textarea f, :notes, class: "form-control" %>
+    <%= error_tag f, :notes %>
+  </div>
+
+  <%= if @changeset.data.id == nil do %>
+    <h3>Main edition</h3>
+    <%= inputs_for f, :phone_editions, fn i -> %>
+
+      <%= render PhonesCollectionWeb.PhoneEditionView, "_shared_inputs.html", form: i %>
+
+    <% end %>
+
+  <% end %>
+
+  <div class="form-group">
+    <%= if @changeset.data.id == nil do %>
+      <%= submit "Create", class: "btn btn-primary" %>
+      <%= submit "Create and Upload images", class: "btn btn-primary", name: "save_and_upload" %>
+    <% else %>
+      <%= submit "Update", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+<% end %>

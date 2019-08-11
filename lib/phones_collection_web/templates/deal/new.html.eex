@@ -1,0 +1,8 @@
+<div class='breadcrumbs'>
+  <%= link "Deals >", to: Routes.deal_path(@conn, :index) %>
+  <%= "Add new deal" %>
+</div>
+
+<%= render "form.html", changeset: @changeset,
+                        phone_editions: @phone_editions,
+                        action: Routes.deal_path(@conn, :create) %>

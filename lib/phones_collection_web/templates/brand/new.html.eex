@@ -1,0 +1,7 @@
+<div class='breadcrumbs'>
+  <%= link "Brands >", to: Routes.brand_path(@conn, :index) %>
+  <%= "New" %>
+</div>
+
+<%= render "form.html", changeset: @changeset,
+                        action: Routes.brand_path(@conn, :create) %>

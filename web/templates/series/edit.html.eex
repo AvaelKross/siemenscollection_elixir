@@ -1,7 +1,0 @@
-<h2>Edit series</h2>
-
-<%= render "form.html", changeset: @changeset,
-                        brands: @brands,
-                        action: brand_series_path(@conn, :update, @brand, @series) %>
-
-<%= link "Back", to: catalog_phone_path(@conn, :index, @brand) %>

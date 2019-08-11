@@ -6,7 +6,7 @@
 use Mix.Config
 
 # Configures the endpoint
-config :siemens_collection, SiemensCollection.Endpoint,
+config :siemens_collection, PhonesCollectionWeb.Endpoint,
   url: [host: "localhost"],
   ecto_repos: [SiemensCollection.Repo],
   secret_key_base: "+E+SMepQ+DNQ1zjeSjbiyBFUTinc94ZuKRjKz6VCLAf28vwRVvStN5uYWTNDb6RY",
@@ -29,14 +29,6 @@ import_config "#{Mix.env}.exs"
 config :phoenix, :generators,
   migration: true,
   binary_id: false
-
-config :addict,
-  secret_key: "24326224313224416248435730693841675759536a3642347161584b4f",
-  extra_validation: {SiemensCollection.User, :addict_validate},
-  user_schema: SiemensCollection.User,
-  repo: SiemensCollection.Repo,
-  from_email: "no-reply@siemenscollection.ru", # CHANGE THIS
-  mail_service: nil
 
 config :ex_aws,
   access_key_id: "AKIAIM7J52PY7JYEVISA",

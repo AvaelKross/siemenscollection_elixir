@@ -1,0 +1,25 @@
+# on dev machine
+
+docker build avael/phonescollection .
+docker push avael/phonescollection
+
+# on server
+
+docker pull avael/phonescollection
+docker run -p 4000:4000 -d -i avael/phonescollection:latest start
+
+
+# if wanna get into the container
+
+docker exec -u 0 -it avael/phonescollection /bin/bash
+
+container name can be found in `docker ps`
+
+
+
+
+# DEV OPS todo:
+
+* automate deploy with a .sh script
+* setup SSL
+* close postgres ports from the outside (check sudo nano /etc/postgresql/9.5/main/pg_hba.conf)

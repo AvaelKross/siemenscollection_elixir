@@ -8,7 +8,7 @@ defmodule SiemensCollection do
 
     children = [
       # Start the endpoint when the application starts
-      supervisor(SiemensCollection.Endpoint, []),
+      supervisor(PhonesCollectionWeb.Endpoint, []),
       # Start the Ecto repository
       supervisor(SiemensCollection.Repo, []),
       # Here you could define other workers and supervisors as children
@@ -24,7 +24,7 @@ defmodule SiemensCollection do
   # Tell Phoenix to update the endpoint configuration
   # whenever the application is updated.
   def config_change(changed, _new, removed) do
-    SiemensCollection.Endpoint.config_change(changed, removed)
+    PhonesCollectionWeb.Endpoint.config_change(changed, removed)
     :ok
   end
 end

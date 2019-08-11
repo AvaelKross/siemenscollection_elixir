@@ -6,22 +6,22 @@ use Mix.Config
 # The watchers configuration can be used to run external
 # watchers to your application. For example, we use it
 # with brunch.io to recompile .js and .css sources.
-config :siemens_collection, SiemensCollection.Endpoint,
+config :siemens_collection, PhonesCollectionWeb.Endpoint,
   http: [port: 4001],
   debug_errors: true,
   code_reloader: true,
   check_origin: false,
   watchers: [node: ["node_modules/brunch/bin/brunch", "watch", "--stdin",
-             cd: Path.expand("../", __DIR__)]]
+             cd: Path.expand("../assets", __DIR__)]]
 
 # Watch static and templates for browser reloading.
-config :siemens_collection, SiemensCollection.Endpoint,
+config :siemens_collection, PhonesCollectionWeb.Endpoint,
   live_reload: [
     patterns: [
       ~r{priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$},
       ~r{priv/gettext/.*(po)$},
-      ~r{web/views/.*(ex)$},
-      ~r{web/templates/.*(eex)$}
+      ~r{lib/phones_collection_web/views/.*(ex)$},
+      ~r{lib/phones_collection_web/templates/.*(eex)$}
     ]
   ]
 
@@ -35,7 +35,6 @@ config :phoenix, :stacktrace_depth, 20
 
 # Configure your database
 config :siemens_collection, SiemensCollection.Repo,
-  adapter: Ecto.Adapters.Postgres,
   username: "siemens",
   password: "siemens",
   database: "siemens_collection_dev",

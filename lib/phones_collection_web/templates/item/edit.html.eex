@@ -1,0 +1,35 @@
+<div class='breadcrumbs'>
+  <%= link "Collections >", to: Routes.collections_collection_path(@conn, :index) %>
+  <%= link "#{@user.name} >", to: Routes.collections_item_path(@conn, :index, @user) %>
+  <%= link PhonesCollectionWeb.PhoneEditionView.full_phone_name(@item.phone_edition),
+           to: Routes.collections_item_path(@conn, :show, @user, @item) %>
+  <%= "> Edit" %>
+</div>
+
+<%= render "form.html", changeset: @changeset,
+                        phone_editions: @phone_editions,
+                        action: Routes.collections_item_path(@conn, :update, @user, @item) %>
+
+<h2>Images</h2>
+
+<%= link "Upload new images", to: Routes.collections_picture_path(@conn, :new, @user, @item.id) %>
+<br><br>
+<%= if length(@item.pictures) > 0 do %>
+  <div class="edit_images">
+    <%= for picture <- @item.pictures do %>
+      <% thumb_image_url = PhonesCollectionWeb.Picture.get_url(picture, :thumb) %>
+      <% image_url = PhonesCollectionWeb.Picture.get_url(picture) %>
+      <div class="image">
+        <a href="<%= image_url %>" target="_blank">
+          <img src="<%= thumb_image_url %>"/>
+        </a>
+        <%= link "Destroy", to: Routes.collections_picture_path(@conn, :delete, @user, @item.id, picture.id), method: :delete %>
+        <%= link "Rotate ↻", to: Routes.collections_picture_path(@conn, :rotate, @user, @item.id, picture.id, "right"), method: :post %>
+        <%= link "Rotate ↺", to: Routes.collections_picture_path(@conn, :rotate, @user, @item.id, picture.id, "left"), method: :post %>
+        <%= if picture.id != @item.cover_id do %>
+          <%= link "Set cover", to: Routes.collections_picture_path(@conn, :set_cover, @user, @item.id, picture.id), method: :put %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+<% end %>

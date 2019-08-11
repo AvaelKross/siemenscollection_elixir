@@ -1,0 +1,9 @@
+<div class='breadcrumbs'>
+  <%= link "Deals >", to: Routes.deal_path(@conn, :index) %>
+  <%= link PhonesCollectionWeb.PhoneEditionView.full_phone_name(@deal.phone_edition), to: Routes.deal_path(@conn, :show, @deal) %>
+  <%= "> Edit" %>
+</div>
+
+<%= render "form.html", changeset: @changeset,
+                        phone_editions: @phone_editions,
+                        action: Routes.deal_path(@conn, :update, @deal) %>

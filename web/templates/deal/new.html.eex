@@ -1,8 +1,0 @@
-<div class='breadcrumbs'>
-  <%= link "Deals >", to: deal_path(@conn, :index) %>
-  <%= "Add new deal" %>
-</div>
-
-<%= render "form.html", changeset: @changeset,
-                        phone_editions: @phone_editions,
-                        action: deal_path(@conn, :create) %>

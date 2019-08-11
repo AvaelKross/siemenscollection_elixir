@@ -1,8 +1,0 @@
-<div class='breadcrumbs'>
-  <%= link "Brands >", to: brand_path(@conn, :index) %>
-  <%= link "#{@brand.name} >", to: catalog_phone_path(@conn, :index, @brand) %>
-  <%= "Edit" %>
-</div>
-
-<%= render "form.html", changeset: @changeset,
-                        action: brand_path(@conn, :update, @brand) %>

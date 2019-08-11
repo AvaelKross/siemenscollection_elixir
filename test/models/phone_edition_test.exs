@@ -1,7 +1,7 @@
 defmodule SiemensCollection.PhoneEditionTest do
   use SiemensCollection.ModelCase
 
-  alias SiemensCollection.PhoneEdition
+  alias PhonesCollectionWeb.PhoneEdition
 
   @valid_attrs %{limited: true, name: "some content", notes: "some content", prototype: true}
   @invalid_attrs %{}

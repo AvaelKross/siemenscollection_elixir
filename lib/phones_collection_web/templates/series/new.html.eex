@@ -1,0 +1,7 @@
+<h2>New series</h2>
+
+<%= render "form.html", changeset: @changeset,
+                        brands: @brands,
+                        action: Routes.brand_series_path(@conn, :create, @brand) %>
+
+<%= link "Back", to: Routes.catalog_phone_path(@conn, :index, @brand) %>

@@ -1,0 +1,41 @@
+<div class='breadcrumbs'>
+  Deals >
+</div>
+
+<h2 class="siemens-text editions">
+  Deals Manager
+  <%= link "New deal", to: Routes.deal_path(@conn, :new), class: "btn btn-default btn-xs" %>
+</h2>
+
+<%= link_or_text "In progress", nil, @conn.assigns[:filter], Routes.deal_path(@conn, :index) %> |
+<%= link_or_text "Successful", "successful", @conn.assigns[:filter], Routes.successful_deal_path(@conn, :index) %> |
+<%= link_or_text "Failed", "failed", @conn.assigns[:filter], Routes.failed_deal_path(@conn, :index) %> |
+<%= link_or_text "All", "all", @conn.assigns[:filter], Routes.all_deal_path(@conn, :index) %>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Phone</th>
+      <th>Last update</th>
+      <th>From</th>
+      <th>Status</th>
+      <th>Price</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= for deal <- @deals do %>
+      <tr>
+        <td><%= link PhonesCollectionWeb.PhoneEditionView.full_phone_name(deal.phone_edition), to: Routes.deal_path(@conn, :show, deal) %></td>
+        <td><%= deal.updated_at |> DateTime.to_iso8601 %></td>
+        <td><%= deal.from %></td>
+        <td><%= deal.status %></td>
+        <td><%= deal.price %></td>
+        <td class="text-right">
+          <%= link "Edit", to: Routes.deal_path(@conn, :edit, deal.id), class: "btn btn-default btn-xs" %>
+          <%= link "Delete", to: Routes.deal_path(@conn, :delete, deal.id), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+        </td>
+      <tr>
+    <% end %>
+  </tbody>
+</table>

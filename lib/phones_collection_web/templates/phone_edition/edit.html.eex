@@ -1,0 +1,38 @@
+<div class='breadcrumbs'>
+  <%= link "Brands >", to: Routes.brand_path(@conn, :index) %>
+  <%= link "#{@brand.name} >", to: Routes.catalog_phone_path(@conn, :index, @brand.id) %>
+  <%= link "#{@phone.name} >", to: Routes.catalog_phone_path(@conn, :show, @brand.id, @phone) %>
+  <%= link "#{PhonesCollectionWeb.PhoneEditionView.full_edition_name(@phone_edition, false)} >", to: Routes.catalog_phone_edition_path(@conn, :show, @brand.id, @phone, @phone_edition) %>
+  Edit
+</div>
+
+<h2>Edit edition</h2>
+
+<%= render "form.html", changeset: @changeset,
+                        phone: @phone,
+                        phones: @phones,
+                        action: Routes.catalog_phone_edition_path(@conn, :update, @brand.id, @phone.id, @phone_edition) %>
+
+<h2>Images</h2>
+
+<%= link "Upload new images", to: Routes.catalog_picture_path(@conn, :new, @brand.id, @phone.id, @phone_edition.id) %>
+<br><br>
+<%= if length(@phone_edition.pictures) > 0 do %>
+  <div class="edit_images">
+    <%= for picture <- @phone_edition.pictures do %>
+      <% thumb_image_url = PhonesCollectionWeb.Picture.get_url(picture, :thumb) %>
+      <% image_url = PhonesCollectionWeb.Picture.get_url(picture) %>
+      <div class="image">
+        <a href="<%= image_url %>" target="_blank">
+          <img src="<%= thumb_image_url %>"/>
+        </a>
+        <%= link "Destroy", to: Routes.catalog_picture_path(@conn, :delete, @brand.id, @phone.id, @phone_edition.id, picture.id), method: :delete %>
+        <%= link "Rotate ↻", to: Routes.catalog_picture_path(@conn, :rotate, @brand.id, @phone.id, @phone_edition.id, picture.id, "right"), method: :post %>
+        <%= link "Rotate ↺", to: Routes.catalog_picture_path(@conn, :rotate, @brand.id, @phone.id, @phone_edition.id, picture.id, "left"), method: :post %>
+        <%= if picture.id != @phone_edition.cover_id do %>
+          <%= link "Set cover", to: Routes.catalog_picture_path(@conn, :set_cover, @brand.id, @phone.id, @phone_edition.id, picture.id), method: :put %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+<% end %>

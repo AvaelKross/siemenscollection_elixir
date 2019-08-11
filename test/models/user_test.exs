@@ -1,7 +1,7 @@
 defmodule SiemensCollection.UserTest do
   use SiemensCollection.ModelCase
 
-  alias SiemensCollection.User
+  alias PhonesCollectionWeb.User
 
   @valid_attrs %{email: "some content", encrypted_password: "some content", location: "some content", name: "some content"}
   @invalid_attrs %{}

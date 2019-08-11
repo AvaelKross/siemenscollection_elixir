@@ -1,0 +1,17 @@
+<%= if @phone_edition.limited do %>
+  <div class="btn btn-xs ed-label limited-label" title="Limited Edition">Limited</div>
+<% end %>
+
+<%= if @phone_edition.prototype do %>
+  <div class="btn btn-xs ed-label prototype-label" title="Prototype">Prototype</div>
+<% end %>
+
+<%= if @phone_edition.operator_edition do %>
+  <div class="btn btn-xs ed-label operator-label" title="Operator's edition: <%= @phone_edition.operator_name %>">
+    Operator
+  </div>
+<% end %>
+
+<%= if PhonesCollectionWeb.PhoneEdition.owned_amount(@phone_edition, current_user(@conn)) > 0 do %>
+  <div class="btn btn-xs ed-label owned-label" title="Owned">Owned</div>
+<% end %>

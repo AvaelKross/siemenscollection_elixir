@@ -1,0 +1,9 @@
+<div class='breadcrumbs'>
+  <%= link "Collections >", to: Routes.collections_collection_path(@conn, :index) %>
+  <%= link "#{@user.name} >", to: Routes.collections_item_path(@conn, :index, @user) %>
+  <%= "Add to collection" %>
+</div>
+
+<%= render "form.html", changeset: @changeset,
+                        phone_editions: @phone_editions,
+                        action: Routes.collections_item_path(@conn, :create, @user) %>
